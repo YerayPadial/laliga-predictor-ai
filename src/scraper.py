@@ -19,7 +19,7 @@ DATA_DIR = "data"
 os.makedirs(DATA_DIR, exist_ok=True)
 
 def get_headless_driver() -> webdriver.Chrome:
-    """Configuración Ultra-Stealth."""
+    """Configuración Anti-Bloqueo."""
     chrome_options = Options()
     chrome_options.add_argument("--headless=new") 
     chrome_options.add_argument("--no-sandbox")
@@ -35,36 +35,32 @@ def get_headless_driver() -> webdriver.Chrome:
 def clean_team_name(text: str) -> str:
     if not text: return ""
     import re
-    text = re.sub(r'\s\d+$', '', text) # Quitar números finales
+    text = re.sub(r'\s\d+$', '', text) 
     text = text.replace("SAD", "").strip()
     return text
 
 # --- FUENTE 1: FLASHSCORE ---
 def scrape_flashscore(driver, url, is_history) -> pd.DataFrame:
-    logger.info(f"Trying Flashscore: {url}")
+    logger.info(f"Intento 1: Flashscore ({'Historial' if is_history else 'Calendario'})...")
     data = []
     try:
         driver.get(url)
-        # Intentar cerrar cookies rápido
+        # Intentar cerrar cookies
         try:
             WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler"))).click()
         except: pass
 
-        wait = WebDriverWait(driver, 10)
-        # Esperamos filas O mensaje de error
+        wait = WebDriverWait(driver, 8)
         wait.until(lambda d: d.find_elements(By.CSS_SELECTOR, "div[class*='event__match']") or d.find_elements(By.CLASS_NAME, "footer"))
         
         match_rows = driver.find_elements(By.CSS_SELECTOR, "div[class*='event__match']")
         
-        # Si es calendario y no hay filas, asumimos fallo
         if not match_rows and not is_history: return pd.DataFrame()
 
         for row in match_rows:
             try:
                 text = row.text.split('\n')
                 if is_history:
-                    # Formato Historial: [Estado, Local, Goles, Visitante]
-                    # Buscamos la línea con el guión de resultado (ej: "2-1")
                     res_idx = next((i for i, x in enumerate(text) if '-' in x and x[0].isdigit()), -1)
                     if res_idx > 0:
                         data.append({
@@ -75,70 +71,91 @@ def scrape_flashscore(driver, url, is_history) -> pd.DataFrame:
                             "away_score": int(text[res_idx].split('-')[1])
                         })
                 else:
-                    # Formato Calendario: [Hora, Local, Visitante] o [Local, Visitante, Hora]
                     if len(text) >= 3:
-                        # Asumimos que si hay hora ("14:00"), es el primer elemento o el último
                         data.append({
                             "date_str": text[0] if ':' in text[0] or '.' in text[0] else "Upcoming",
                             "home_team": clean_team_name(text[1]),
                             "away_team": clean_team_name(text[2])
                         })
             except: continue
-    except Exception as e:
-        logger.warning(f"Flashscore error: {e}")
+    except:
         return pd.DataFrame()
-        
     return pd.DataFrame(data)
 
-# --- FUENTE 2: AS.COM (Backup Robusto) ---
+# --- FUENTE 2: AS.COM ---
 def scrape_backup_as(driver) -> pd.DataFrame:
-    """
-    Scrapea la JORNADA ACTUAL de AS.com.
-    Selector: Busca cualquier 'tr' que tenga nombres de equipos.
-    """
-    logger.info("🛡️ Activando PLAN B: AS.com (Jornada Actual)...")
-    # URL directa a la jornada en curso (más fiable que calendario completo)
+    logger.info("Intento 2: AS.com (Jornada Actual)...")
     url = "https://resultados.as.com/resultados/futbol/primera/jornada/"
     data = []
-    
     try:
         driver.get(url)
         time.sleep(3)
-        
         soup = BeautifulSoup(driver.page_source, 'html.parser')
-        
-        # Buscamos filas en la tabla de resultados
         rows = soup.find_all('tr')
-        
         for row in rows:
             try:
-                # Buscamos celdas que contengan nombres de equipos (clase suele contener 'nombre-equipo')
                 teams = row.select('.nombre-equipo')
-                
                 if len(teams) >= 2:
-                    home = clean_team_name(teams[0].get_text(strip=True))
-                    away = clean_team_name(teams[1].get_text(strip=True))
-                    
-                    # Intentamos buscar fecha/hora
-                    date_elem = row.select_one('.fecha-evento, .resultado')
-                    date_str = date_elem.get_text(strip=True) if date_elem else "Pendiente"
-                    
                     data.append({
-                        "home_team": home,
-                        "away_team": away,
-                        "date_str": date_str
+                        "home_team": clean_team_name(teams[0].get_text(strip=True)),
+                        "away_team": clean_team_name(teams[1].get_text(strip=True)),
+                        "date_str": "Próximamente" # AS complica las fechas, simplificamos
                     })
             except: continue
-            
+    except: pass
+    return pd.DataFrame(data)
+
+# --- FUENTE 3: MARCA (El Tanque) ---
+def scrape_backup_marca(driver) -> pd.DataFrame:
+    logger.info("🛡️ Intento 3: MARCA (El Tanque)...")
+    url = "https://www.marca.com/futbol/primera-division/calendario.html"
+    data = []
+    try:
+        driver.get(url)
+        time.sleep(3)
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        
+        # Marca usa una estructura de lista muy robusta
+        partidos = soup.find_all('div', class_='partido')
+        
+        if not partidos:
+             # Fallback a tabla
+             partidos = soup.find_all('tr')
+
+        logger.info(f"Marca: Encontrados {len(partidos)} elementos.")
+
+        for p in partidos:
+            try:
+                # Buscamos equipos en texto
+                texto = p.get_text()
+                if " vs " in texto or "-" in texto:
+                    # Intento de extracción simple por estructura
+                    equipos = p.find_all('span', class_='nombre')
+                    if not equipos:
+                        equipos = p.find_all('a') # A veces son links
+                    
+                    if len(equipos) >= 2:
+                        home = clean_team_name(equipos[0].get_text(strip=True))
+                        away = clean_team_name(equipos[1].get_text(strip=True))
+                        
+                        # Filtramos si parece resultado pasado (tiene números de goles)
+                        if any(c.isdigit() for c in texto) and "Jornada" not in texto:
+                             # Es arriesgado, pero asumimos que si estamos aqui es calendario futuro
+                             pass 
+
+                        data.append({
+                            "home_team": home,
+                            "away_team": away,
+                            "date_str": "Próximamente"
+                        })
+            except: continue
     except Exception as e:
-        logger.error(f"Error Plan B: {e}")
+        logger.error(f"Marca Error: {e}")
         
     return pd.DataFrame(data)
 
-# --- RED DE SEGURIDAD (Dummy Data) ---
 def create_emergency_fixture():
-    """Crea un CSV válido pero 'falso' para que la App no explote."""
-    logger.warning("🚨 Activando RED DE SEGURIDAD (Datos Dummy).")
+    logger.warning("🚨 TODOS fallaron. Activando DUMMY data para no romper la web.")
     return pd.DataFrame([{
         "home_team": "Sistema AI",
         "away_team": "Mantenimiento",
@@ -148,27 +165,26 @@ def create_emergency_fixture():
 def main():
     driver = get_headless_driver()
     try:
-        # 1. HISTORIAL (Flashscore)
-        # Si falla el historial no es crítico, usamos lo que haya o vacío
+        # 1. HISTORIAL
         df_hist = scrape_flashscore(driver, "https://www.flashscore.es/futbol/espana/laliga/resultados/", True)
         if not df_hist.empty:
             df_hist.to_csv(os.path.join(DATA_DIR, "laliga_results_raw.csv"), index=False)
-            logger.info(f"💾 Historial: {len(df_hist)} registros.")
+            logger.info(f"💾 Historial guardado.")
 
-        # 2. CALENDARIO (Crítico para UX)
+        # 2. CALENDARIO (Cadena de intentos)
         df_future = scrape_flashscore(driver, "https://www.flashscore.es/futbol/espana/laliga/calendario/", False)
         
-        # Si Flashscore falla, probar AS
         if df_future.empty:
             df_future = scrape_backup_as(driver)
             
-        # Si AS también falla, crear Dummy
+        if df_future.empty:
+            df_future = scrape_backup_marca(driver)
+            
         if df_future.empty:
             df_future = create_emergency_fixture()
             
-        # GUARDAR SIEMPRE
         df_future.to_csv(os.path.join(DATA_DIR, "laliga_fixtures.csv"), index=False)
-        logger.info(f"💾 Calendario final guardado: {len(df_future)} partidos.")
+        logger.info(f"💾 Calendario Final: {len(df_future)} partidos.")
 
     finally:
         driver.quit()

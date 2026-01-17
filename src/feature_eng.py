@@ -8,25 +8,34 @@ from typing import Dict, List, Tuple
 
 # Diccionario maestro de normalización
 TEAM_MAPPING = {
+    # Nombres Flashscore / Estándar
     "Athletic Club": "Athletic Bilbao", "Athletic": "Athletic Bilbao",
-    "Atlético de Madrid": "Atletico Madrid",
     "Atlético de Madrid": "Atletico Madrid", "Atl. Madrid": "Atletico Madrid", "Atlético": "Atletico Madrid",
     "R. Betis": "Real Betis", "Betis": "Real Betis",
     "Real Sociedad": "Real Sociedad", "R. Sociedad": "Real Sociedad",
-    "R. Sociedad": "Real Sociedad",
     "FC Barcelona": "Barcelona", "Barca": "Barcelona",
-    "Barca": "Barcelona",
     "Real Madrid": "Real Madrid",
-    "Real Madrid 2": "Real Madrid",
-    "R. Madrid": "Real Madrid",
     "Real Oviedo 2": "Real Oviedo", "Oviedo": "Real Oviedo",
-    "Girona FC": "Girona",
+    "Real Oviedo": "Real Oviedo", "Oviedo": "Real Oviedo",
+    "Girona FC": "Girona", "Girona": "Girona",
     "Getafe 2": "Getafe",
-    "Alavés": "Alaves", "D. Alavés": "Alaves",
-    "Leganés": "Leganes",
-    "Valladolid": "Real Valladolid",
-    "Celta": "Celta de Vigo", "RC Celta": "Celta de Vigo",
-    # Añadir más variaciones si aparecen en el futuro
+    "Getafe": "Getafe",
+    
+    # Nombres AS / Marca
+    "Celta": "Celta de Vigo", "RC Celta": "Celta de Vigo", "Celta Vigo": "Celta de Vigo",
+    "Alavés": "Alaves", "D. Alavés": "Alaves", 
+    "Leganés": "Leganes", "CD Leganés": "Leganes",
+    "Valladolid": "Real Valladolid", "R. Valladolid": "Real Valladolid",
+    "Sevilla": "Sevilla", "Sevilla FC": "Sevilla",
+    "Valencia": "Valencia", "Valencia CF": "Valencia",
+    "Villarreal": "Villarreal", "Villarreal CF": "Villarreal",
+    "Mallorca": "Mallorca", "RCD Mallorca": "Mallorca",
+    "Osasuna": "Osasuna", "CA Osasuna": "Osasuna",
+    "Las Palmas": "Las Palmas", "UD Las Palmas": "Las Palmas",
+    "Rayo": "Rayo Vallecano", "Rayo Vallecano": "Rayo Vallecano",
+    "Espanyol": "Espanyol", "RCD Espanyol": "Espanyol",
+    
+    # Emergencia
     "Sistema AI": "Sistema AI",
     "Mantenimiento": "Mantenimiento",
 }

@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-update:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # B. Setup: Ubuntu environment
 
     steps:
       # 1. Check out del repositorio
@@ -42,6 +42,11 @@ jobs:
         run: python src/scraper.py
         env:
           User_Agent: "Mozilla/5.0 (LaLigaAI)"
+
+      # --- PASO CRÍTICO (El que causó el conflicto) ---
+      - name: Run Feature Engineering
+        run: python src/feature_eng.py
+      # ----------------------------------------------
 
       # 6. D. Run Training
       # Lee el CSV nuevo, entrena modelos y guarda model_winner.pkl

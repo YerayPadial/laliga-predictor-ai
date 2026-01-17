@@ -39,65 +39,71 @@ def get_headless_driver() -> webdriver.Chrome:
 
 def scrape_historical_results(driver: webdriver.Chrome, url: str) -> pd.DataFrame:
     """
-    Extrae resultados de partidos jugados.
-    Detecta selectores típicos de Flashscore (nota: estos cambian, revisar periódicamente).
+     Extrae resultados con mejor manejo de errores.
     """
     logger.info(f"Iniciando scraping de resultados: {url}")
     data = []
     
     try:
         driver.get(url)
-        # Esperar a que cargue el contenedor principal de partidos
         wait = WebDriverWait(driver, 15)
-        # Nota: Los selectores de clase (ej: .event__match) son ejemplos. 
-        # Deben validarse con el inspector de elementos real del sitio objetivo.
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "sportName")))
+        # Esperar a que cargue algo reconocible
+        wait.until(EC.presence_of_element_located((By.ID, "live-table")))
         
-        # Lógica para cargar más partidos si es necesario (scroll o click en botón)
-        # try:
-        #     more_button = driver.find_element(By.CLASS_NAME, "event__more")
-        #     driver.execute_script("arguments[0].click();", more_button)
-        #     time.sleep(2)
-        # except:
-        #     pass
-
-        # Extraer filas de partidos
+        # Encontrar filas de partidos
         match_rows = driver.find_elements(By.CSS_SELECTOR, ".event__match")
-        
-        logger.info(f"Encontrados {len(match_rows)} partidos potenciales.")
+        logger.info(f"Encontrados {len(match_rows)} partidos potenciales. Procesando...")
+
+        success_count = 0
+        error_count = 0
 
         for row in match_rows:
             try:
-                # Extracción defensiva
+                # Intentamos extraer texto general primero para depuración
+                row_text = row.text
+                
+                # Búsqueda de equipos (Selectores actualizados a lo más común en Flashscore)
+                # Nota: A veces usan classes como "event__participant--home" y otras veces "event__participant--away"
                 home_team = row.find_element(By.CSS_SELECTOR, ".event__participant--home").text
                 away_team = row.find_element(By.CSS_SELECTOR, ".event__participant--away").text
                 
-                # Scores
-                score_home = row.find_element(By.CSS_SELECTOR, ".event__score--home").text
-                score_away = row.find_element(By.CSS_SELECTOR, ".event__score--away").text
+                # Scores - IMPORTANTE: Solo extraemos si hay goles (partido terminado)
+                # Si el partido no tiene goles, find_element fallará o devolverá vacío.
+                score_home_element = row.find_elements(By.CSS_SELECTOR, ".event__score--home")
+                score_away_element = row.find_elements(By.CSS_SELECTOR, ".event__score--away")
                 
-                # Fecha/Hora (A veces está en un bloque anterior, simplificado aquí)
-                # En implementaciones reales, se rastrea el encabezado de fecha anterior
-                
-                if score_home.isdigit() and score_away.isdigit():
-                    data.append({
-                        "date": datetime.now().strftime("%Y-%m-%d"), # Placeholder si no se extrae fecha exacta
-                        "home_team": home_team,
-                        "away_team": away_team,
-                        "home_score": int(score_home),
-                        "away_score": int(score_away)
-                    })
+                if score_home_element and score_away_element:
+                    score_home = score_home_element[0].text
+                    score_away = score_away_element[0].text
+                    
+                    if score_home.isdigit() and score_away.isdigit():
+                        data.append({
+                            "date": datetime.now().strftime("%Y-%m-%d"), 
+                            "home_team": home_team,
+                            "away_team": away_team,
+                            "home_score": int(score_home),
+                            "away_score": int(score_away)
+                        })
+                        success_count += 1
+                else:
+                    # Es un partido futuro o sin goles, lo ignoramos sin error
+                    continue
+
             except Exception as row_e:
-                # Si falla una fila, no rompemos todo el proceso
+                # Si falla, imprimimos la primera vez para entender por qué
+                if error_count < 3: 
+                    logger.warning(f"Fallo al leer fila: {row_e}")
+                error_count += 1
                 continue
 
+        logger.info(f"Procesamiento finalizado. Éxitos: {success_count}, Fallos/Futuros: {error_count}")
+
     except TimeoutException:
-        logger.error("Timeout: La página tardó demasiado en cargar.")
+        logger.error("Timeout: La página tardó demasiado y no se encontraron elementos.")
     except Exception as e:
-        logger.error(f"Error fatal en scraping de resultados: {e}")
+        logger.error(f"Error fatal general: {e}")
 
     df = pd.DataFrame(data)
-    logger.info(f"Scraping finalizado. {len(df)} registros extraídos.")
     return df
 
 def scrape_standings(driver: webdriver.Chrome, url: str) -> pd.DataFrame:

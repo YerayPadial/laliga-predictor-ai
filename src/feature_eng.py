@@ -8,21 +8,24 @@ from typing import Dict, List, Tuple
 
 # Diccionario maestro de normalización
 TEAM_MAPPING = {
-    "Athletic Club": "Athletic Bilbao",
-    "Athletic": "Athletic Bilbao",
+    "Athletic Club": "Athletic Bilbao", "Athletic": "Athletic Bilbao",
     "Atlético de Madrid": "Atletico Madrid",
-    "Atl. Madrid": "Atletico Madrid",
-    "R. Betis": "Real Betis",
-    "Real Sociedad": "Real Sociedad",
+    "Atlético de Madrid": "Atletico Madrid", "Atl. Madrid": "Atletico Madrid", "Atlético": "Atletico Madrid",
+    "R. Betis": "Real Betis", "Betis": "Real Betis",
+    "Real Sociedad": "Real Sociedad", "R. Sociedad": "Real Sociedad",
     "R. Sociedad": "Real Sociedad",
-    "FC Barcelona": "Barcelona",
+    "FC Barcelona": "Barcelona", "Barca": "Barcelona",
     "Barca": "Barcelona",
     "Real Madrid": "Real Madrid",
     "Real Madrid 2": "Real Madrid",
     "R. Madrid": "Real Madrid",
-    "Real Oviedo 2": "Real Oviedo",
+    "Real Oviedo 2": "Real Oviedo", "Oviedo": "Real Oviedo",
     "Girona FC": "Girona",
     "Getafe 2": "Getafe",
+    "Alavés": "Alaves", "D. Alavés": "Alaves",
+    "Leganés": "Leganes",
+    "Valladolid": "Real Valladolid",
+    "Celta": "Celta de Vigo", "RC Celta": "Celta de Vigo",
     # Añadir más variaciones si aparecen en el futuro
 }
 
@@ -169,79 +172,69 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
 
 # --- 4. PREPARACIÓN DE DATOS (QUINIELA / UX) ---
 
-def parse_flashscore_date(date_str: str) -> datetime:
-    """Convierte fechas tipo '17.01. 14:00' (Flashscore) a objetos datetime reales."""
+# --- 4. PREPARACIÓN QUINIELA (Universal Date Parser) ---
+def parse_date_universal(date_str: str) -> datetime:
+    """Parser robusto para fechas de Flashscore ('17.01.') y AS ('17/01' o '17 Ene')."""
     try:
         if not isinstance(date_str, str): return datetime.now()
-        parts = date_str.split('.')
-        day = int(parts[0])
-        month = int(parts[1])
         current_year = datetime.now().year
+        
+        # Limpieza inicial
+        clean_str = date_str.lower().replace('.', '/').replace(',', '').split()[0] # Toma la primera parte "17/01"
+        
+        # Intentar extraer día y mes
+        import re
+        match = re.search(r'(\d{1,2})[/-](\d{1,2})', clean_str)
+        if match:
+            day, month = int(match.group(1)), int(match.group(2))
+        else:
+            return datetime.now()
+
         dt = datetime(current_year, month, day)
-        if dt < datetime.now() - timedelta(days=90):
-            dt = dt.replace(year=current_year + 1)
+        if dt < datetime.now() - timedelta(days=90): dt = dt.replace(year=current_year + 1)
         return dt
     except:
         return datetime.now()
 
 def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """
-    Cruza el Calendario con el Historial para generar la Quiniela.
-    Devuelve: (X_prediccion, Info_Partidos_con_Fechas)
-    """
     try:
-        # 1. Cargar Calendario
-        if not os.path.exists(fixtures_path):
-            print("No se encontró fixtures.csv")
-            return pd.DataFrame(), pd.DataFrame()
-            
+        if not os.path.exists(fixtures_path): return pd.DataFrame(), pd.DataFrame()
         df_fix = pd.read_csv(fixtures_path)
+        if df_fix.empty: return pd.DataFrame(), pd.DataFrame()
+
         df_fix = normalize_names(df_fix)
         df_fix = df_fix.drop_duplicates(subset=['home_team', 'away_team'])
-        df_fix['parsed_date'] = df_fix['date_str'].apply(parse_flashscore_date)
+        df_fix['parsed_date'] = df_fix['date_str'].apply(parse_date_universal)
 
-        # 2. Cargar Historial para obtener 'Estado de Forma' actual
-        if not os.path.exists(training_path):
-            return pd.DataFrame(), df_fix
-            
+        if not os.path.exists(training_path): return pd.DataFrame(), df_fix
         df_hist = pd.read_csv(training_path)
         df_hist = normalize_names(df_hist)
         df_hist['date'] = pd.to_datetime(df_hist['date'])
         
-        # Recalcular ganadores para stats
-        conditions = [
-            (df_hist['home_score'] > df_hist['away_score']),
-            (df_hist['home_score'] == df_hist['away_score']),
-            (df_hist['home_score'] < df_hist['away_score'])
-        ]
+        conditions = [(df_hist['home_score'] > df_hist['away_score']), (df_hist['home_score'] == df_hist['away_score']), (df_hist['home_score'] < df_hist['away_score'])]
         df_hist['winner'] = np.select(conditions, ['Home', 'Draw', 'Away'], default='Draw')
         
-        # Obtener últimas estadísticas conocidas
         stats = get_team_stats_history(df_hist)
         latest_stats = stats.sort_values('date').groupby('team').tail(1).set_index('team')
         
-        # 3. Construir dataset de predicción
         data_for_pred = []
         valid_fixtures = []
 
         for _, row in df_fix.iterrows():
             ht, at = row['home_team'], row['away_team']
-            
             if ht in latest_stats.index and at in latest_stats.index:
-                row_data = {
+                data_for_pred.append({
                     'last_5_home_points': latest_stats.loc[ht, 'last_5_points'],
                     'last_5_away_points': latest_stats.loc[at, 'last_5_points'],
-                    'rest_days_home': 7, # Asumimos descanso estándar para el futuro
+                    'rest_days_home': 7,
                     'rest_days_away': 7,
-                    'h2h_home_wins': 0 # Simplificación (cuesta mucho calcular h2h real en inferencia rápida)
-                }
-                data_for_pred.append(row_data)
+                    'h2h_home_wins': 0
+                })
                 valid_fixtures.append(row)
         
         return pd.DataFrame(data_for_pred), pd.DataFrame(valid_fixtures)
-
     except Exception as e:
-        print(f"Error preparing fixtures: {e}")
+        print(f"Error fixtures: {e}")
         return pd.DataFrame(), pd.DataFrame()
 
 if __name__ == "__main__":

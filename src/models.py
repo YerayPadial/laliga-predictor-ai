@@ -47,21 +47,30 @@ def load_data(path: str):
 
 def get_pipeline(model_type: str) -> Pipeline:
     """
-    Fábrica de Pipelines.
-    Es CRÍTICO incluir un StandardScaler para Regresión Logística.
-    Random Forest no lo necesita estrictamente, pero no le hace daño.
+    Fábrica de Pipelines con mejoras para desbalanceo de clases.
     """
     if model_type == 'rf':
-        clf = RandomForestClassifier(random_state=42, class_weight='balanced')
+        # CAMBIO CLAVE: balanced_subsample es más agresivo a favor de los empates
+        clf = RandomForestClassifier(
+            random_state=42, 
+            class_weight='balanced_subsample', 
+            n_estimators=200  # Aumentamos árboles para estabilizar
+        )
     elif model_type == 'lr':
-        clf = LogisticRegression(random_state=42, multi_class='multinomial', solver='lbfgs', max_iter=1000)
+        clf = LogisticRegression(
+            random_state=42, 
+            multi_class='multinomial', 
+            solver='lbfgs', 
+            max_iter=1000,
+            class_weight='balanced' # Importante para Regresión también
+        )
     elif model_type == 'dt':
         clf = DecisionTreeClassifier(random_state=42, class_weight='balanced')
     else:
         raise ValueError("Modelo desconocido")
         
     return Pipeline([
-        ('scaler', StandardScaler()), # Normalización Z-Score
+        ('scaler', StandardScaler()), 
         ('clf', clf)
     ])
 

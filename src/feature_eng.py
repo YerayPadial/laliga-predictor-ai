@@ -101,37 +101,43 @@ def calculate_h2h(row, df_history):
 
 def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFrame:
     """
-    Función MAESTRA.
-    Lee CSV crudo -> Limpia -> Genera Features -> Devuelve DF listo para ML.
+    Función MAESTRA (Versión 2.0 - Anti-Duplicados).
     """
     try:
         df = pd.read_csv(raw_csv_path)
+        
+        # --- LIMPIEZA CRÍTICA ---
+        # 1. Eliminar espacios en blanco invisibles
+        df['home_team'] = df['home_team'].str.strip()
+        df['away_team'] = df['away_team'].str.strip()
+        
+        # 2. Eliminar duplicados EXACTOS (Mismo partido scrapeado N veces)
+        # Nos quedamos con el último registro encontrado (keep='last')
+        before = len(df)
+        df.drop_duplicates(subset=['date', 'home_team', 'away_team'], keep='last', inplace=True)
+        print(f"Limpieza: Se eliminaron {before - len(df)} filas duplicadas.")
+        # ------------------------
+
         df['date'] = pd.to_datetime(df['date'])
         
-        # 0. Normalización
+        # 0. Normalización (Asegúrate de que tu diccionario TEAM_MAPPING arriba esté completo)
         df = normalize_names(df)
         
-        # 1. Definir Target (Variable Objetivo)
-        # 0: Local Gana, 1: Empate, 2: Visitante Gana
+        # 1. Definir Target
         conditions = [
             (df['home_score'] > df['away_score']),
             (df['home_score'] == df['away_score']),
             (df['home_score'] < df['away_score'])
         ]
         
-        # --- CORRECCIÓN AQUÍ ---
-        # Añadimos default='Draw' para que NumPy sepa que todo son Strings
+        # TYPE SAFETY: Definimos defaults explícitos para evitar errores de NumPy
         df['winner'] = np.select(conditions, ['Home', 'Draw', 'Away'], default='Draw')
-        
-        # Añadimos default=1 para que NumPy sepa que todo son Enteros
         df['TARGET'] = np.select(conditions, [0, 1, 2], default=1)
-        # -----------------------
         
-        # 2. Calcular Features de Racha y Fatiga (Team-Centric)
+        # 2. Calcular Features (Rachas)
         team_stats = get_team_stats_history(df)
         
-        # 3. Mapear de vuelta al DataFrame de Partidos (Match-Centric)
-        # Join para Home Team
+        # 3. Mapear de vuelta (Joins)
         df = df.merge(team_stats[['date', 'team', 'last_5_points', 'rest_days']], 
                       left_on=['date', 'home_team'], 
                       right_on=['date', 'team'], 
@@ -140,7 +146,6 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
                           'rest_days': 'rest_days_home'
                       }).drop(columns=['team'])
                       
-        # Join para Away Team
         df = df.merge(team_stats[['date', 'team', 'last_5_points', 'rest_days']], 
                       left_on=['date', 'away_team'], 
                       right_on=['date', 'team'], 
@@ -149,13 +154,13 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
                           'rest_days': 'rest_days_away'
                       }).drop(columns=['team'])
         
-        # 4. Calcular H2H (Loop optimizado o Apply)
+        # 4. H2H
         df['h2h_home_wins'] = df.apply(lambda x: calculate_h2h(x, df), axis=1)
 
-        # 5. Limpieza Final (Handling NaNs)
+        # 5. Drop NaNs
         df.dropna(subset=['last_5_home_points', 'last_5_away_points'], inplace=True)
         
-        # Selección de columnas finales según Schema
+        # Selección final
         final_cols = [
             'date', 'home_team', 'away_team', 
             'last_5_home_points', 'last_5_away_points',

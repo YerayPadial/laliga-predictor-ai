@@ -27,6 +27,8 @@ TEAM_MAPPING = {
     "Valladolid": "Real Valladolid",
     "Celta": "Celta de Vigo", "RC Celta": "Celta de Vigo",
     # Añadir más variaciones si aparecen en el futuro
+    "Sistema AI": "Sistema AI",
+    "Mantenimiento": "Mantenimiento",
 }
 
 def normalize_names(df: pd.DataFrame) -> pd.DataFrame:

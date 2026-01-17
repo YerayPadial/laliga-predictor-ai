@@ -43,14 +43,11 @@ jobs:
         env:
           User_Agent: "Mozilla/5.0 (LaLigaAI)"
 
-<<<<<<< HEAD
+      # 6. C. Run Feature Engineering
       - name: Run Feature Engineering
         run: python src/feature_eng.py
 
       # 6. D. Run Training 
-=======
-      # 6. D. Run Training
->>>>>>> ce590e86d15a6811f7c827f3f3acb6157d379dfb
       # Lee el CSV nuevo, entrena modelos y guarda model_winner.pkl
       - name: Train Models
         run: python src/models.py

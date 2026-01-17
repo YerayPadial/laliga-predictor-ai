@@ -1,7 +1,7 @@
 name: LaLiga Data Pipeline & Training
 
-# A. Trigger: Cron Schedule [cite: 1]
-# Ejecutar Martes y Viernes a las 8:00 AM UTC 
+# A. Trigger: Cron Schedule
+# Ejecutar Martes y Viernes a las 8:00 AM UTC
 on:
   schedule:
     - cron: '0 8 * * 2,5'
@@ -10,25 +10,25 @@ on:
 
 jobs:
   build-and-update:
-    [cite_start]runs-on: ubuntu-latest # B. Setup: Ubuntu environment [cite: 1]
+    runs-on: ubuntu-latest
 
     steps:
       # 1. Check out del repositorio
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Configurar Python 3.9 [cite: 1]
+      # 2. Configurar Python 3.9
       - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
       # 3. Instalar Chrome y Chromedriver (Necesario para Selenium Headless)
-      # GitHub Runners actuales ya suelen incluir Chrome, pero esto asegura compatibilidad.
       - name: Install Chrome dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y xvfb
 
       # 4. Instalar librerías Python
       - name: Install dependencies
@@ -36,29 +36,31 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 5. C. Run Scraper 
+      # 5. C. Run Scraper
       # Extrae datos de Flashscore y Transfermarkt y actualiza /data
       - name: Run Scraper (ETL)
         run: python src/scraper.py
         env:
-          # Si usas proxies en el futuro, las variables van aquí
           User_Agent: "Mozilla/5.0 (LaLigaAI)"
 
+<<<<<<< HEAD
       - name: Run Feature Engineering
         run: python src/feature_eng.py
 
       # 6. D. Run Training 
+=======
+      # 6. D. Run Training
+>>>>>>> ce590e86d15a6811f7c827f3f3acb6157d379dfb
       # Lee el CSV nuevo, entrena modelos y guarda model_winner.pkl
       - name: Train Models
         run: python src/models.py
 
-      # 7. E. Git Auto-Commit 
+      # 7. E. Git Auto-Commit
       # Detecta cambios en /data y hace push al repo automáticamente
       - name: Commit and Push changes
         run: |
           git config --global user.name "LaLiga AI Bot"
           git config --global user.email "bot@laliga-ai.com"
-          git add data/laliga_matches.csv data/model_winner.pkl
-          # El commit solo ocurre si hay cambios, evitando errores si no hay datos nuevos
+          git add data/
           git commit -m "Auto-update: New match data and trained model" || echo "No changes to commit"
           git push

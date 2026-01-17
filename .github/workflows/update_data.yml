@@ -53,12 +53,12 @@ jobs:
       - name: Train Models
         run: python src/models.py
 
-      # 7. E. Git Auto-Commit
-      # Detecta cambios en /data y hace push al repo automáticamente
+     # 7. E. Git Auto-Commit
       - name: Commit and Push changes
         run: |
           git config --global user.name "LaLiga AI Bot"
           git config --global user.email "bot@laliga-ai.com"
+          # Añadir TODO lo que haya en data/ (incluyendo el nuevo fixtures.csv)
           git add data/
-          git commit -m "Auto-update: New match data and trained model" || echo "No changes to commit"
+          git commit -m "Auto-update: Match results, fixtures and model" || echo "No changes to commit"
           git push

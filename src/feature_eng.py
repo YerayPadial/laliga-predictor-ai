@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
 from datetime import timedelta
+import os
 from typing import Dict, List, Tuple
 
-# Definición de Mapeo para normalizar nombres (Según tu estrategia) [cite: 1]
+# [cite_start]Definición de Mapeo para normalizar nombres (Según tu estrategia) [cite: 1]
 TEAM_MAPPING = {
     "Athletic Club": "Athletic Bilbao",
     "Athletic": "Athletic Bilbao",
@@ -15,25 +16,19 @@ TEAM_MAPPING = {
     "FC Barcelona": "Barcelona",
     "Barca": "Barcelona",
     "Real Madrid": "Real Madrid",
+    "Real Madrid 2": "Real Madrid",
     "R. Madrid": "Real Madrid",
+    "Real Oviedo 2": "Real Oviedo",
+    "Girona FC": "Girona",
+    "Getafe 2": "Getafe",
     # Añadir más según se detecten en el scraper
 }
 
 def normalize_names(df: pd.DataFrame) -> pd.DataFrame:
     """Normaliza los nombres de los equipos usando el diccionario maestro."""
-    df['home_team'] = df['home_team'].replace(TEAM_MAPPING)
-    df['away_team'] = df['away_team'].replace(TEAM_MAPPING)
+    df['home_team'] = df['home_team'].replace(TEAM_MAPPING).str.strip()
+    df['away_team'] = df['away_team'].replace(TEAM_MAPPING).str.strip()
     return df
-
-def calculate_points(row, team_column):
-    """Auxiliar: Calcula puntos obtenidos en un partido (3, 1, 0)."""
-    if row['winner'] == 'Draw':
-        return 1
-    if row['winner'] == 'Home' and row['home_team'] == row[team_column]:
-        return 3
-    if row['winner'] == 'Away' and row['away_team'] == row[team_column]:
-        return 3
-    return 0
 
 def get_team_stats_history(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -52,14 +47,12 @@ def get_team_stats_history(df: pd.DataFrame) -> pd.DataFrame:
     team_stats = pd.concat([home_matches, away_matches]).sort_values(['team', 'date'])
     
     # Calcular puntos por partido
-    # Lógica simplificada para vectorización
     conditions = [
         (team_stats['is_home'] == 1) & (team_stats['winner_ref'] == 'Home'),
         (team_stats['is_home'] == 0) & (team_stats['winner_ref'] == 'Away'),
         (team_stats['winner_ref'] == 'Draw')
     ]
-    choices = [3, 3, 1]
-    team_stats['points'] = np.select(conditions, choices, default=0)
+    team_stats['points'] = np.select(conditions, [3, 3, 1], default=0)
     
     # --- INGENIERÍA DE CARACTERÍSTICAS ---
     
@@ -120,7 +113,7 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
 
         df['date'] = pd.to_datetime(df['date'])
         
-        # 0. Normalización (Asegúrate de que tu diccionario TEAM_MAPPING arriba esté completo)
+        # 0. Normalización
         df = normalize_names(df)
         
         # 1. Definir Target
@@ -154,7 +147,7 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
                           'rest_days': 'rest_days_away'
                       }).drop(columns=['team'])
         
-        # 4. H2H
+        # 4. H2H (Mantenemos tu lógica avanzada para el entrenamiento)
         df['h2h_home_wins'] = df.apply(lambda x: calculate_h2h(x, df), axis=1)
 
         # 5. Drop NaNs
@@ -175,11 +168,73 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
     except FileNotFoundError:
         print("Error: No se encontró el archivo de datos crudos.")
         return pd.DataFrame()
-    
+
+def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> pd.DataFrame:
+    """
+    Prepara la Quiniela cruzando el calendario con los datos históricos.
+    Calcula las estadísticas más recientes conocidas para proyectar el futuro.
+    """
+    try:
+        # 1. Cargar Calendario (Fixtures)
+        if not os.path.exists(fixtures_path):
+            print("No se encontró archivo de fixtures.") 
+            return pd.DataFrame(), pd.DataFrame()
+            
+        df_fix = pd.read_csv(fixtures_path)
+        df_fix = normalize_names(df_fix)
+        # Limpieza de duplicados en el calendario también
+        df_fix = df_fix.drop_duplicates(subset=['home_team', 'away_team']) 
+
+        # 2. Cargar Historial (RAW Data) para sacar stats actuales
+        if not os.path.exists(training_path): 
+            return pd.DataFrame(), df_fix # Devuelve solo info básica si no hay historia
+            
+        df_hist = pd.read_csv(training_path)
+        df_hist = normalize_names(df_hist)
+        df_hist['date'] = pd.to_datetime(df_hist['date'])
+        
+        # Calcular Target en el histórico para poder usar get_team_stats_history
+        conditions = [
+            (df_hist['home_score'] > df_hist['away_score']),
+            (df_hist['home_score'] == df_hist['away_score']),
+            (df_hist['home_score'] < df_hist['away_score'])
+        ]
+        df_hist['winner'] = np.select(conditions, ['Home', 'Draw', 'Away'], default='Draw')
+        
+        # Calcular últimas estadísticas conocidas
+        stats = get_team_stats_history(df_hist)
+        # Nos quedamos con la ÚLTIMA fila de cada equipo (su estado actual)
+        latest_stats = stats.sort_values('date').groupby('team').tail(1).set_index('team')
+        
+        # 3. Cruzar datos
+        data_for_pred = []
+        valid_fixtures = []
+
+        for _, row in df_fix.iterrows():
+            ht, at = row['home_team'], row['away_team']
+            
+            # Si tenemos datos históricos de ambos equipos
+            if ht in latest_stats.index and at in latest_stats.index:
+                row_data = {
+                    'last_5_home_points': latest_stats.loc[ht, 'last_5_points'],
+                    'last_5_away_points': latest_stats.loc[at, 'last_5_points'],
+                    'rest_days_home': 7, # Default para futuro
+                    'rest_days_away': 7,
+                    'h2h_home_wins': 0 # Simplificación para predicción rápida (se podría mejorar cruzando historia)
+                }
+                data_for_pred.append(row_data)
+                valid_fixtures.append(row)
+        
+        # Devolver DF con features para el modelo y DF con info del partido para visualizar
+        return pd.DataFrame(data_for_pred), pd.DataFrame(valid_fixtures)
+
+    except Exception as e:
+        print(f"Error preparing fixtures: {e}")
+        return pd.DataFrame(), pd.DataFrame()
+
 if __name__ == "__main__":
-    # Prueba rápida
+    # Prueba rápida local
     df_clean = prepare_data()
-    print(df_clean.head())
-    # Guardar para inspección
     if not df_clean.empty:
+        print(df_clean.head())
         df_clean.to_csv("data/training_set.csv", index=False)

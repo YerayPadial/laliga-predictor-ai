@@ -44,6 +44,9 @@ jobs:
           # Si usas proxies en el futuro, las variables van aquí
           User_Agent: "Mozilla/5.0 (LaLigaAI)"
 
+      - name: Run Feature Engineering
+        run: python src/feature_eng.py
+
       # 6. D. Run Training 
       # Lee el CSV nuevo, entrena modelos y guarda model_winner.pkl
       - name: Train Models

@@ -170,28 +170,18 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
 # --- 4. PREPARACIÓN DE DATOS (QUINIELA / UX) ---
 
 def parse_flashscore_date(date_str: str) -> datetime:
-    """
-    Convierte fechas tipo '17.01. 14:00' (Flashscore) a objetos datetime reales.
-    Vital para que la App sepa qué partidos son 'Esta Semana'.
-    """
+    """Convierte fechas tipo '17.01. 14:00' (Flashscore) a objetos datetime reales."""
     try:
         if not isinstance(date_str, str): return datetime.now()
-        
-        # Formato esperado: "DD.MM. HH:MM"
         parts = date_str.split('.')
         day = int(parts[0])
         month = int(parts[1])
         current_year = datetime.now().year
-        
         dt = datetime(current_year, month, day)
-        
-        # Ajuste de año (si estamos en Dic y la fecha es Ene, es el año siguiente)
         if dt < datetime.now() - timedelta(days=90):
             dt = dt.replace(year=current_year + 1)
-            
         return dt
     except:
-        # Si falla, devolvemos hoy para que al menos salga en la lista
         return datetime.now()
 
 def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
@@ -208,10 +198,7 @@ def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> Tuple[pd
         df_fix = pd.read_csv(fixtures_path)
         df_fix = normalize_names(df_fix)
         df_fix = df_fix.drop_duplicates(subset=['home_team', 'away_team'])
-        
-        # --- PARSEO DE FECHAS (NUEVO) ---
         df_fix['parsed_date'] = df_fix['date_str'].apply(parse_flashscore_date)
-        # --------------------------------
 
         # 2. Cargar Historial para obtener 'Estado de Forma' actual
         if not os.path.exists(training_path):

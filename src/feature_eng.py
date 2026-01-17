@@ -111,22 +111,26 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
         # 0. Normalización
         df = normalize_names(df)
         
-        # 1. Definir Target (Variable Objetivo) 
+        # 1. Definir Target (Variable Objetivo)
         # 0: Local Gana, 1: Empate, 2: Visitante Gana
         conditions = [
             (df['home_score'] > df['away_score']),
             (df['home_score'] == df['away_score']),
             (df['home_score'] < df['away_score'])
         ]
-        df['winner'] = np.select(conditions, ['Home', 'Draw', 'Away'])
-        df['TARGET'] = np.select(conditions, [0, 1, 2])
+        
+        # --- CORRECCIÓN AQUÍ ---
+        # Añadimos default='Draw' para que NumPy sepa que todo son Strings
+        df['winner'] = np.select(conditions, ['Home', 'Draw', 'Away'], default='Draw')
+        
+        # Añadimos default=1 para que NumPy sepa que todo son Enteros
+        df['TARGET'] = np.select(conditions, [0, 1, 2], default=1)
+        # -----------------------
         
         # 2. Calcular Features de Racha y Fatiga (Team-Centric)
         team_stats = get_team_stats_history(df)
         
         # 3. Mapear de vuelta al DataFrame de Partidos (Match-Centric)
-        # Necesitamos unir 'last_5_points' y 'rest_days' para Home y Away
-        
         # Join para Home Team
         df = df.merge(team_stats[['date', 'team', 'last_5_points', 'rest_days']], 
                       left_on=['date', 'home_team'], 
@@ -146,13 +150,12 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
                       }).drop(columns=['team'])
         
         # 4. Calcular H2H (Loop optimizado o Apply)
-        # Nota: Esto puede ser lento en datasets enormes, aceptable para <5k partidos
         df['h2h_home_wins'] = df.apply(lambda x: calculate_h2h(x, df), axis=1)
 
         # 5. Limpieza Final (Handling NaNs)
         df.dropna(subset=['last_5_home_points', 'last_5_away_points'], inplace=True)
         
-        # Selección de columnas finales según Schema 
+        # Selección de columnas finales según Schema
         final_cols = [
             'date', 'home_team', 'away_team', 
             'last_5_home_points', 'last_5_away_points',
@@ -167,7 +170,7 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
     except FileNotFoundError:
         print("Error: No se encontró el archivo de datos crudos.")
         return pd.DataFrame()
-
+    
 if __name__ == "__main__":
     # Prueba rápida
     df_clean = prepare_data()

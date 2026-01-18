@@ -55,7 +55,9 @@ def main():
         st.info("📅 No hay partidos programados detectados o faltan datos históricos.")
         st.write("El scraper actualizará el calendario automáticamente el próximo Martes/Viernes.")
         return
-
+    # Reseteamos el índice para que coincida con el array de predicciones (0, 1, 2...)
+    df_info = df_info.reset_index(drop=True)
+    
     # Realizar Predicciones en Lote
     predictions = model.predict(X_pred)
     probs = model.predict_proba(X_pred)

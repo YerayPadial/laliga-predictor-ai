@@ -107,48 +107,56 @@ def scrape_backup_as(driver) -> pd.DataFrame:
 
 # --- FUENTE 3: MARCA (El Tanque) ---
 def scrape_backup_marca(driver) -> pd.DataFrame:
-    logger.info("🛡️ Intento 3: MARCA (El Tanque)...")
+    logger.info("🛡️ Intento 3: MARCA (Extracción Fuerza Bruta)...")
     url = "https://www.marca.com/futbol/primera-division/calendario.html"
     data = []
+    
     try:
         driver.get(url)
         time.sleep(3)
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         
-        # Marca usa una estructura de lista muy robusta
-        partidos = soup.find_all('div', class_='partido')
+        # Obtenemos TODOS los elementos que parezcan filas o bloques de partido
+        items = soup.find_all(['div', 'li', 'tr'])
         
-        if not partidos:
-             # Fallback a tabla
-             partidos = soup.find_all('tr')
-
-        logger.info(f"Marca: Encontrados {len(partidos)} elementos.")
-
-        for p in partidos:
+        count = 0
+        for item in items:
             try:
-                # Buscamos equipos en texto
-                texto = p.get_text()
-                if " vs " in texto or "-" in texto:
-                    # Intento de extracción simple por estructura
-                    equipos = p.find_all('span', class_='nombre')
-                    if not equipos:
-                        equipos = p.find_all('a') # A veces son links
+                # Obtenemos TODO el texto limpio del elemento
+                text_content = item.get_text(separator='|', strip=True)
+                parts = text_content.split('|')
+                
+                # Filtramos las partes que no nos sirven (horas, "Jornada", guiones vacíos)
+                clean_parts = [
+                    p for p in parts 
+                    if len(p) > 3             # Nombres muy cortos suelen ser basura
+                    and not p[0].isdigit()    # No empieza por número (hora/resultado)
+                    and ':' not in p          # No es una hora
+                    and 'Jornada' not in p
+                    and 'Directo' not in p
+                ]
+                
+                # Si nos quedan al menos 2 textos que parecen equipos...
+                if len(clean_parts) >= 2:
+                    # Validamos que no sean textos de menú (ej: "Fútbol", "Primera")
+                    t1, t2 = clean_parts[0], clean_parts[1]
                     
-                    if len(equipos) >= 2:
-                        home = clean_team_name(equipos[0].get_text(strip=True))
-                        away = clean_team_name(equipos[1].get_text(strip=True))
-                        
-                        # Filtramos si parece resultado pasado (tiene números de goles)
-                        if any(c.isdigit() for c in texto) and "Jornada" not in texto:
-                             # Es arriesgado, pero asumimos que si estamos aqui es calendario futuro
-                             pass 
+                    # Evitamos duplicados procesados (Marca anida divs)
+                    if any(x['home_team'] == t1 and x['away_team'] == t2 for x in data):
+                        continue
 
-                        data.append({
-                            "home_team": home,
-                            "away_team": away,
-                            "date_str": "Próximamente"
-                        })
+                    # Guardamos
+                    data.append({
+                        "home_team": clean_team_name(t1),
+                        "away_team": clean_team_name(t2),
+                        "date_str": "Próximamente"
+                    })
+                    count += 1
+                    
             except: continue
+            
+        logger.info(f"Marca (Fuerza Bruta): Extraídos {count} partidos posibles.")
+            
     except Exception as e:
         logger.error(f"Marca Error: {e}")
         

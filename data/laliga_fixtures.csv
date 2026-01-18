@@ -1,2 +1,506 @@
 home_team,away_team,date_str
-Sistema AI,Mantenimiento,17.01. 12:00
+Alcaraz,Vinicius,Próximamente
+Portada de Marca,Edición seleccionada,Próximamente
+Edición seleccionada,España,Próximamente
+España,México,Próximamente
+Fútbol,Baloncesto,Próximamente
+Última hora,MARCA Entradas,Próximamente
+Portada,Fútbol,Próximamente
+Equipos,Dorsales,Próximamente
+Calendario LaLiga EA Sports 2025 - 2026,Primera División,Próximamente
+Calendario LaLiga EA Sports 2025 - 2026,Primera División,Próximamente
+Compartir en Facebook,Compartir en Twitter,Próximamente
+España,LALIGA EA Sports,Próximamente
+LALIGA EA Sports,Calendario,Próximamente
+Liga F Moeve,Calendario,Próximamente
+LALIGA Hypermotion,Calendario,Próximamente
+Selección Española,UEFA Nations League,Próximamente
+Selección Española femenina,Eurocopa,Próximamente
+Internacional,Premier League,Próximamente
+Premier League,Calendario,Próximamente
+Bundesliga,Calendario,Próximamente
+Serie A,Calendario,Próximamente
+Ligue,Calendario,Próximamente
+Primeira Liga de Portugal,Calendario,Próximamente
+Champions League,Calendario,Próximamente
+Champions League femenina,Calendario,Próximamente
+Europa League,Calendario,Próximamente
+Conference League,Calendario,Próximamente
+Youth League,Calendario,Próximamente
+América,Argentina,Próximamente
+Argentina,Calendario,Próximamente
+Chile,Calendario,Próximamente
+Colombia,Calendario,Próximamente
+Estados Unidos,Calendario,Próximamente
+México,Calendario,Próximamente
+Venezuela,Calendario,Próximamente
+Leagues Cup,Calendario,Próximamente
+CONMEBOL Libertadores,Calendario,Próximamente
+Más América,Campeonato Brasileiro,Próximamente
+Destacamos,Atletismo,Próximamente
+Otros deportes,Ajedrez,Próximamente
+Natación,Olimpismo,Próximamente
+Toros,Triatlón,Próximamente
+Calendario LaLiga EA Sports 2025 - 2026,Primera División,Próximamente
+Calendario LaLiga EA Sports 2025 - 2026,Primera División,Próximamente
+Selecciona jornada,Pulsa en tu equipo para ver sus partidos y en,Próximamente
+Pulsa en tu equipo para ver sus partidos y en,calendario,Próximamente
+Ir arriba,Equipo local,Próximamente
+Equipo local,Resultado,Próximamente
+Girona,Rayo,Próximamente
+Villarreal,Oviedo,Próximamente
+Mallorca,Barcelona,Próximamente
+Alavés,Levante,Próximamente
+Valencia,R. Sociedad,Próximamente
+Celta,Getafe,Próximamente
+Athletic,Sevilla,Próximamente
+Espanyol,Atlético,Próximamente
+Elche,Betis,Próximamente
+Real Madrid,Osasuna,Próximamente
+Betis,Alavés,Próximamente
+Mallorca,Celta,Próximamente
+Atlético,Elche,Próximamente
+Levante,Barcelona,Próximamente
+Osasuna,Valencia,Próximamente
+R. Sociedad,Espanyol,Próximamente
+Villarreal,Girona,Próximamente
+Oviedo,Real Madrid,Próximamente
+Athletic,Rayo,Próximamente
+Sevilla,Getafe,Próximamente
+Elche,Levante,Próximamente
+Valencia,Getafe,Próximamente
+Alavés,Atlético,Próximamente
+Oviedo,R. Sociedad,Próximamente
+Girona,Sevilla,Próximamente
+Real Madrid,Mallorca,Próximamente
+Celta,Villarreal,Próximamente
+Betis,Athletic,Próximamente
+Espanyol,Osasuna,Próximamente
+Rayo,Barcelona,Próximamente
+Sevilla,Elche,Próximamente
+Getafe,Oviedo,Próximamente
+R. Sociedad,Real Madrid,Próximamente
+Athletic,Alavés,Próximamente
+Atlético,Villarreal,Próximamente
+Celta,Girona,Próximamente
+Levante,Betis,Próximamente
+Osasuna,Rayo,Próximamente
+Barcelona,Valencia,Próximamente
+Espanyol,Mallorca,Próximamente
+Betis,R. Sociedad,Próximamente
+Girona,Levante,Próximamente
+Real Madrid,Espanyol,Próximamente
+Alavés,Sevilla,Próximamente
+Villarreal,Osasuna,Próximamente
+Valencia,Athletic,Próximamente
+Rayo,Celta,Próximamente
+Mallorca,Atlético,Próximamente
+Elche,Oviedo,Próximamente
+Barcelona,Getafe,Próximamente
+Celta,Betis,Próximamente
+Athletic,Girona,Próximamente
+Espanyol,Valencia,Próximamente
+Levante,Real Madrid,Próximamente
+Sevilla,Villarreal,Próximamente
+Getafe,Alavés,Próximamente
+Atlético,Rayo,Próximamente
+R. Sociedad,Mallorca,Próximamente
+Osasuna,Elche,Próximamente
+Oviedo,Barcelona,Próximamente
+Girona,Espanyol,Próximamente
+Getafe,Levante,Próximamente
+Atlético,Real Madrid,Próximamente
+Mallorca,Alavés,Próximamente
+Villarreal,Athletic,Próximamente
+Rayo,Sevilla,Próximamente
+Elche,Celta,Próximamente
+Barcelona,R. Sociedad,Próximamente
+Betis,Osasuna,Próximamente
+Valencia,Oviedo,Próximamente
+Osasuna,Getafe,Próximamente
+Oviedo,Levante,Próximamente
+Girona,Valencia,Próximamente
+Athletic,Mallorca,Próximamente
+Real Madrid,Villarreal,Próximamente
+Alavés,Elche,Próximamente
+Sevilla,Barcelona,Próximamente
+Espanyol,Betis,Próximamente
+R. Sociedad,Rayo,Próximamente
+Celta,Atlético,Próximamente
+Oviedo,Espanyol,Próximamente
+Sevilla,Mallorca,Próximamente
+Barcelona,Girona,Próximamente
+Villarreal,Betis,Próximamente
+Atlético,Osasuna,Próximamente
+Elche,Athletic,Próximamente
+Celta,R. Sociedad,Próximamente
+Levante,Rayo,Próximamente
+Getafe,Real Madrid,Próximamente
+Alavés,Valencia,Próximamente
+R. Sociedad,Sevilla,Próximamente
+Girona,Oviedo,Próximamente
+Espanyol,Elche,Próximamente
+Athletic,Getafe,Próximamente
+Valencia,Villarreal,Próximamente
+Mallorca,Levante,Próximamente
+Real Madrid,Barcelona,Próximamente
+Osasuna,Celta,Próximamente
+Rayo,Alavés,Próximamente
+Betis,Atlético,Próximamente
+Getafe,Girona,Próximamente
+Villarreal,Rayo,Próximamente
+Atlético,Sevilla,Próximamente
+R. Sociedad,Athletic,Próximamente
+Real Madrid,Valencia,Próximamente
+Levante,Celta,Próximamente
+Alavés,Espanyol,Próximamente
+Barcelona,Elche,Próximamente
+Betis,Mallorca,Próximamente
+Oviedo,Osasuna,Próximamente
+Elche,R. Sociedad,Próximamente
+Girona,Alavés,Próximamente
+Sevilla,Osasuna,Próximamente
+Atlético,Levante,Próximamente
+Espanyol,Villarreal,Próximamente
+Athletic,Oviedo,Próximamente
+Rayo,Real Madrid,Próximamente
+Mallorca,Getafe,Próximamente
+Valencia,Betis,Próximamente
+Celta,Barcelona,Próximamente
+Valencia,Levante,Próximamente
+Alavés,Celta,Próximamente
+Barcelona,Athletic,Próximamente
+Osasuna,R. Sociedad,Próximamente
+Villarreal,Mallorca,Próximamente
+Oviedo,Rayo,Próximamente
+Betis,Girona,Próximamente
+Getafe,Atlético,Próximamente
+Elche,Real Madrid,Próximamente
+Espanyol,Sevilla,Próximamente
+Getafe,Elche,Próximamente
+Mallorca,Osasuna,Próximamente
+Barcelona,Alavés,Próximamente
+Levante,Athletic,Próximamente
+Atlético,Oviedo,Próximamente
+R. Sociedad,Villarreal,Próximamente
+Sevilla,Betis,Próximamente
+Celta,Espanyol,Próximamente
+Girona,Real Madrid,Próximamente
+Rayo,Valencia,Próximamente
+Oviedo,Mallorca,Próximamente
+Villarreal,Getafe,Próximamente
+Alavés,R. Sociedad,Próximamente
+Betis,Barcelona,Próximamente
+Athletic,Atlético,Próximamente
+Elche,Girona,Próximamente
+Valencia,Sevilla,Próximamente
+Espanyol,Rayo,Próximamente
+Real Madrid,Celta,Próximamente
+Osasuna,Levante,Próximamente
+R. Sociedad,Girona,Próximamente
+Atlético,Valencia,Próximamente
+Mallorca,Elche,Próximamente
+Barcelona,Osasuna,Próximamente
+Getafe,Espanyol,Próximamente
+Sevilla,Oviedo,Próximamente
+Celta,Athletic,Próximamente
+Levante,Aplazado,Próximamente
+Alavés,Real Madrid,Próximamente
+Rayo,Betis,Próximamente
+Valencia,Mallorca,Próximamente
+Oviedo,Celta,Próximamente
+Levante,R. Sociedad,Próximamente
+Osasuna,Alavés,Próximamente
+Real Madrid,Sevilla,Próximamente
+Girona,Atlético,Próximamente
+Villarreal,Barcelona,Próximamente
+Elche,Rayo,Próximamente
+Betis,Getafe,Próximamente
+Athletic,Espanyol,Próximamente
+Rayo,Getafe,Próximamente
+Celta,Valencia,Próximamente
+Osasuna,Athletic,Próximamente
+Elche,Villarreal,Próximamente
+Espanyol,Barcelona,Próximamente
+Sevilla,Levante,Próximamente
+Real Madrid,Betis,Próximamente
+Alavés,Oviedo,Próximamente
+Mallorca,Girona,Próximamente
+R. Sociedad,Atlético,Próximamente
+Barcelona,Atlético,Próximamente
+Athletic,Real Madrid,Próximamente
+Getafe,R. Sociedad,Próximamente
+Oviedo,Betis,Próximamente
+Villarreal,Alavés,Próximamente
+Girona,Osasuna,Próximamente
+Valencia,Elche,Próximamente
+Rayo,Mallorca,Próximamente
+Levante,Espanyol,Próximamente
+Sevilla,Celta,Próximamente
+Espanyol,Girona,Próximamente
+Real Madrid,Levante,Próximamente
+Mallorca,Athletic,Próximamente
+Osasuna,Oviedo,Próximamente
+Betis,Villarreal,Próximamente
+Getafe,Valencia,Próximamente
+Atlético,Alavés,Próximamente
+Celta,Rayo,Próximamente
+R. Sociedad,Barcelona,Próximamente
+Elche,Sevilla,Próximamente
+Levante,Elche,Próximamente
+Rayo,Osasuna,Próximamente
+Valencia,Espanyol,Próximamente
+Sevilla,Athletic,Próximamente
+Villarreal,Real Madrid,Próximamente
+Atlético,Mallorca,Próximamente
+Barcelona,Oviedo,Próximamente
+R. Sociedad,Celta,Próximamente
+Alavés,Betis,Próximamente
+Girona,Getafe,Próximamente
+Espanyol,Alavés,Próximamente
+Oviedo,Girona,Próximamente
+Osasuna,Villarreal,Próximamente
+Levante,Atlético,Próximamente
+Elche,Barcelona,Próximamente
+Real Madrid,Rayo,Próximamente
+Betis,Valencia,Próximamente
+Getafe,Celta,Próximamente
+Athletic,R. Sociedad,Próximamente
+Mallorca,Sevilla,Próximamente
+Alavés,Getafe,Próximamente
+Athletic,Levante,Próximamente
+Atlético,Betis,Próximamente
+Barcelona,Mallorca,Próximamente
+Celta,Osasuna,Próximamente
+Rayo,Oviedo,Próximamente
+R. Sociedad,Elche,Próximamente
+Sevilla,Girona,Próximamente
+Valencia,Real Madrid,Próximamente
+Villarreal,Espanyol,Próximamente
+Elche,Osasuna,Próximamente
+Espanyol,Celta,Próximamente
+Getafe,Villarreal,Próximamente
+Girona,Barcelona,Próximamente
+Levante,Valencia,Próximamente
+Mallorca,Betis,Próximamente
+Rayo,Atlético,Próximamente
+Real Madrid,R. Sociedad,Próximamente
+Oviedo,Athletic,Próximamente
+Sevilla,Alavés,Próximamente
+Alavés,Girona,Próximamente
+Athletic,Elche,Próximamente
+Atlético,Espanyol,Próximamente
+Barcelona,Levante,Próximamente
+Celta,Mallorca,Próximamente
+Getafe,Sevilla,Próximamente
+Osasuna,Real Madrid,Próximamente
+Betis,Rayo,Próximamente
+R. Sociedad,Oviedo,Próximamente
+Villarreal,Valencia,Próximamente
+Barcelona,Villarreal,Próximamente
+Elche,Espanyol,Próximamente
+Girona,Celta,Próximamente
+Levante,Alavés,Próximamente
+Mallorca,R. Sociedad,Próximamente
+Rayo,Athletic,Próximamente
+Betis,Sevilla,Próximamente
+Real Madrid,Getafe,Próximamente
+Oviedo,Atlético,Próximamente
+Valencia,Osasuna,Próximamente
+Athletic,Barcelona,Próximamente
+Atlético,R. Sociedad,Próximamente
+Celta,Real Madrid,Próximamente
+Espanyol,Oviedo,Próximamente
+Getafe,Betis,Próximamente
+Levante,Girona,Próximamente
+Osasuna,Mallorca,Próximamente
+Sevilla,Rayo,Próximamente
+Valencia,Alavés,Próximamente
+Villarreal,Elche,Próximamente
+Alavés,Villarreal,Próximamente
+Atlético,Getafe,Próximamente
+Barcelona,Sevilla,Próximamente
+Girona,Athletic,Próximamente
+Mallorca,Espanyol,Próximamente
+Rayo,Levante,Próximamente
+Betis,Celta,Próximamente
+Real Madrid,Elche,Próximamente
+Oviedo,Valencia,Próximamente
+R. Sociedad,Osasuna,Próximamente
+Athletic,Betis,Próximamente
+Barcelona,Rayo,Próximamente
+Celta,Alavés,Próximamente
+Elche,Mallorca,Próximamente
+Espanyol,Getafe,Próximamente
+Levante,Oviedo,Próximamente
+Osasuna,Girona,Próximamente
+Real Madrid,Atlético,Próximamente
+Sevilla,Valencia,Próximamente
+Villarreal,R. Sociedad,Próximamente
+Alavés,Osasuna,Próximamente
+Atlético,Barcelona,Próximamente
+Getafe,Athletic,Próximamente
+Girona,Villarreal,Próximamente
+Mallorca,Real Madrid,Próximamente
+Rayo,Elche,Próximamente
+Betis,Espanyol,Próximamente
+Oviedo,Sevilla,Próximamente
+R. Sociedad,Levante,Próximamente
+Valencia,Celta,Próximamente
+Athletic,Villarreal,Próximamente
+Barcelona,Espanyol,Próximamente
+Celta,Oviedo,Próximamente
+Elche,Valencia,Próximamente
+Levante,Getafe,Próximamente
+Mallorca,Rayo,Próximamente
+Osasuna,Betis,Próximamente
+Real Madrid,Girona,Próximamente
+R. Sociedad,Alavés,Próximamente
+Sevilla,Atlético,Próximamente
+Alavés,Mallorca,Próximamente
+Atlético,Athletic,Próximamente
+Espanyol,Levante,Próximamente
+Getafe,Barcelona,Próximamente
+Osasuna,Sevilla,Próximamente
+Rayo,R. Sociedad,Próximamente
+Betis,Real Madrid,Próximamente
+Oviedo,Elche,Próximamente
+Valencia,Girona,Próximamente
+Villarreal,Celta,Próximamente
+Athletic,Osasuna,Próximamente
+Barcelona,Celta,Próximamente
+Elche,Atlético,Próximamente
+Girona,Betis,Próximamente
+Levante,Sevilla,Próximamente
+Mallorca,Valencia,Próximamente
+Rayo,Espanyol,Próximamente
+Real Madrid,Alavés,Próximamente
+Oviedo,Villarreal,Próximamente
+R. Sociedad,Getafe,Próximamente
+Alavés,Athletic,Próximamente
+Celta,Elche,Próximamente
+Espanyol,Real Madrid,Próximamente
+Getafe,Rayo,Próximamente
+Girona,Mallorca,Próximamente
+Osasuna,Barcelona,Próximamente
+Betis,Oviedo,Próximamente
+Sevilla,R. Sociedad,Próximamente
+Valencia,Atlético,Próximamente
+Villarreal,Levante,Próximamente
+Athletic,Valencia,Próximamente
+Atlético,Celta,Próximamente
+Barcelona,Real Madrid,Próximamente
+Elche,Alavés,Próximamente
+Levante,Osasuna,Próximamente
+Mallorca,Villarreal,Próximamente
+Rayo,Girona,Próximamente
+Oviedo,Getafe,Próximamente
+R. Sociedad,Betis,Próximamente
+Sevilla,Espanyol,Próximamente
+Alavés,Barcelona,Próximamente
+Celta,Levante,Próximamente
+Espanyol,Athletic,Próximamente
+Getafe,Mallorca,Próximamente
+Girona,R. Sociedad,Próximamente
+Osasuna,Atlético,Próximamente
+Betis,Elche,Próximamente
+Real Madrid,Oviedo,Próximamente
+Valencia,Rayo,Próximamente
+Villarreal,Sevilla,Próximamente
+Athletic,Celta,Próximamente
+Atlético,Girona,Próximamente
+Barcelona,Betis,Próximamente
+Elche,Getafe,Próximamente
+Levante,Mallorca,Próximamente
+Osasuna,Espanyol,Próximamente
+Rayo,Villarreal,Próximamente
+Oviedo,Alavés,Próximamente
+R. Sociedad,Valencia,Próximamente
+Sevilla,Real Madrid,Próximamente
+Alavés,Rayo,Próximamente
+Celta,Sevilla,Próximamente
+Espanyol,R. Sociedad,Próximamente
+Getafe,Osasuna,Próximamente
+Girona,Elche,Próximamente
+Mallorca,Oviedo,Próximamente
+Betis,Levante,Próximamente
+Real Madrid,Athletic,Próximamente
+Valencia,Barcelona,Próximamente
+Villarreal,Atlético,Próximamente
+Más noticias,"Getafe - Valencia, en directo",Próximamente
+Más noticias,"Getafe - Valencia, en directo",Próximamente
+Más noticias,"Getafe - Valencia, en directo",Próximamente
+Más noticias,"Getafe - Valencia, en directo",Próximamente
+Más noticias,"Getafe - Valencia, en directo",Próximamente
+"Getafe - Valencia, en directo",LaLiga EA Sports hoy en vivo,Próximamente
+"Getafe - Valencia, en directo",LaLiga EA Sports hoy en vivo,Próximamente
+"Getafe - Valencia, en directo",LaLiga EA Sports hoy en vivo,Próximamente
+"Getafe - Valencia, en directo",LaLiga EA Sports hoy en vivo,Próximamente
+M.Á. RODRÍGUEZ,comentarios,Próximamente
+LaLiga EA Sports,REDACCIÓN MARCA,Próximamente
+LaLiga EA Sports,FERNANDO ÁLVAREZ,Próximamente
+LaLiga EA Sports,Atlético - Alavés,Próximamente
+LaLiga EA Sports,Atlético - Alavés,Próximamente
+LaLiga EA Sports,Atlético - Alavés,Próximamente
+CARLOS FERNÁNDEZ,ANDER BARROSO,Próximamente
+LaLiga EA Sports,Celta - Rayo Vallecano,Próximamente
+LaLiga EA Sports,Celta - Rayo Vallecano,Próximamente
+LaLiga EA Sports,Celta - Rayo Vallecano,Próximamente
+RAFA VALERO,ÁLVARO OLMEDO,Próximamente
+LaLiga EA Sports,Getafe - Valencia,Próximamente
+LaLiga EA Sports,Getafe - Valencia,Próximamente
+LaLiga EA Sports,Getafe - Valencia,Próximamente
+Betis - Villarreal en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
+Betis - Villarreal en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
+Betis - Villarreal en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
+JAIME RINCÓN,comentarios,Próximamente
+LaLiga EA Sports,El Betis no se rinde en la lucha por la Champions,Próximamente
+MIGUEL Á. MORÁN,comentarios,Próximamente
+Osasuna 3-2 Oviedo,Osasuna rompe al Oviedo,Próximamente
+JOSÉ I. PÉREZ,comentarios,Próximamente
+Mallorca - Athletic en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
+Mallorca - Athletic en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
+Mallorca - Athletic en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
+MIGUEL SANZ,comentarios,Próximamente
+LaLiga EA Sports,Guzmán le quita el foco a Muriqui,Próximamente
+JUANMA VELASCO,comentarios,Próximamente
+Real Madrid - Levante,RUBÉN JIMÉNEZ,Próximamente
+RUBÉN JIMÉNEZ,comentarios,Próximamente
+LaLiga EA Sports,M.Á.R,Próximamente
+Real Madrid 2-0 Levante,Güler y Mbappé apañan el papelón,Próximamente
+José María Rodríguez,comentarios,Próximamente
+REDACCIÓN MARCA,comentarios,Próximamente
+LaLiga EA Sports,DANIEL RETE,Próximamente
+LaLiga EA Sports,Mallorca - Athletic,Próximamente
+LaLiga EA Sports,Mallorca - Athletic,Próximamente
+LaLiga EA Sports,Mallorca - Athletic,Próximamente
+PABLO CHINARRO e IKER TORRRESCUSA,comentarios,Próximamente
+LaLiga EA Sports,MIGUEL Á. MORÁN,Próximamente
+Otras webs de Unidad Editorial,Resultados deportivos,Próximamente
+Resultados deportivos,Clasificación LALIGA,Próximamente
+© Julio,"Unidad Editorial Información Deportiva, S.L.U. Todos los derechos reservados.",Próximamente
+© Julio,"Unidad Editorial Información Deportiva, S.L.U. Todos los derechos reservados.",Próximamente
+España,Liga Endesa,Próximamente
+Liga Endesa,Calendario,Próximamente
+Copa del Rey,Cuadro y resultados,Próximamente
+Supercopa Endesa,Cuadro y resultados,Próximamente
+Europa,Eurobasket,Próximamente
+Euroliga,Clasificación,Próximamente
+Eurocup,Resultados y Clasificación,Próximamente
+FIBA Champions League,Resultados y Clasificación,Próximamente
+Internacional,Calendario,Próximamente
+Calendario,Clasificaciones,Próximamente
+Coches,Fórmula,Próximamente
+Coches,Fórmula,Próximamente
+Fórmula,Calendario,Próximamente
+Grandes Premios de Fórmula,Australia,Próximamente
+Fórmula E,Rallies,Próximamente
+Rallies,Calendario,Próximamente
+Motos,Moto GP,Próximamente
+Moto GP,Calendario,Próximamente
+Grandes Premios de Moto GP,Tailandia,Próximamente
+Modelos de coches,Pruebas de coches,Próximamente
+Coches,Eléctricos,Próximamente
+"MARCA y nuestros socios utilizan cookies y tecnologías de seguimiento para analizar y medir su comportamiento cuando navega por nuestro sitio web, así como para ofrecerle contenidos y publicidad personalizados en función de su perfil individual. La información podrá comunicarse a terceros, como empresas de publicidad y analítica, e incluir el título de los vídeos que usted haya visualizado.","Al pulsar “Aceptar”, usted consiente la instalación de estas cookies. Al pulsar “Rechazar”, podrá acceder al sitio web mediante una suscripción sin cookies.",Próximamente
+Rechazar,Aceptar,Próximamente
+¿Eres suscriptor?,Inicia sesión,Próximamente

@@ -1,502 +1,185 @@
-home_team,away_team,date_str
-Alcaraz,Vinicius,Próximamente
-Portada de Marca,Edición seleccionada,Próximamente
-Edición seleccionada,España,Próximamente
-España,México,Próximamente
-Fútbol,Baloncesto,Próximamente
-Última hora,MARCA Entradas,Próximamente
-Portada,Fútbol,Próximamente
-Equipos,Dorsales,Próximamente
-Calendario LaLiga EA Sports 2025 - 2026,Primera División,Próximamente
-Calendario LaLiga EA Sports 2025 - 2026,Primera División,Próximamente
-Compartir en Facebook,Compartir en Twitter,Próximamente
-España,LALIGA EA Sports,Próximamente
-LALIGA EA Sports,Calendario,Próximamente
-Liga F Moeve,Calendario,Próximamente
-LALIGA Hypermotion,Calendario,Próximamente
-Selección Española,UEFA Nations League,Próximamente
-Selección Española femenina,Eurocopa,Próximamente
-Internacional,Premier League,Próximamente
-Premier League,Calendario,Próximamente
-Bundesliga,Calendario,Próximamente
-Serie A,Calendario,Próximamente
-Ligue,Calendario,Próximamente
-Primeira Liga de Portugal,Calendario,Próximamente
-Champions League,Calendario,Próximamente
-Champions League femenina,Calendario,Próximamente
-Europa League,Calendario,Próximamente
-Conference League,Calendario,Próximamente
-Youth League,Calendario,Próximamente
-América,Argentina,Próximamente
-Argentina,Calendario,Próximamente
-Chile,Calendario,Próximamente
-Colombia,Calendario,Próximamente
-Estados Unidos,Calendario,Próximamente
-México,Calendario,Próximamente
-Venezuela,Calendario,Próximamente
-Leagues Cup,Calendario,Próximamente
-CONMEBOL Libertadores,Calendario,Próximamente
-Más América,Campeonato Brasileiro,Próximamente
-Destacamos,Atletismo,Próximamente
-Otros deportes,Ajedrez,Próximamente
-Natación,Olimpismo,Próximamente
-Toros,Triatlón,Próximamente
-Calendario LaLiga EA Sports 2025 - 2026,Primera División,Próximamente
-Calendario LaLiga EA Sports 2025 - 2026,Primera División,Próximamente
-Selecciona jornada,Pulsa en tu equipo para ver sus partidos y en,Próximamente
-Pulsa en tu equipo para ver sus partidos y en,calendario,Próximamente
-Ir arriba,Equipo local,Próximamente
-Equipo local,Resultado,Próximamente
-Girona,Rayo,Próximamente
-Villarreal,Oviedo,Próximamente
-Mallorca,Barcelona,Próximamente
-Alavés,Levante,Próximamente
-Valencia,R. Sociedad,Próximamente
-Celta,Getafe,Próximamente
-Athletic,Sevilla,Próximamente
-Espanyol,Atlético,Próximamente
-Elche,Betis,Próximamente
-Real Madrid,Osasuna,Próximamente
-Betis,Alavés,Próximamente
-Mallorca,Celta,Próximamente
-Atlético,Elche,Próximamente
-Levante,Barcelona,Próximamente
-Osasuna,Valencia,Próximamente
-R. Sociedad,Espanyol,Próximamente
-Villarreal,Girona,Próximamente
-Oviedo,Real Madrid,Próximamente
-Athletic,Rayo,Próximamente
-Sevilla,Getafe,Próximamente
-Elche,Levante,Próximamente
-Valencia,Getafe,Próximamente
-Alavés,Atlético,Próximamente
-Oviedo,R. Sociedad,Próximamente
-Girona,Sevilla,Próximamente
-Real Madrid,Mallorca,Próximamente
-Celta,Villarreal,Próximamente
-Betis,Athletic,Próximamente
-Espanyol,Osasuna,Próximamente
-Rayo,Barcelona,Próximamente
-Sevilla,Elche,Próximamente
-Getafe,Oviedo,Próximamente
-R. Sociedad,Real Madrid,Próximamente
-Athletic,Alavés,Próximamente
-Atlético,Villarreal,Próximamente
-Celta,Girona,Próximamente
-Levante,Betis,Próximamente
-Osasuna,Rayo,Próximamente
-Barcelona,Valencia,Próximamente
-Espanyol,Mallorca,Próximamente
-Betis,R. Sociedad,Próximamente
-Girona,Levante,Próximamente
-Real Madrid,Espanyol,Próximamente
-Alavés,Sevilla,Próximamente
-Villarreal,Osasuna,Próximamente
-Valencia,Athletic,Próximamente
-Rayo,Celta,Próximamente
-Mallorca,Atlético,Próximamente
-Elche,Oviedo,Próximamente
-Barcelona,Getafe,Próximamente
-Celta,Betis,Próximamente
-Athletic,Girona,Próximamente
-Espanyol,Valencia,Próximamente
-Levante,Real Madrid,Próximamente
-Sevilla,Villarreal,Próximamente
-Getafe,Alavés,Próximamente
-Atlético,Rayo,Próximamente
-R. Sociedad,Mallorca,Próximamente
-Osasuna,Elche,Próximamente
-Oviedo,Barcelona,Próximamente
-Girona,Espanyol,Próximamente
-Getafe,Levante,Próximamente
-Atlético,Real Madrid,Próximamente
-Mallorca,Alavés,Próximamente
-Villarreal,Athletic,Próximamente
-Rayo,Sevilla,Próximamente
-Elche,Celta,Próximamente
-Barcelona,R. Sociedad,Próximamente
-Betis,Osasuna,Próximamente
-Valencia,Oviedo,Próximamente
-Osasuna,Getafe,Próximamente
-Oviedo,Levante,Próximamente
-Girona,Valencia,Próximamente
-Athletic,Mallorca,Próximamente
-Real Madrid,Villarreal,Próximamente
-Alavés,Elche,Próximamente
-Sevilla,Barcelona,Próximamente
-Espanyol,Betis,Próximamente
-R. Sociedad,Rayo,Próximamente
-Celta,Atlético,Próximamente
-Oviedo,Espanyol,Próximamente
-Sevilla,Mallorca,Próximamente
-Barcelona,Girona,Próximamente
-Villarreal,Betis,Próximamente
-Atlético,Osasuna,Próximamente
-Elche,Athletic,Próximamente
-Celta,R. Sociedad,Próximamente
-Levante,Rayo,Próximamente
-Getafe,Real Madrid,Próximamente
-Alavés,Valencia,Próximamente
-R. Sociedad,Sevilla,Próximamente
-Girona,Oviedo,Próximamente
-Espanyol,Elche,Próximamente
-Athletic,Getafe,Próximamente
-Valencia,Villarreal,Próximamente
-Mallorca,Levante,Próximamente
-Real Madrid,Barcelona,Próximamente
-Osasuna,Celta,Próximamente
-Rayo,Alavés,Próximamente
-Betis,Atlético,Próximamente
-Getafe,Girona,Próximamente
-Villarreal,Rayo,Próximamente
-Atlético,Sevilla,Próximamente
-R. Sociedad,Athletic,Próximamente
-Real Madrid,Valencia,Próximamente
-Levante,Celta,Próximamente
-Alavés,Espanyol,Próximamente
-Barcelona,Elche,Próximamente
-Betis,Mallorca,Próximamente
-Oviedo,Osasuna,Próximamente
-Elche,R. Sociedad,Próximamente
-Girona,Alavés,Próximamente
-Sevilla,Osasuna,Próximamente
-Atlético,Levante,Próximamente
-Espanyol,Villarreal,Próximamente
-Athletic,Oviedo,Próximamente
-Rayo,Real Madrid,Próximamente
-Mallorca,Getafe,Próximamente
-Valencia,Betis,Próximamente
-Celta,Barcelona,Próximamente
-Valencia,Levante,Próximamente
-Alavés,Celta,Próximamente
-Barcelona,Athletic,Próximamente
-Osasuna,R. Sociedad,Próximamente
-Villarreal,Mallorca,Próximamente
-Oviedo,Rayo,Próximamente
-Betis,Girona,Próximamente
-Getafe,Atlético,Próximamente
-Elche,Real Madrid,Próximamente
-Espanyol,Sevilla,Próximamente
-Getafe,Elche,Próximamente
-Mallorca,Osasuna,Próximamente
-Barcelona,Alavés,Próximamente
-Levante,Athletic,Próximamente
-Atlético,Oviedo,Próximamente
-R. Sociedad,Villarreal,Próximamente
-Sevilla,Betis,Próximamente
-Celta,Espanyol,Próximamente
-Girona,Real Madrid,Próximamente
-Rayo,Valencia,Próximamente
-Oviedo,Mallorca,Próximamente
-Villarreal,Getafe,Próximamente
-Alavés,R. Sociedad,Próximamente
-Betis,Barcelona,Próximamente
-Athletic,Atlético,Próximamente
-Elche,Girona,Próximamente
-Valencia,Sevilla,Próximamente
-Espanyol,Rayo,Próximamente
-Real Madrid,Celta,Próximamente
-Osasuna,Levante,Próximamente
-R. Sociedad,Girona,Próximamente
-Atlético,Valencia,Próximamente
-Mallorca,Elche,Próximamente
-Barcelona,Osasuna,Próximamente
-Getafe,Espanyol,Próximamente
-Sevilla,Oviedo,Próximamente
-Celta,Athletic,Próximamente
-Levante,Aplazado,Próximamente
-Alavés,Real Madrid,Próximamente
-Rayo,Betis,Próximamente
-Valencia,Mallorca,Próximamente
-Oviedo,Celta,Próximamente
-Levante,R. Sociedad,Próximamente
-Osasuna,Alavés,Próximamente
-Real Madrid,Sevilla,Próximamente
-Girona,Atlético,Próximamente
-Villarreal,Barcelona,Próximamente
-Elche,Rayo,Próximamente
-Betis,Getafe,Próximamente
-Athletic,Espanyol,Próximamente
-Rayo,Getafe,Próximamente
-Celta,Valencia,Próximamente
-Osasuna,Athletic,Próximamente
-Elche,Villarreal,Próximamente
-Espanyol,Barcelona,Próximamente
-Sevilla,Levante,Próximamente
-Real Madrid,Betis,Próximamente
-Alavés,Oviedo,Próximamente
-Mallorca,Girona,Próximamente
-R. Sociedad,Atlético,Próximamente
-Barcelona,Atlético,Próximamente
-Athletic,Real Madrid,Próximamente
-Getafe,R. Sociedad,Próximamente
-Oviedo,Betis,Próximamente
-Villarreal,Alavés,Próximamente
-Girona,Osasuna,Próximamente
-Valencia,Elche,Próximamente
-Rayo,Mallorca,Próximamente
-Levante,Espanyol,Próximamente
-Sevilla,Celta,Próximamente
-Espanyol,Girona,Próximamente
-Real Madrid,Levante,Próximamente
-Mallorca,Athletic,Próximamente
-Osasuna,Oviedo,Próximamente
-Betis,Villarreal,Próximamente
-Getafe,Valencia,Próximamente
-Atlético,Alavés,Próximamente
-Celta,Rayo,Próximamente
-R. Sociedad,Barcelona,Próximamente
-Elche,Sevilla,Próximamente
-Levante,Elche,Próximamente
-Rayo,Osasuna,Próximamente
-Valencia,Espanyol,Próximamente
-Sevilla,Athletic,Próximamente
-Villarreal,Real Madrid,Próximamente
-Atlético,Mallorca,Próximamente
-Barcelona,Oviedo,Próximamente
-R. Sociedad,Celta,Próximamente
-Alavés,Betis,Próximamente
-Girona,Getafe,Próximamente
-Espanyol,Alavés,Próximamente
-Oviedo,Girona,Próximamente
-Osasuna,Villarreal,Próximamente
-Levante,Atlético,Próximamente
-Elche,Barcelona,Próximamente
-Real Madrid,Rayo,Próximamente
-Betis,Valencia,Próximamente
-Getafe,Celta,Próximamente
-Athletic,R. Sociedad,Próximamente
-Mallorca,Sevilla,Próximamente
-Alavés,Getafe,Próximamente
-Athletic,Levante,Próximamente
-Atlético,Betis,Próximamente
-Barcelona,Mallorca,Próximamente
-Celta,Osasuna,Próximamente
-Rayo,Oviedo,Próximamente
-R. Sociedad,Elche,Próximamente
-Sevilla,Girona,Próximamente
-Valencia,Real Madrid,Próximamente
-Villarreal,Espanyol,Próximamente
-Elche,Osasuna,Próximamente
-Espanyol,Celta,Próximamente
-Getafe,Villarreal,Próximamente
-Girona,Barcelona,Próximamente
-Levante,Valencia,Próximamente
-Mallorca,Betis,Próximamente
-Rayo,Atlético,Próximamente
-Real Madrid,R. Sociedad,Próximamente
-Oviedo,Athletic,Próximamente
-Sevilla,Alavés,Próximamente
-Alavés,Girona,Próximamente
-Athletic,Elche,Próximamente
-Atlético,Espanyol,Próximamente
-Barcelona,Levante,Próximamente
-Celta,Mallorca,Próximamente
-Getafe,Sevilla,Próximamente
-Osasuna,Real Madrid,Próximamente
-Betis,Rayo,Próximamente
-R. Sociedad,Oviedo,Próximamente
-Villarreal,Valencia,Próximamente
-Barcelona,Villarreal,Próximamente
-Elche,Espanyol,Próximamente
-Girona,Celta,Próximamente
-Levante,Alavés,Próximamente
-Mallorca,R. Sociedad,Próximamente
-Rayo,Athletic,Próximamente
-Betis,Sevilla,Próximamente
-Real Madrid,Getafe,Próximamente
-Oviedo,Atlético,Próximamente
-Valencia,Osasuna,Próximamente
-Athletic,Barcelona,Próximamente
-Atlético,R. Sociedad,Próximamente
-Celta,Real Madrid,Próximamente
-Espanyol,Oviedo,Próximamente
-Getafe,Betis,Próximamente
-Levante,Girona,Próximamente
-Osasuna,Mallorca,Próximamente
-Sevilla,Rayo,Próximamente
-Valencia,Alavés,Próximamente
-Villarreal,Elche,Próximamente
-Alavés,Villarreal,Próximamente
-Atlético,Getafe,Próximamente
-Barcelona,Sevilla,Próximamente
-Girona,Athletic,Próximamente
-Mallorca,Espanyol,Próximamente
-Rayo,Levante,Próximamente
-Betis,Celta,Próximamente
-Real Madrid,Elche,Próximamente
-Oviedo,Valencia,Próximamente
-R. Sociedad,Osasuna,Próximamente
-Athletic,Betis,Próximamente
-Barcelona,Rayo,Próximamente
-Celta,Alavés,Próximamente
-Elche,Mallorca,Próximamente
-Espanyol,Getafe,Próximamente
-Levante,Oviedo,Próximamente
-Osasuna,Girona,Próximamente
-Real Madrid,Atlético,Próximamente
-Sevilla,Valencia,Próximamente
-Villarreal,R. Sociedad,Próximamente
-Alavés,Osasuna,Próximamente
-Atlético,Barcelona,Próximamente
-Getafe,Athletic,Próximamente
-Girona,Villarreal,Próximamente
-Mallorca,Real Madrid,Próximamente
-Rayo,Elche,Próximamente
-Betis,Espanyol,Próximamente
-Oviedo,Sevilla,Próximamente
-R. Sociedad,Levante,Próximamente
-Valencia,Celta,Próximamente
-Athletic,Villarreal,Próximamente
-Barcelona,Espanyol,Próximamente
-Celta,Oviedo,Próximamente
-Elche,Valencia,Próximamente
-Levante,Getafe,Próximamente
-Mallorca,Rayo,Próximamente
-Osasuna,Betis,Próximamente
-Real Madrid,Girona,Próximamente
-R. Sociedad,Alavés,Próximamente
-Sevilla,Atlético,Próximamente
-Alavés,Mallorca,Próximamente
-Atlético,Athletic,Próximamente
-Espanyol,Levante,Próximamente
-Getafe,Barcelona,Próximamente
-Osasuna,Sevilla,Próximamente
-Rayo,R. Sociedad,Próximamente
-Betis,Real Madrid,Próximamente
-Oviedo,Elche,Próximamente
-Valencia,Girona,Próximamente
-Villarreal,Celta,Próximamente
-Athletic,Osasuna,Próximamente
-Barcelona,Celta,Próximamente
-Elche,Atlético,Próximamente
-Girona,Betis,Próximamente
-Levante,Sevilla,Próximamente
-Mallorca,Valencia,Próximamente
-Rayo,Espanyol,Próximamente
-Real Madrid,Alavés,Próximamente
-Oviedo,Villarreal,Próximamente
-R. Sociedad,Getafe,Próximamente
-Alavés,Athletic,Próximamente
-Celta,Elche,Próximamente
-Espanyol,Real Madrid,Próximamente
-Getafe,Rayo,Próximamente
-Girona,Mallorca,Próximamente
-Osasuna,Barcelona,Próximamente
-Betis,Oviedo,Próximamente
-Sevilla,R. Sociedad,Próximamente
-Valencia,Atlético,Próximamente
-Villarreal,Levante,Próximamente
-Athletic,Valencia,Próximamente
-Atlético,Celta,Próximamente
-Barcelona,Real Madrid,Próximamente
-Elche,Alavés,Próximamente
-Levante,Osasuna,Próximamente
-Mallorca,Villarreal,Próximamente
-Rayo,Girona,Próximamente
-Oviedo,Getafe,Próximamente
-R. Sociedad,Betis,Próximamente
-Sevilla,Espanyol,Próximamente
-Alavés,Barcelona,Próximamente
-Celta,Levante,Próximamente
-Espanyol,Athletic,Próximamente
-Getafe,Mallorca,Próximamente
-Girona,R. Sociedad,Próximamente
-Osasuna,Atlético,Próximamente
-Betis,Elche,Próximamente
-Real Madrid,Oviedo,Próximamente
-Valencia,Rayo,Próximamente
-Villarreal,Sevilla,Próximamente
-Athletic,Celta,Próximamente
-Atlético,Girona,Próximamente
-Barcelona,Betis,Próximamente
-Elche,Getafe,Próximamente
-Levante,Mallorca,Próximamente
-Osasuna,Espanyol,Próximamente
-Rayo,Villarreal,Próximamente
-Oviedo,Alavés,Próximamente
-R. Sociedad,Valencia,Próximamente
-Sevilla,Real Madrid,Próximamente
-Alavés,Rayo,Próximamente
-Celta,Sevilla,Próximamente
-Espanyol,R. Sociedad,Próximamente
-Getafe,Osasuna,Próximamente
-Girona,Elche,Próximamente
-Mallorca,Oviedo,Próximamente
-Betis,Levante,Próximamente
-Real Madrid,Athletic,Próximamente
-Valencia,Barcelona,Próximamente
-Villarreal,Atlético,Próximamente
-Más noticias,Atlético-Alavés,Próximamente
-Atlético-Alavés,Atlético - Alavés en directo,Próximamente
-"Getafe - Valencia, en directo",LaLiga EA Sports hoy en vivo,Próximamente
-"Getafe - Valencia, en directo",LaLiga EA Sports hoy en vivo,Próximamente
-"Getafe - Valencia, en directo",LaLiga EA Sports hoy en vivo,Próximamente
-M.Á. RODRÍGUEZ,comentarios,Próximamente
-LaLiga EA Sports,REDACCIÓN MARCA,Próximamente
-LaLiga EA Sports,FERNANDO ÁLVAREZ,Próximamente
-LaLiga EA Sports,Atlético - Alavés,Próximamente
-LaLiga EA Sports,Atlético - Alavés,Próximamente
-LaLiga EA Sports,Atlético - Alavés,Próximamente
-CARLOS FERNÁNDEZ,ANDER BARROSO,Próximamente
-LaLiga EA Sports,Celta - Rayo Vallecano,Próximamente
-LaLiga EA Sports,Celta - Rayo Vallecano,Próximamente
-LaLiga EA Sports,Celta - Rayo Vallecano,Próximamente
-RAFA VALERO,ÁLVARO OLMEDO,Próximamente
-LaLiga EA Sports,Getafe - Valencia,Próximamente
-LaLiga EA Sports,Getafe - Valencia,Próximamente
-LaLiga EA Sports,Getafe - Valencia,Próximamente
-FERNANDO ÁLVAREZ,comentarios,Próximamente
-Betis - Villarreal en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
-Betis - Villarreal en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
-Betis - Villarreal en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
-JAIME RINCÓN,comentarios,Próximamente
-LaLiga EA Sports,El Betis no se rinde en la lucha por la Champions,Próximamente
-MIGUEL Á. MORÁN,comentarios,Próximamente
-Osasuna 3-2 Oviedo,Osasuna rompe al Oviedo,Próximamente
-JOSÉ I. PÉREZ,comentarios,Próximamente
-Mallorca - Athletic en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
-Mallorca - Athletic en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
-Mallorca - Athletic en directo,"LaLiga EA Sports hoy, en vivo",Próximamente
-MIGUEL SANZ,comentarios,Próximamente
-LaLiga EA Sports,Guzmán le quita el foco a Muriqui,Próximamente
-JUANMA VELASCO,comentarios,Próximamente
-Real Madrid - Levante,RUBÉN JIMÉNEZ,Próximamente
-RUBÉN JIMÉNEZ,comentarios,Próximamente
-LaLiga EA Sports,M.Á.R,Próximamente
-Real Madrid 2-0 Levante,Güler y Mbappé apañan el papelón,Próximamente
-José María Rodríguez,comentarios,Próximamente
-REDACCIÓN MARCA,comentarios,Próximamente
-LaLiga EA Sports,DANIEL RETE,Próximamente
-LaLiga EA Sports,Mallorca - Athletic,Próximamente
-LaLiga EA Sports,Mallorca - Athletic,Próximamente
-LaLiga EA Sports,Mallorca - Athletic,Próximamente
-PABLO CHINARRO e IKER TORRRESCUSA,comentarios,Próximamente
-Otras webs de Unidad Editorial,Resultados deportivos,Próximamente
-Resultados deportivos,Clasificación LALIGA,Próximamente
-© Julio,"Unidad Editorial Información Deportiva, S.L.U. Todos los derechos reservados.",Próximamente
-© Julio,"Unidad Editorial Información Deportiva, S.L.U. Todos los derechos reservados.",Próximamente
-España,Liga Endesa,Próximamente
-Liga Endesa,Calendario,Próximamente
-Copa del Rey,Cuadro y resultados,Próximamente
-Supercopa Endesa,Cuadro y resultados,Próximamente
-Europa,Eurobasket,Próximamente
-Euroliga,Clasificación,Próximamente
-Eurocup,Resultados y Clasificación,Próximamente
-FIBA Champions League,Resultados y Clasificación,Próximamente
-Internacional,Calendario,Próximamente
-Calendario,Clasificaciones,Próximamente
-Coches,Fórmula,Próximamente
-Coches,Fórmula,Próximamente
-Fórmula,Calendario,Próximamente
-Grandes Premios de Fórmula,Australia,Próximamente
-Fórmula E,Rallies,Próximamente
-Rallies,Calendario,Próximamente
-Motos,Moto GP,Próximamente
-Moto GP,Calendario,Próximamente
-Grandes Premios de Moto GP,Tailandia,Próximamente
-Modelos de coches,Pruebas de coches,Próximamente
-Coches,Eléctricos,Próximamente
-"MARCA y nuestros socios utilizan cookies y tecnologías de seguimiento para analizar y medir su comportamiento cuando navega por nuestro sitio web, así como para ofrecerle contenidos y publicidad personalizados en función de su perfil individual. La información podrá comunicarse a terceros, como empresas de publicidad y analítica, e incluir el título de los vídeos que usted haya visualizado.","Al pulsar “Aceptar”, usted consiente la instalación de estas cookies. Al pulsar “Rechazar”, podrá acceder al sitio web mediante una suscripción sin cookies.",Próximamente
-Rechazar,Aceptar,Próximamente
-¿Eres suscriptor?,Inicia sesión,Próximamente
+matchday,date_str,home_team,away_team
+20,2026-01-18 15:15,Atletico Madrid,Alaves
+20,2026-01-18 17:30,Celta de Vigo,Rayo Vallecano
+20,2026-01-18 20:00,Real Sociedad,Barcelona
+20,2026-01-19 20:00,Elche CF,Sevilla
+21,2026-01-23 20:00,Levante UD,Elche CF
+21,2026-01-24 13:00,Rayo Vallecano,Osasuna
+21,2026-01-24 15:15,Valencia,Espanyol
+21,2026-01-24 17:30,Sevilla,Athletic Bilbao
+21,2026-01-24 20:00,Villarreal,Real Madrid
+21,2026-01-25 13:00,Atletico Madrid,Mallorca
+21,2026-01-25 15:15,Barcelona,Real Oviedo
+21,2026-01-25 17:30,Real Sociedad,Celta de Vigo
+21,2026-01-25 20:00,Alaves,Real Betis
+21,2026-01-26 20:00,Girona,Getafe
+22,2026-01-30 20:00,Espanyol,Alaves
+22,2026-01-31 13:00,Real Oviedo,Girona
+22,2026-01-31 15:15,Osasuna,Villarreal
+22,2026-01-31 17:30,Levante UD,Atletico Madrid
+22,2026-01-31 20:00,Elche CF,Barcelona
+22,2026-02-01 13:00,Real Madrid,Rayo Vallecano
+22,2026-02-01 15:15,Real Betis,Valencia
+22,2026-02-01 17:30,Getafe,Celta de Vigo
+22,2026-02-01 20:00,Athletic Bilbao,Real Sociedad
+22,2026-02-02 20:00,Mallorca,Sevilla
+23,2026-02-08 00:00,Alaves,Getafe
+23,2026-02-08 00:00,Athletic Bilbao,Levante UD
+23,2026-02-08 00:00,Atletico Madrid,Real Betis
+23,2026-02-08 00:00,Barcelona,Mallorca
+23,2026-02-08 00:00,Celta de Vigo,Osasuna
+23,2026-02-08 00:00,Real Sociedad,Elche CF
+23,2026-02-08 00:00,Villarreal,Espanyol
+23,2026-02-08 00:00,Sevilla,Girona
+23,2026-02-08 00:00,Valencia,Real Madrid
+23,2026-02-08 00:00,Rayo Vallecano,Real Oviedo
+24,2026-02-15 00:00,Elche CF,Osasuna
+24,2026-02-15 00:00,Getafe,Villarreal
+24,2026-02-15 00:00,Levante UD,Valencia
+24,2026-02-15 00:00,Real Madrid,Real Sociedad
+24,2026-02-15 00:00,Sevilla,Alaves
+24,2026-02-15 00:00,Real Oviedo,Athletic Bilbao
+24,2026-02-15 00:00,Rayo Vallecano,Atletico Madrid
+24,2026-02-15 00:00,Girona,Barcelona
+24,2026-02-15 00:00,Mallorca,Real Betis
+24,2026-02-15 00:00,Espanyol,Celta de Vigo
+25,2026-02-22 00:00,Alaves,Girona
+25,2026-02-22 00:00,Athletic Bilbao,Elche CF
+25,2026-02-22 00:00,Atletico Madrid,Espanyol
+25,2026-02-22 00:00,Barcelona,Levante UD
+25,2026-02-22 00:00,Real Betis,Rayo Vallecano
+25,2026-02-22 00:00,Celta de Vigo,Mallorca
+25,2026-02-22 00:00,Getafe,Sevilla
+25,2026-02-22 00:00,Osasuna,Real Madrid
+25,2026-02-22 00:00,Villarreal,Valencia
+25,2026-02-22 00:00,Real Sociedad,Real Oviedo
+26,2026-03-01 00:00,Barcelona,Villarreal
+26,2026-03-01 00:00,Real Betis,Sevilla
+26,2026-03-01 00:00,Elche CF,Espanyol
+26,2026-03-01 00:00,Mallorca,Real Sociedad
+26,2026-03-01 00:00,Levante UD,Alaves
+26,2026-03-01 00:00,Rayo Vallecano,Athletic Bilbao
+26,2026-03-01 00:00,Real Oviedo,Atletico Madrid
+26,2026-03-01 00:00,Girona,Celta de Vigo
+26,2026-03-01 00:00,Real Madrid,Getafe
+26,2026-03-01 00:00,Valencia,Osasuna
+27,2026-03-08 00:00,Athletic Bilbao,Barcelona
+27,2026-03-08 00:00,Atletico Madrid,Real Sociedad
+27,2026-03-08 00:00,Celta de Vigo,Real Madrid
+27,2026-03-08 00:00,Espanyol,Real Oviedo
+27,2026-03-08 00:00,Valencia,Alaves
+27,2026-03-08 00:00,Getafe,Real Betis
+27,2026-03-08 00:00,Villarreal,Elche CF
+27,2026-03-08 00:00,Levante UD,Girona
+27,2026-03-08 00:00,Osasuna,Mallorca
+27,2026-03-08 00:00,Sevilla,Rayo Vallecano
+28,2026-03-15 00:00,Alaves,Villarreal
+28,2026-03-15 00:00,Atletico Madrid,Getafe
+28,2026-03-15 00:00,Barcelona,Sevilla
+28,2026-03-15 00:00,Real Betis,Celta de Vigo
+28,2026-03-15 00:00,Real Oviedo,Valencia
+28,2026-03-15 00:00,Girona,Athletic Bilbao
+28,2026-03-15 00:00,Real Madrid,Elche CF
+28,2026-03-15 00:00,Mallorca,Espanyol
+28,2026-03-15 00:00,Rayo Vallecano,Levante UD
+28,2026-03-15 00:00,Real Sociedad,Osasuna
+29,2026-03-22 00:00,Athletic Bilbao,Real Betis
+29,2026-03-22 00:00,Barcelona,Rayo Vallecano
+29,2026-03-22 00:00,Elche CF,Mallorca
+29,2026-03-22 00:00,Espanyol,Getafe
+29,2026-03-22 00:00,Levante UD,Real Oviedo
+29,2026-03-22 00:00,Sevilla,Valencia
+29,2026-03-22 00:00,Celta de Vigo,Alaves
+29,2026-03-22 00:00,Real Madrid,Atletico Madrid
+29,2026-03-22 00:00,Osasuna,Girona
+29,2026-03-22 00:00,Villarreal,Real Sociedad
+30,2026-04-05 00:00,Alaves,Osasuna
+30,2026-04-05 00:00,Atletico Madrid,Barcelona
+30,2026-04-05 00:00,Real Betis,Espanyol
+30,2026-04-05 00:00,Girona,Villarreal
+30,2026-04-05 00:00,Mallorca,Real Madrid
+30,2026-04-05 00:00,Real Oviedo,Sevilla
+30,2026-04-05 00:00,Getafe,Athletic Bilbao
+30,2026-04-05 00:00,Valencia,Celta de Vigo
+30,2026-04-05 00:00,Rayo Vallecano,Elche CF
+30,2026-04-05 00:00,Real Sociedad,Levante UD
+31,2026-04-12 00:00,Barcelona,Espanyol
+31,2026-04-12 00:00,Celta de Vigo,Real Oviedo
+31,2026-04-12 00:00,Elche CF,Valencia
+31,2026-04-12 00:00,Mallorca,Rayo Vallecano
+31,2026-04-12 00:00,Real Sociedad,Alaves
+31,2026-04-12 00:00,Sevilla,Atletico Madrid
+31,2026-04-12 00:00,Osasuna,Real Betis
+31,2026-04-12 00:00,Levante UD,Getafe
+31,2026-04-12 00:00,Real Madrid,Girona
+31,2026-04-12 00:00,Athletic Bilbao,Villarreal
+32,2026-04-19 00:00,Alaves,Mallorca
+32,2026-04-19 00:00,Real Betis,Real Madrid
+32,2026-04-19 00:00,Espanyol,Levante UD
+32,2026-04-19 00:00,Osasuna,Sevilla
+32,2026-04-19 00:00,Rayo Vallecano,Real Sociedad
+32,2026-04-19 00:00,Atletico Madrid,Athletic Bilbao
+32,2026-04-19 00:00,Getafe,Barcelona
+32,2026-04-19 00:00,Villarreal,Celta de Vigo
+32,2026-04-19 00:00,Real Oviedo,Elche CF
+32,2026-04-19 00:00,Valencia,Girona
+33,2026-04-22 00:00,Athletic Bilbao,Osasuna
+33,2026-04-22 00:00,Barcelona,Celta de Vigo
+33,2026-04-22 00:00,Levante UD,Sevilla
+33,2026-04-22 00:00,Mallorca,Valencia
+33,2026-04-22 00:00,Real Oviedo,Villarreal
+33,2026-04-22 00:00,Real Madrid,Alaves
+33,2026-04-22 00:00,Elche CF,Atletico Madrid
+33,2026-04-22 00:00,Girona,Real Betis
+33,2026-04-22 00:00,Rayo Vallecano,Espanyol
+33,2026-04-22 00:00,Real Sociedad,Getafe
+34,2026-05-03 00:00,Alaves,Athletic Bilbao
+34,2026-05-03 00:00,Real Betis,Real Oviedo
+34,2026-05-03 00:00,Celta de Vigo,Elche CF
+34,2026-05-03 00:00,Espanyol,Real Madrid
+34,2026-05-03 00:00,Getafe,Rayo Vallecano
+34,2026-05-03 00:00,Girona,Mallorca
+34,2026-05-03 00:00,Valencia,Atletico Madrid
+34,2026-05-03 00:00,Osasuna,Barcelona
+34,2026-05-03 00:00,Villarreal,Levante UD
+34,2026-05-03 00:00,Sevilla,Real Sociedad
+35,2026-05-10 00:00,Athletic Bilbao,Valencia
+35,2026-05-10 00:00,Atletico Madrid,Celta de Vigo
+35,2026-05-10 00:00,Barcelona,Real Madrid
+35,2026-05-10 00:00,Levante UD,Osasuna
+35,2026-05-10 00:00,Mallorca,Villarreal
+35,2026-05-10 00:00,Elche CF,Alaves
+35,2026-05-10 00:00,Real Sociedad,Real Betis
+35,2026-05-10 00:00,Sevilla,Espanyol
+35,2026-05-10 00:00,Real Oviedo,Getafe
+35,2026-05-10 00:00,Rayo Vallecano,Girona
+36,2026-05-13 00:00,Alaves,Barcelona
+36,2026-05-13 00:00,Real Betis,Elche CF
+36,2026-05-13 00:00,Celta de Vigo,Levante UD
+36,2026-05-13 00:00,Getafe,Mallorca
+36,2026-05-13 00:00,Girona,Real Sociedad
+36,2026-05-13 00:00,Espanyol,Athletic Bilbao
+36,2026-05-13 00:00,Osasuna,Atletico Madrid
+36,2026-05-13 00:00,Valencia,Rayo Vallecano
+36,2026-05-13 00:00,Villarreal,Sevilla
+36,2026-05-13 00:00,Real Madrid,Real Oviedo
+37,2026-05-17 00:00,Athletic Bilbao,Celta de Vigo
+37,2026-05-17 00:00,Atletico Madrid,Girona
+37,2026-05-17 00:00,Barcelona,Real Betis
+37,2026-05-17 00:00,Elche CF,Getafe
+37,2026-05-17 00:00,Levante UD,Mallorca
+37,2026-05-17 00:00,Rayo Vallecano,Villarreal
+37,2026-05-17 00:00,Real Sociedad,Valencia
+37,2026-05-17 00:00,Real Oviedo,Alaves
+37,2026-05-17 00:00,Osasuna,Espanyol
+37,2026-05-17 00:00,Sevilla,Real Madrid
+38,2026-05-24 00:00,Alaves,Rayo Vallecano
+38,2026-05-24 00:00,Real Betis,Levante UD
+38,2026-05-24 00:00,Celta de Vigo,Sevilla
+38,2026-05-24 00:00,Espanyol,Real Sociedad
+38,2026-05-24 00:00,Getafe,Osasuna
+38,2026-05-24 00:00,Mallorca,Real Oviedo
+38,2026-05-24 00:00,Real Madrid,Athletic Bilbao
+38,2026-05-24 00:00,Villarreal,Atletico Madrid
+38,2026-05-24 00:00,Valencia,Barcelona
+38,2026-05-24 00:00,Girona,Elche CF

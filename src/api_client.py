@@ -2,20 +2,19 @@ import requests
 import pandas as pd
 import logging
 import os
-from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# TU TOKEN PERSONAL (Lo extraje de tu mensaje anterior)
+# TU API KEY
 API_KEY = "0f3d6700ed56499eaa6f67d1250a6901"
-BASE_URL = "https://api.football-data.org/v4/competitions/PD/matches" # PD = Primera Division
+BASE_URL = "https://api.football-data.org/v4/competitions/PD/matches"
 
 DATA_DIR = "data"
 os.makedirs(DATA_DIR, exist_ok=True)
 
-# Mapeo de nombres API -> Nombres Modelo
-API_MAPPING = {
+# Mapeo
+API_TO_MODEL_MAPPING = {
     "Athletic Club": "Athletic Bilbao",
     "Club Atlético de Madrid": "Atletico Madrid",
     "CA Osasuna": "Osasuna",
@@ -40,9 +39,10 @@ API_MAPPING = {
 
 def fetch_fixtures():
     headers = {'X-Auth-Token': API_KEY}
-    params = {'status': 'SCHEDULED'} # Solo partidos pendientes
+    params = {'status': 'SCHEDULED'} 
     
     try:
+        logger.info("📡 Conectando con API football-data.org...")
         response = requests.get(BASE_URL, headers=headers, params=params)
         response.raise_for_status()
         
@@ -51,20 +51,21 @@ def fetch_fixtures():
         
         for match in data.get('matches', []):
             try:
-                # Extraemos datos limpios
                 matchday = match['matchday']
-                utc_date = match['utcDate'] # Ej: 2026-01-20T19:00:00Z
+                utc_date = match['utcDate'] # Viene en UTC (Zulu time)
                 
-                # Normalizamos nombres inmediatamente
-                home_raw = match['homeTeam']['name']
-                away_raw = match['awayTeam']['name']
+                # Usamos Pandas para convertir de UTC a Madrid automáticamente
+                ts = pd.Timestamp(utc_date)
+                ts_madrid = ts.tz_convert('Europe/Madrid')
+                # Formato bonito: Día/Mes Hora:Minuto
+                date_str = ts_madrid.strftime("%d/%m %H:%M")
+                # -------------------------------------
                 
-                home = API_MAPPING.get(home_raw, home_raw) # Si no está en mapa, usa el original
-                away = API_MAPPING.get(away_raw, away_raw)
+                home_api = match['homeTeam']['name']
+                away_api = match['awayTeam']['name']
                 
-                # Formatear fecha
-                dt = datetime.strptime(utc_date, "%Y-%m-%dT%H:%M:%SZ")
-                date_str = dt.strftime("%Y-%m-%d %H:%M")
+                home = API_TO_MODEL_MAPPING.get(home_api, home_api)
+                away = API_TO_MODEL_MAPPING.get(away_api, away_api)
                 
                 matches.append({
                     "matchday": matchday,
@@ -73,21 +74,20 @@ def fetch_fixtures():
                     "away_team": away
                 })
             except Exception as e:
-                logger.warning(f"Error procesando un partido: {e}")
                 continue
                 
         df = pd.DataFrame(matches)
         
+        output_path = os.path.join(DATA_DIR, "laliga_fixtures.csv")
         if not df.empty:
-            output_path = os.path.join(DATA_DIR, "laliga_fixtures.csv")
             df.to_csv(output_path, index=False)
-            logger.info(f"✅ API Éxito: {len(df)} partidos pendientes descargados.")
-            logger.info(f"Jornadas detectadas: {df['matchday'].unique()}")
+            logger.info(f"✅ Calendario actualizado: {len(df)} partidos. (Hora Madrid aplicada)")
         else:
-            logger.warning("⚠️ La API devolvió 0 partidos pendientes (¿Final de temporada?).")
+            logger.warning("⚠️ La API devolvió 0 partidos.")
+            pd.DataFrame(columns=['matchday', 'date_str', 'home_team', 'away_team']).to_csv(output_path, index=False)
             
     except Exception as e:
-        logger.error(f"❌ Error conectando con API: {e}")
+        logger.error(f"❌ Error crítico en API: {e}")
 
 if __name__ == "__main__":
     fetch_fixtures()

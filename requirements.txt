@@ -8,6 +8,9 @@ selenium>=4.10.0
 webdriver-manager>=4.0.0
 beautifulsoup4>=4.12.2 
 
+# --- API CLIENT ---
+requests>=2.31.0
+
 # --- MACHINE LEARNING (CEREBRO) ---
 scikit-learn==1.5.2
 

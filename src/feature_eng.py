@@ -8,21 +8,16 @@ from typing import Dict, List, Tuple
 
 # Diccionario maestro de normalización
 TEAM_MAPPING = {
-    # Nombres Flashscore / Estándar
     "Athletic Club": "Athletic Bilbao", "Athletic": "Athletic Bilbao",
-    "Atlético de Madrid": "Atletico Madrid", "Atl. Madrid": "Atletico Madrid", "Atlético": "Atletico Madrid",
-    "R. Betis": "Real Betis", "Betis": "Real Betis",
+    "Atlético de Madrid": "Atletico Madrid", "Atl. Madrid": "Atletico Madrid",
+    "R. Betis": "Real Betis",
     "Real Sociedad": "Real Sociedad", "R. Sociedad": "Real Sociedad",
     "FC Barcelona": "Barcelona", "Barca": "Barcelona",
     "Real Madrid": "Real Madrid",
     "Real Oviedo 2": "Real Oviedo", "Oviedo": "Real Oviedo",
-    "Real Oviedo": "Real Oviedo", "Oviedo": "Real Oviedo",
     "Girona FC": "Girona", "Girona": "Girona",
     "Getafe 2": "Getafe",
-    "Getafe": "Getafe",
-    
-    # Nombres AS / Marca
-    "Celta": "Celta de Vigo", "RC Celta": "Celta de Vigo", "Celta Vigo": "Celta de Vigo",
+    "Celta": "Celta de Vigo", "RC Celta": "Celta de Vigo",
     "Alavés": "Alaves", "D. Alavés": "Alaves", 
     "Leganés": "Leganes", "CD Leganés": "Leganes",
     "Valladolid": "Real Valladolid", "R. Valladolid": "Real Valladolid",
@@ -34,26 +29,17 @@ TEAM_MAPPING = {
     "Las Palmas": "Las Palmas", "UD Las Palmas": "Las Palmas",
     "Rayo": "Rayo Vallecano", "Rayo Vallecano": "Rayo Vallecano",
     "Espanyol": "Espanyol", "RCD Espanyol": "Espanyol",
-    
-    # Emergencia
-    "Sistema AI": "Sistema AI",
-    "Mantenimiento": "Mantenimiento",
 }
 
 def normalize_names(df: pd.DataFrame) -> pd.DataFrame:
-    """Normaliza los nombres de los equipos y elimina espacios invisibles."""
+    """Normaliza los nombres de los equipos."""
     df['home_team'] = df['home_team'].replace(TEAM_MAPPING).str.strip()
     df['away_team'] = df['away_team'].replace(TEAM_MAPPING).str.strip()
     return df
 
-# --- 2. LÓGICA DE ESTADÍSTICAS (CORE) ---
+# --- 2. LÓGICA DE ESTADÍSTICAS (CORE - NO TOCAR) ---
 
 def get_team_stats_history(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Calcula rachas (últimos 5 partidos) y fatiga (días de descanso)
-    basándose en el historial completo.
-    """
-    # Desglosar partidos en dos filas (Local y Visitante)
     home_matches = df[['date', 'home_team', 'home_score', 'away_score', 'winner']].copy()
     home_matches.columns = ['date', 'team', 'goals_for', 'goals_against', 'winner_ref']
     home_matches['is_home'] = 1
@@ -64,7 +50,6 @@ def get_team_stats_history(df: pd.DataFrame) -> pd.DataFrame:
     
     team_stats = pd.concat([home_matches, away_matches]).sort_values(['team', 'date'])
     
-    # Calcular puntos (3, 1, 0)
     conditions = [
         (team_stats['is_home'] == 1) & (team_stats['winner_ref'] == 'Home'),
         (team_stats['is_home'] == 0) & (team_stats['winner_ref'] == 'Away'),
@@ -72,58 +57,37 @@ def get_team_stats_history(df: pd.DataFrame) -> pd.DataFrame:
     ]
     team_stats['points'] = np.select(conditions, [3, 3, 1], default=0)
     
-    # A. Racha de puntos (Últimos 5 partidos ANTERIORES)
     team_stats['last_5_points'] = team_stats.groupby('team')['points'].transform(
         lambda x: x.shift(1).rolling(window=5, min_periods=1).sum()
     ).fillna(0)
     
-    # B. Días de descanso (Fatiga)
     team_stats['date'] = pd.to_datetime(team_stats['date'])
     team_stats['prev_date'] = team_stats.groupby('team')['date'].shift(1)
     team_stats['rest_days'] = (team_stats['date'] - team_stats['prev_date']).dt.days
-    team_stats['rest_days'] = team_stats['rest_days'].fillna(7) # Default 7 días
+    team_stats['rest_days'] = team_stats['rest_days'].fillna(7)
     
     return team_stats
 
 def calculate_h2h(row, df_history):
-    """
-    Calcula cuántas veces el equipo LOCAL ganó a este VISITANTE 
-    en los últimos 3 años (Historial directo).
-    """
     try:
         date_limit = row['date'] - timedelta(days=3*365)
-        
-        # Filtrar enfrentamientos previos
         past_matches = df_history[
             (df_history['date'] < row['date']) & 
             (df_history['date'] >= date_limit) &
             (df_history['home_team'] == row['home_team']) & 
             (df_history['away_team'] == row['away_team'])
         ]
-        
-        if past_matches.empty:
-            return 0
-            
-        # Contar victorias locales
+        if past_matches.empty: return 0
         return past_matches[past_matches['winner'] == 'Home'].shape[0]
-    except:
-        return 0
+    except: return 0
 
-# --- 3. PREPARACIÓN DE DATOS (ENTRENAMIENTO) ---
+# --- 3. ENTRENAMIENTO ---
 
 def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFrame:
-    """
-    Función MAESTRA para Entrenamiento.
-    Lee CSV -> Limpia -> Calcula H2H/Rachas -> Devuelve Dataset listo.
-    """
     try:
-        if not os.path.exists(raw_csv_path):
-            print("Error: No se encontró el archivo de datos crudos.")
-            return pd.DataFrame()
-
+        if not os.path.exists(raw_csv_path): return pd.DataFrame()
         df = pd.read_csv(raw_csv_path)
         
-        # 1. Limpieza de duplicados y espacios
         df['home_team'] = df['home_team'].str.strip()
         df['away_team'] = df['away_team'].str.strip()
         df.drop_duplicates(subset=['date', 'home_team', 'away_team'], keep='last', inplace=True)
@@ -131,103 +95,37 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
         df['date'] = pd.to_datetime(df['date'])
         df = normalize_names(df)
         
-        # 2. Definir Target y Ganador
-        conditions = [
-            (df['home_score'] > df['away_score']),
-            (df['home_score'] == df['away_score']),
-            (df['home_score'] < df['away_score'])
-        ]
+        conditions = [(df['home_score'] > df['away_score']), (df['home_score'] == df['away_score']), (df['home_score'] < df['away_score'])]
         df['winner'] = np.select(conditions, ['Home', 'Draw', 'Away'], default='Draw')
         df['TARGET'] = np.select(conditions, [0, 1, 2], default=1)
         
-        # 3. Calcular Features (Rachas)
         team_stats = get_team_stats_history(df)
         
-        # 4. Mapear stats al dataframe principal (Merges)
-        df = df.merge(team_stats[['date', 'team', 'last_5_points', 'rest_days']], 
-                      left_on=['date', 'home_team'], 
-                      right_on=['date', 'team'], 
-                      how='left').rename(columns={
-                          'last_5_points': 'last_5_home_points', 
-                          'rest_days': 'rest_days_home'
-                      }).drop(columns=['team'])
-                      
-        df = df.merge(team_stats[['date', 'team', 'last_5_points', 'rest_days']], 
-                      left_on=['date', 'away_team'], 
-                      right_on=['date', 'team'], 
-                      how='left').rename(columns={
-                          'last_5_points': 'last_5_away_points', 
-                          'rest_days': 'rest_days_away'
-                      }).drop(columns=['team'])
+        df = df.merge(team_stats[['date', 'team', 'last_5_points', 'rest_days']], left_on=['date', 'home_team'], right_on=['date', 'team'], how='left').rename(columns={'last_5_points': 'last_5_home_points', 'rest_days': 'rest_days_home'}).drop(columns=['team'])
+        df = df.merge(team_stats[['date', 'team', 'last_5_points', 'rest_days']], left_on=['date', 'away_team'], right_on=['date', 'team'], how='left').rename(columns={'last_5_points': 'last_5_away_points', 'rest_days': 'rest_days_away'}).drop(columns=['team'])
         
-        # 5. H2H (Cálculo real para entrenamiento)
         df['h2h_home_wins'] = df.apply(lambda x: calculate_h2h(x, df), axis=1)
-
-        # 6. Limpieza final
         df.dropna(subset=['last_5_home_points', 'last_5_away_points'], inplace=True)
         
-        final_cols = [
-            'date', 'home_team', 'away_team', 
-            'last_5_home_points', 'last_5_away_points',
-            'rest_days_home', 'rest_days_away',
-            'h2h_home_wins',
-            'TARGET'
-        ]
-        
-        print(f"Data Engineering Completado. Dataset shape: {df[final_cols].shape}")
-        return df[final_cols]
+        return df[['date', 'home_team', 'away_team', 'last_5_home_points', 'last_5_away_points', 'rest_days_home', 'rest_days_away', 'h2h_home_wins', 'TARGET']]
+    except: return pd.DataFrame()
 
-    except Exception as e:
-        print(f"Error en prepare_data: {e}")
-        return pd.DataFrame()
-
-# --- 4. PREPARACIÓN DE DATOS (QUINIELA / UX) ---
-
-# --- 4. PREPARACIÓN QUINIELA (Universal Date Parser) ---
-def parse_date_universal(date_str: str) -> datetime:
-    """Intenta entender fechas de Flashscore, AS y Marca."""
-    try:
-        if not isinstance(date_str, str): return datetime.now()
-        now = datetime.now()
-        
-        # Caso Dummy
-        if "Próximamente" in date_str or "Upcoming" in date_str:
-            return now + timedelta(days=7) # Lo ponemos en el futuro seguro
-
-        # Limpieza básica
-        clean = date_str.lower().replace('.', '/').replace(',', '').split()[0]
-        import re
-        match = re.search(r'(\d{1,2})[/-](\d{1,2})', clean)
-        
-        if match:
-            day, month = int(match.group(1)), int(match.group(2))
-            # Lógica de cambio de año: Si estamos en Mayo y el partido es en Agosto -> Año actual.
-            # Si estamos en Diciembre y el partido es en Enero -> Año siguiente.
-            year = now.year
-            if now.month > 8 and month < 6: year += 1 
-            
-            return datetime(year, month, day)
-        return now
-    except: return datetime.now()
+# --- 4. PREPARACIÓN QUINIELA (API INTEGRATION) ---
 
 def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """Lee el CSV generado por la API (que ya tiene matchday y fechas limpias)."""
     try:
         if not os.path.exists(fixtures_path): return pd.DataFrame(), pd.DataFrame()
-        df_fix = pd.read_csv(fixtures_path)
+        
+        # Leemos el CSV de la API (ya viene limpio gracias a api_client.py)
+        df_fix = pd.read_csv(fixtures_path) 
         if df_fix.empty: return pd.DataFrame(), pd.DataFrame()
 
-        df_fix = normalize_names(df_fix)
-        df_fix = df_fix.drop_duplicates(subset=['home_team', 'away_team'])
-        df_fix['parsed_date'] = df_fix['date_str'].apply(parse_date_universal)
-
-        # 2. FILTRO CRÍTICO: Eliminar partidos pasados (Ayer o antes)
-        # Dejamos los de hoy por si se están jugando
-        today_midnight = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-        df_fix = df_fix[df_fix['parsed_date'] >= today_midnight]
+        # Ordenamos por Jornada y luego Fecha
+        if 'matchday' in df_fix.columns:
+            df_fix = df_fix.sort_values(['matchday', 'date_str'])
         
-        # 3. ORDENAR: Lo más próximo primero
-        df_fix = df_fix.sort_values('parsed_date')
-
+        # Historial para stats
         if not os.path.exists(training_path): return pd.DataFrame(), df_fix
         df_hist = pd.read_csv(training_path)
         df_hist = normalize_names(df_hist)
@@ -244,6 +142,8 @@ def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> Tuple[pd
 
         for _, row in df_fix.iterrows():
             ht, at = row['home_team'], row['away_team']
+            
+            # Cruzamos datos solo si tenemos historial
             if ht in latest_stats.index and at in latest_stats.index:
                 data_for_pred.append({
                     'last_5_home_points': latest_stats.loc[ht, 'last_5_points'],
@@ -260,9 +160,4 @@ def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> Tuple[pd
         return pd.DataFrame(), pd.DataFrame()
 
 if __name__ == "__main__":
-    # Test local
-    print("Probando Feature Engineering...")
-    df = prepare_data()
-    if not df.empty:
-        df.to_csv("data/training_set.csv", index=False)
-        print("Training set generado.")
+    prepare_data()

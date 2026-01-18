@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-update:
-    runs-on: ubuntu-latest # B. Setup: Ubuntu environment
+    runs-on: ubuntu-latest # Setup: Ubuntu environment
 
     steps:
       # 1. Check out del repositorio
@@ -36,29 +36,29 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 5. C. Run Scraper
-      # Extrae datos de Flashscore y Transfermarkt y actualiza /data
-      - name: Run Scraper (ETL)
+     # 5. Ejecutar Scrapers (Arquitectura Híbrida)
+      
+      # 5.1 Historial (Flashscore - Selenium)
+      - name: Run Scraper (History - Flashscore)
         run: python src/scraper.py
-        env:
-          User_Agent: "Mozilla/5.0 (LaLigaAI)"
+        
+      # 5.2 Calendario (API - Requests)
+      - name: Run API Client (Fixtures - Football-Data)
+        run: python src/api_client.py
 
-      # --- PASO CRÍTICO (El que causó el conflicto) ---
+     # 6. Procesar Datos
       - name: Run Feature Engineering
         run: python src/feature_eng.py
-      # ----------------------------------------------
 
-      # 6. D. Run Training
-      # Lee el CSV nuevo, entrena modelos y guarda model_winner.pkl
+      # 7. Entrenar
       - name: Train Models
         run: python src/models.py
 
-     # 7. E. Git Auto-Commit
+     # 8. Guardar
       - name: Commit and Push changes
         run: |
           git config --global user.name "LaLiga AI Bot"
           git config --global user.email "bot@laliga-ai.com"
-          # Añadir TODO lo que haya en data/ (incluyendo el nuevo fixtures.csv)
           git add data/
           git commit -m "Auto-update: Match results, fixtures and model" || echo "No changes to commit"
           git push

@@ -185,27 +185,30 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
 
 # --- 4. PREPARACIÓN QUINIELA (Universal Date Parser) ---
 def parse_date_universal(date_str: str) -> datetime:
-    """Parser robusto para fechas de Flashscore ('17.01.') y AS ('17/01' o '17 Ene')."""
+    """Intenta entender fechas de Flashscore, AS y Marca."""
     try:
         if not isinstance(date_str, str): return datetime.now()
-        current_year = datetime.now().year
+        now = datetime.now()
         
-        # Limpieza inicial
-        clean_str = date_str.lower().replace('.', '/').replace(',', '').split()[0] # Toma la primera parte "17/01"
-        
-        # Intentar extraer día y mes
+        # Caso Dummy
+        if "Próximamente" in date_str or "Upcoming" in date_str:
+            return now + timedelta(days=7) # Lo ponemos en el futuro seguro
+
+        # Limpieza básica
+        clean = date_str.lower().replace('.', '/').replace(',', '').split()[0]
         import re
-        match = re.search(r'(\d{1,2})[/-](\d{1,2})', clean_str)
+        match = re.search(r'(\d{1,2})[/-](\d{1,2})', clean)
+        
         if match:
             day, month = int(match.group(1)), int(match.group(2))
-        else:
-            return datetime.now()
-
-        dt = datetime(current_year, month, day)
-        if dt < datetime.now() - timedelta(days=90): dt = dt.replace(year=current_year + 1)
-        return dt
-    except:
-        return datetime.now()
+            # Lógica de cambio de año: Si estamos en Mayo y el partido es en Agosto -> Año actual.
+            # Si estamos en Diciembre y el partido es en Enero -> Año siguiente.
+            year = now.year
+            if now.month > 8 and month < 6: year += 1 
+            
+            return datetime(year, month, day)
+        return now
+    except: return datetime.now()
 
 def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
     try:
@@ -216,6 +219,14 @@ def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> Tuple[pd
         df_fix = normalize_names(df_fix)
         df_fix = df_fix.drop_duplicates(subset=['home_team', 'away_team'])
         df_fix['parsed_date'] = df_fix['date_str'].apply(parse_date_universal)
+
+        # 2. FILTRO CRÍTICO: Eliminar partidos pasados (Ayer o antes)
+        # Dejamos los de hoy por si se están jugando
+        today_midnight = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        df_fix = df_fix[df_fix['parsed_date'] >= today_midnight]
+        
+        # 3. ORDENAR: Lo más próximo primero
+        df_fix = df_fix.sort_values('parsed_date')
 
         if not os.path.exists(training_path): return pd.DataFrame(), df_fix
         df_hist = pd.read_csv(training_path)

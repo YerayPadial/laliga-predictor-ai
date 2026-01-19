@@ -57,31 +57,39 @@ def main():
         st.error("⚠️ Modelo no encontrado.")
         return
 
-    # 1. Cargar Datos
     X_pred, df_info = prepare_upcoming_matches(FIXTURES_PATH, RAW_DATA_PATH)
 
     if X_pred.empty:
-        st.info("📅 Calendario actualizado. Esperando datos de API.")
+        st.info("📅 Calendario actualizado. Esperando datos.")
         return
 
-    # 2. Resetear índices
     df_info = df_info.reset_index(drop=True)
-    
-    # 3. Predecir
     predictions = model.predict(X_pred)
     probs = model.predict_proba(X_pred)
 
-    # --- LÓGICA DE JORNADAS ---
+    # --- LÓGICA DE NAVEGACIÓN ---
     if 'matchday' in df_info.columns:
         df_info['matchday'] = pd.to_numeric(df_info['matchday'], errors='coerce').fillna(0).astype(int)
         available_matchdays = sorted(df_info['matchday'].unique())
-        available_matchdays = [m for m in available_matchdays if m > 0]
         if not available_matchdays: available_matchdays = [1]
     else:
         available_matchdays = [1]
 
+    # --- AUTO-FOCUS JORNADA ACTUAL ---
+    # Si es la primera vez que entramos, buscamos la jornada más cercana a HOY
     if 'current_md_index' not in st.session_state:
-        st.session_state.current_md_index = 0
+        # Buscamos el primer partido que NO esté finalizado
+        pending_matches = df_info[df_info['status'] != 'FINISHED']
+        if not pending_matches.empty:
+            target_matchday = pending_matches.iloc[0]['matchday']
+            # Buscamos el índice de esa jornada en nuestra lista
+            try:
+                st.session_state.current_md_index = available_matchdays.index(target_matchday)
+            except:
+                st.session_state.current_md_index = len(available_matchdays) - 1
+        else:
+            # Si todo acabó, mostramos la última jornada
+            st.session_state.current_md_index = len(available_matchdays) - 1
     
     md_idx = max(0, min(st.session_state.current_md_index, len(available_matchdays) - 1))
     current_matchday = available_matchdays[md_idx]

@@ -8,10 +8,7 @@ logger = logging.getLogger(__name__)
 
 # TU API KEY
 API_KEY = "0f3d6700ed56499eaa6f67d1250a6901"
-# URL Base de la competición (LaLiga Primera División)
-BASE_URL_COMPETITION = "https://api.football-data.org/v4/competitions/PD"
-# URL Base de partidos
-BASE_URL_MATCHES = "https://api.football-data.org/v4/competitions/PD/matches"
+BASE_URL = "https://api.football-data.org/v4/competitions/PD/matches"
 
 DATA_DIR = "data"
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -43,74 +40,23 @@ API_TO_MODEL_MAPPING = {
     "Real Oviedo": "Real Oviedo",
 }
 
-def get_current_matchday():
-    """
-    Determina la jornada actual de forma robusta.
-    Estrategia 1: Preguntar a la competición.
-    Estrategia 2: Preguntar al primer partido pendiente.
-    """
-    headers = {'X-Auth-Token': API_KEY}
-    
-    # --- ESTRATEGIA 1: Vía Directa ---
-    try:
-        response = requests.get(BASE_URL_COMPETITION, headers=headers)
-        if response.status_code == 200:
-            data = response.json()
-            # Verificamos que existan las claves antes de acceder
-            if 'currentSeason' in data and data['currentSeason'] and 'currentMatchday' in data['currentSeason']:
-                return data['currentSeason']['currentMatchday']
-    except Exception as e:
-        logger.warning(f"Estrategia 1 falló: {e}")
-
-    # --- ESTRATEGIA 2: Vía 'Próximo Partido' (Fallback) ---
-    logger.info("Activando Estrategia 2 para detectar jornada...")
-    try:
-        # Pedimos solo 1 partido que esté programado (SCHEDULED)
-        params = {'status': 'SCHEDULED', 'limit': 1}
-        response = requests.get(BASE_URL_MATCHES, headers=headers, params=params)
-        response.raise_for_status()
-        data = response.json()
-        
-        matches = data.get('matches', [])
-        if matches:
-            # Si hay partidos futuros, la jornada actual es la de ese partido
-            found_matchday = matches[0]['matchday']
-            logger.info(f"Jornada detectada por próximo partido: {found_matchday}")
-            return found_matchday
-    except Exception as e:
-        logger.error(f"Estrategia 2 falló: {e}")
-
-    # Si todo falla, devolvemos None (el script principal manejará el error)
-    return None
-
 def fetch_fixtures():
     headers = {'X-Auth-Token': API_KEY}
+    # No filtramos por status ni matchday. Pedimos TODO el calendario 2024/2025.
     
-    # 1. Obtener jornada actual (Con sistema anti-fallos)
-    current_matchday = get_current_matchday()
-    
-    if not current_matchday:
-        logger.error("❌ CRÍTICO: No se pudo determinar la jornada. Usando modo de emergencia.")
-        # Creamos archivo vacío para no romper la web y salimos
-        pd.DataFrame(columns=['matchday', 'utc_date', 'date_str', 'status', 'home_team', 'away_team', 'real_result']).to_csv(os.path.join(DATA_DIR, "laliga_fixtures.csv"), index=False)
-        return
-
-    logger.info(f"📍 Jornada Oficial Detectada: {current_matchday}")
-
-    # 2. Descargar Jornada Actual y la Siguiente
-    matchdays_to_fetch = [current_matchday, current_matchday + 1]
-    all_matches = []
-
-    for md in matchdays_to_fetch:
-        try:
-            url = f"{BASE_URL_MATCHES}?matchday={md}"
-            response = requests.get(url, headers=headers)
-            response.raise_for_status()
-            data = response.json()
-            
-            for match in data.get('matches', []):
+    try:
+        logger.info("📡 Descargando calendario COMPLETO de la temporada...")
+        response = requests.get(BASE_URL, headers=headers)
+        response.raise_for_status()
+        
+        data = response.json()
+        matches = []
+        
+        for match in data.get('matches', []):
+            try:
+                matchday = match['matchday']
                 utc_date = match['utcDate']
-                status = match['status']
+                status = match['status'] # SCHEDULED, FINISHED, IN_PLAY...
                 
                 # Corrección Hora Madrid
                 ts = pd.Timestamp(utc_date)
@@ -123,40 +69,40 @@ def fetch_fixtures():
                 home = API_TO_MODEL_MAPPING.get(home_api, home_api)
                 away = API_TO_MODEL_MAPPING.get(away_api, away_api)
                 
+                # Resultados
                 score_home = match['score']['fullTime']['home']
                 score_away = match['score']['fullTime']['away']
                 
-                # Manejo seguro de None en el marcador
                 if score_home is None: score_home = ""
                 if score_away is None: score_away = ""
                 
                 result_str = f"{score_home}-{score_away}" if status == 'FINISHED' else "-"
 
-                all_matches.append({
-                    "matchday": md,
-                    "utc_date": utc_date,
+                matches.append({
+                    "matchday": matchday,
+                    "utc_date": utc_date, # Vital para ordenar
                     "date_str": date_str,
                     "status": status,
                     "home_team": home,
                     "away_team": away,
                     "real_result": result_str
                 })
+            except Exception as e:
+                continue
                 
-        except Exception as e:
-            logger.error(f"Error descargando jornada {md}: {e}")
-            continue
-
-    df = pd.DataFrame(all_matches)
-    
-    output_path = os.path.join(DATA_DIR, "laliga_fixtures.csv")
-    if not df.empty:
-        # Ordenar por jornada y fecha
-        df = df.sort_values(by=['matchday', 'utc_date'])
-        df.to_csv(output_path, index=False)
-        logger.info(f"✅ Calendario guardado: {len(df)} partidos.")
-    else:
-        logger.warning("⚠️ No se encontraron partidos.")
-        pd.DataFrame(columns=['matchday', 'utc_date', 'date_str', 'status', 'home_team', 'away_team', 'real_result']).to_csv(output_path, index=False)
+        df = pd.DataFrame(matches)
+        
+        output_path = os.path.join(DATA_DIR, "laliga_fixtures.csv")
+        if not df.empty:
+            # Ordenamos por Jornada y fecha
+            df = df.sort_values(by=['matchday', 'utc_date'])
+            df.to_csv(output_path, index=False)
+            logger.info(f"✅ Temporada completa guardada: {len(df)} partidos (Jornadas 1-38).")
+        else:
+            logger.warning("⚠️ La API devolvió 0 partidos.")
+            
+    except Exception as e:
+        logger.error(f"❌ Error en API: {e}")
 
 if __name__ == "__main__":
     fetch_fixtures()

@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import joblib
 import os
-import textwrap
 from src.feature_eng import prepare_upcoming_matches
 
 # Configuración Inicial
@@ -44,7 +43,7 @@ st.markdown("""
     .pred-X { background-color: #FFC107; color: black !important; border: 1px solid #FFB300; }
     .pred-2 { background-color: #F44336; border: 1px solid #E53935; }
     
-    /* Badges de Estado (LIVE / FINISHED) */
+    /* Badges de Estado */
     .status-badge {
         font-size: 0.7em; 
         padding: 3px 8px; 
@@ -85,9 +84,6 @@ MODEL_PATH = 'data/model_winner.pkl'
 FIXTURES_PATH = 'data/laliga_fixtures.csv'
 RAW_DATA_PATH = 'data/laliga_results_raw.csv'
 
-# Tamaño de Jornada (aunque ahora la API manda, esto sirve de fallback)
-MATCHES_PER_ROUND = 10 
-
 def load_model():
     if os.path.exists(MODEL_PATH): return joblib.load(MODEL_PATH)
     return None
@@ -100,25 +96,20 @@ def main():
         st.error("⚠️ Modelo no encontrado.")
         return
 
-    # 1. Cargar Datos
     X_pred, df_info = prepare_upcoming_matches(FIXTURES_PATH, RAW_DATA_PATH)
 
     if X_pred.empty:
         st.info("📅 Calendario actualizado. Esperando datos de API.")
         return
 
-    # 2. Resetear índices (CRÍTICO)
     df_info = df_info.reset_index(drop=True)
-    
-    # 3. Predicciones
     predictions = model.predict(X_pred)
     probs = model.predict_proba(X_pred)
 
-    # --- LÓGICA DE NAVEGACIÓN (JORNADAS) ---
+    # --- LÓGICA DE NAVEGACIÓN ---
     if 'matchday' in df_info.columns:
         df_info['matchday'] = pd.to_numeric(df_info['matchday'], errors='coerce').fillna(0).astype(int)
         available_matchdays = sorted(df_info['matchday'].unique())
-        # Eliminar jornadas 0 si las hubiera
         available_matchdays = [m for m in available_matchdays if m > 0]
         if not available_matchdays: available_matchdays = [1]
     else:
@@ -127,7 +118,6 @@ def main():
     if 'current_md_index' not in st.session_state:
         st.session_state.current_md_index = 0
     
-    # Asegurar rango
     md_idx = max(0, min(st.session_state.current_md_index, len(available_matchdays) - 1))
     current_matchday = available_matchdays[md_idx]
     
@@ -163,20 +153,16 @@ def main():
         confidence = max(prob) * 100
         color_class = f"pred-{winner_code}"
         
-        # --- LÓGICA DE ESTADO (TU NUEVA FEATURE) ---
         status = row.get('status', 'SCHEDULED')
         status_html = ""
-        result_display = "vs" # Por defecto
+        result_display = "vs"
         
-        # Si está en juego o pausa
         if status in ['IN_PLAY', 'PAUSED', 'LIVE']:
             status_html = f"<span class='status-badge status-LIVE'>EN JUEGO</span>"
-        # Si terminó
         elif status == 'FINISHED':
             status_html = f"<span class='status-badge status-FINISHED'>FINALIZADO</span>"
-            result_display = row.get('real_result', 'vs') # Muestra "2-1" o "vs" si falla
+            result_display = row.get('real_result', 'vs')
 
-        # --- HTML BLINDADO CON DEDENT ---
         html_code = f"""
 <div class="match-card">
     <div style="text-align:center; color:#aaa; font-size:0.85em; margin-bottom:12px; font-family:monospace;">

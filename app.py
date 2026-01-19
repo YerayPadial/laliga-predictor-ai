@@ -177,39 +177,37 @@ def main():
             result_display = row.get('real_result', 'vs') # Muestra "2-1" o "vs" si falla
 
         # --- HTML BLINDADO CON DEDENT ---
-        # El truco está aquí: alineamos todo a la izquierda para que Markdown no se confunda
-        html_code = textwrap.dedent(f"""
-            <div class="match-card">
-                <div style="text-align:center; color:#aaa; font-size:0.85em; margin-bottom:12px; font-family:monospace;">
-                    📅 {row['date_str']} {status_html}
-                </div>
-                
-                <div class="team-row">
-                    <div style="flex:1; text-align:right; font-weight:bold; font-size:1.2em;">{row['home_team']}</div>
-                    <div class="vs" style="font-size: 1.4em; color: white;">{result_display}</div>
-                    <div style="flex:1; text-align:left; font-weight:bold; font-size:1.2em;">{row['away_team']}</div>
-                </div>
-                
-                <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:12px;">
-                    <span style="font-size:0.9em; color:#ddd;">IA Predice:</span>
-                    <div class="pred-badge {color_class}">{winner_code}</div>
-                    <span style="font-size:0.85em; color:#aaa;">({confidence:.0f}%)</span>
-                </div>
-                
-                <div class="prob-container">
-                    <div class="prob-segment" style="width:{p1}%; background-color:#4CAF50;" title="Local: {p1:.1f}%"></div>
-                    <div class="prob-segment" style="width:{pX}%; background-color:#FFC107;" title="Empate: {pX:.1f}%"></div>
-                    <div class="prob-segment" style="width:{p2}%; background-color:#F44336;" title="Visitante: {p2:.1f}%"></div>
-                </div>
-                
-                <div class="prob-labels">
-                    <span style="color:#4CAF50;">1: {p1:.0f}%</span>
-                    <span style="color:#FFC107;">X: {pX:.0f}%</span>
-                    <span style="color:#F44336;">2: {p2:.0f}%</span>
-                </div>
-            </div>
-        """).strip() # .strip() limpia espacios extra al inicio y final del bloque
-        
+        html_code = f"""
+<div class="match-card">
+    <div style="text-align:center; color:#aaa; font-size:0.85em; margin-bottom:12px; font-family:monospace;">
+        📅 {row['date_str']} {status_html}
+    </div>
+    
+    <div class="team-row">
+        <div style="flex:1; text-align:right; font-weight:bold; font-size:1.2em;">{row['home_team']}</div>
+        <div class="vs" style="font-size: 1.4em; color: white;">{result_display}</div>
+        <div style="flex:1; text-align:left; font-weight:bold; font-size:1.2em;">{row['away_team']}</div>
+    </div>
+    
+    <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:12px;">
+        <span style="font-size:0.9em; color:#ddd;">IA Predice:</span>
+        <div class="pred-badge {color_class}">{winner_code}</div>
+        <span style="font-size:0.85em; color:#aaa;">({confidence:.0f}%)</span>
+    </div>
+    
+    <div class="prob-container">
+        <div class="prob-segment" style="width:{p1}%; background-color:#4CAF50;" title="Local: {p1:.1f}%"></div>
+        <div class="prob-segment" style="width:{pX}%; background-color:#FFC107;" title="Empate: {pX:.1f}%"></div>
+        <div class="prob-segment" style="width:{p2}%; background-color:#F44336;" title="Visitante: {p2:.1f}%"></div>
+    </div>
+    
+    <div class="prob-labels">
+        <span style="color:#4CAF50;">1: {p1:.0f}%</span>
+        <span style="color:#FFC107;">X: {pX:.0f}%</span>
+        <span style="color:#F44336;">2: {p2:.0f}%</span>
+    </div>
+</div>
+"""
         st.markdown(html_code, unsafe_allow_html=True)
 
 if __name__ == "__main__":

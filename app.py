@@ -7,7 +7,7 @@ from src.feature_eng import prepare_upcoming_matches
 # Configuración Inicial
 st.set_page_config(page_title="La Quiniela AI", page_icon="⚽", layout="centered")
 
-# --- ESTILOS CSS (Añadí los estilos para la barra y los estados) ---
+# --- ESTILOS CSS ---
 st.markdown("""
 <style>
     .match-card {
@@ -27,7 +27,6 @@ st.markdown("""
     .pred-X { background-color: #FFC107; color: black !important; border: 1px solid #FFB300; }
     .pred-2 { background-color: #F44336; border: 1px solid #E53935; }
     
-    /* Nuevos Estilos para Estado y Barra */
     .status-badge {
         font-size: 0.7em; padding: 2px 8px; border-radius: 4px; margin-left: 5px; text-transform: uppercase; font-weight: bold;
     }
@@ -57,67 +56,56 @@ def main():
         st.error("⚠️ Modelo no encontrado.")
         return
 
+    # 1. Cargar Datos
     X_pred, df_info = prepare_upcoming_matches(FIXTURES_PATH, RAW_DATA_PATH)
 
     if X_pred.empty:
-        st.info("📅 Calendario actualizado. Esperando datos.")
+        st.info("📅 Calendario actualizado. Esperando datos de API.")
         return
 
+    # 2. Resetear índices
     df_info = df_info.reset_index(drop=True)
+    
+    # 3. Predecir
     predictions = model.predict(X_pred)
     probs = model.predict_proba(X_pred)
 
-    # --- LÓGICA DE NAVEGACIÓN ---
+    # --- LÓGICA DE JORNADA ACTIVA (STRICT MODE) ---
     if 'matchday' in df_info.columns:
         df_info['matchday'] = pd.to_numeric(df_info['matchday'], errors='coerce').fillna(0).astype(int)
-        available_matchdays = sorted(df_info['matchday'].unique())
-        if not available_matchdays: available_matchdays = [1]
-    else:
-        available_matchdays = [1]
-
-    # --- AUTO-FOCUS JORNADA ACTUAL ---
-    # Si es la primera vez que entramos, buscamos la jornada más cercana a HOY
-    if 'current_md_index' not in st.session_state:
-        # Buscamos el primer partido que NO esté finalizado
-        pending_matches = df_info[df_info['status'] != 'FINISHED']
-        if not pending_matches.empty:
-            target_matchday = pending_matches.iloc[0]['matchday']
-            # Buscamos el índice de esa jornada en nuestra lista
-            try:
-                st.session_state.current_md_index = available_matchdays.index(target_matchday)
-            except:
-                st.session_state.current_md_index = len(available_matchdays) - 1
+        
+        # Estrategia: Buscar la primera jornada que tenga AL MENOS UN partido NO terminado.
+        # Si una jornada tiene todos sus partidos 'FINISHED', pasamos a la siguiente.
+        
+        # Agrupamos por jornada y vemos si todos los partidos están terminados
+        jornadas_pendientes = []
+        for jornada in sorted(df_info['matchday'].unique()):
+            partidos_jornada = df_info[df_info['matchday'] == jornada]
+            # Si hay algún partido que NO sea FINISHED, esta jornada sigue activa
+            if any(partidos_jornada['status'] != 'FINISHED'):
+                jornadas_pendientes.append(jornada)
+        
+        if jornadas_pendientes:
+            # La jornada activa es la primera de la lista que tiene algo pendiente
+            active_matchday = jornadas_pendientes[0]
         else:
-            # Si todo acabó, mostramos la última jornada
-            st.session_state.current_md_index = len(available_matchdays) - 1
-    
-    md_idx = max(0, min(st.session_state.current_md_index, len(available_matchdays) - 1))
-    current_matchday = available_matchdays[md_idx]
-    
-    matches_mask = df_info['matchday'] == current_matchday
+            # Si no hay ninguna pendiente (fin de liga), mostramos la última disponible
+            active_matchday = df_info['matchday'].max()
+            
+    else:
+        active_matchday = 1
+
+    # Filtramos para mostrar SOLO esa jornada
+    matches_mask = df_info['matchday'] == active_matchday
     current_matches = df_info[matches_mask]
 
-    # --- BOTONES ---
-    c1, c2, c3 = st.columns([1, 2, 1])
-    with c1:
-        if md_idx > 0:
-            if st.button(f"⬅️ Jornada {available_matchdays[md_idx-1]}", use_container_width=True):
-                st.session_state.current_md_index -= 1
-                st.rerun()
-    with c2:
-        st.markdown(f"<h3 style='text-align:center; margin:0;'>Jornada {current_matchday}</h3>", unsafe_allow_html=True)
-    with c3:
-        if md_idx < len(available_matchdays) - 1:
-            if st.button(f"Jornada {available_matchdays[md_idx+1]} ➡️", use_container_width=True):
-                st.session_state.current_md_index += 1
-                st.rerun()
-
-    st.divider()
+    # Título de Jornada (Sin botones)
+    st.markdown(f"<h3 style='text-align:center; margin-bottom: 20px;'>Jornada {active_matchday}</h3>", unsafe_allow_html=True)
 
     if current_matches.empty:
         st.info("No hay partidos para mostrar en esta jornada.")
 
-    # --- RENDERIZADO (ESTILO CLÁSICO) ---
+    # --- RENDERIZADO ---
     for local_idx, row in current_matches.iterrows():
         pred = predictions[local_idx]
         prob = probs[local_idx]

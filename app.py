@@ -60,7 +60,7 @@ def main():
     X_pred, df_info = prepare_upcoming_matches(FIXTURES_PATH, RAW_DATA_PATH)
 
     if X_pred.empty:
-        st.info("📅 Calendario actualizado. Esperando datos de API.")
+        st.info("📅 Calendario actualizado. Esperando datos.")
         return
 
     # 2. Resetear índices
@@ -70,36 +70,35 @@ def main():
     predictions = model.predict(X_pred)
     probs = model.predict_proba(X_pred)
 
-    # --- LÓGICA DE JORNADA ACTIVA (STRICT MODE) ---
-    if 'matchday' in df_info.columns:
+    # --- LÓGICA INTELIGENTE DE JORNADA ---
+    # Detectamos la jornada basándonos en el TIEMPO, no en el orden numérico.
+    # Así saltamos partidos aplazados antiguos.
+    
+    if 'matchday' in df_info.columns and 'utc_date' in df_info.columns:
         df_info['matchday'] = pd.to_numeric(df_info['matchday'], errors='coerce').fillna(0).astype(int)
         
-        # Estrategia: Buscar la primera jornada que tenga AL MENOS UN partido NO terminado.
-        # Si una jornada tiene todos sus partidos 'FINISHED', pasamos a la siguiente.
+        # 1. Filtramos todos los partidos que NO han terminado (Pendientes o En Juego)
+        pending_matches = df_info[df_info['status'] != 'FINISHED'].copy()
         
-        # Agrupamos por jornada y vemos si todos los partidos están terminados
-        jornadas_pendientes = []
-        for jornada in sorted(df_info['matchday'].unique()):
-            partidos_jornada = df_info[df_info['matchday'] == jornada]
-            # Si hay algún partido que NO sea FINISHED, esta jornada sigue activa
-            if any(partidos_jornada['status'] != 'FINISHED'):
-                jornadas_pendientes.append(jornada)
-        
-        if jornadas_pendientes:
-            # La jornada activa es la primera de la lista que tiene algo pendiente
-            active_matchday = jornadas_pendientes[0]
-        else:
-            # Si no hay ninguna pendiente (fin de liga), mostramos la última disponible
-            active_matchday = df_info['matchday'].max()
+        if not pending_matches.empty:
+            # 2. Ordenamos estos partidos por FECHA REAL (utc_date)
+            # Esto pone el partido de "mañana" primero, aunque sea J21,
+            # y el aplazado de "dentro de un mes" (J19) al final.
+            pending_matches = pending_matches.sort_values('utc_date')
             
+            # 3. La jornada del partido más inmediato es la que mostramos
+            active_matchday = pending_matches.iloc[0]['matchday']
+        else:
+            # Si no queda nada pendiente en toda la liga, mostramos la última jornada
+            active_matchday = df_info['matchday'].max()
     else:
         active_matchday = 1
 
-    # Filtramos para mostrar SOLO esa jornada
+    # Filtramos la vista
     matches_mask = df_info['matchday'] == active_matchday
     current_matches = df_info[matches_mask]
 
-    # Título de Jornada (Sin botones)
+    # Título
     st.markdown(f"<h3 style='text-align:center; margin-bottom: 20px;'>Jornada {active_matchday}</h3>", unsafe_allow_html=True)
 
     if current_matches.empty:
@@ -114,7 +113,7 @@ def main():
         confidence = max(prob) * 100
         color_class = f"pred-{winner_code}"
         
-        # Estado del partido
+        # Estado
         status = row.get('status', 'SCHEDULED')
         status_html = ""
         result_display = "vs"

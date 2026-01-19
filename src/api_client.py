@@ -34,7 +34,10 @@ API_TO_MODEL_MAPPING = {
     "Villarreal CF": "Villarreal",
     "Deportivo Alavés": "Alaves",
     "UD Las Palmas": "Las Palmas",
-    "CD Leganés": "Leganes"
+    "CD Leganés": "Leganes",
+    "Elche CF": "Elche",
+    "Levante UD": "Levante",
+    "Real Oviedo": "Real Oviedo",
 }
 
 def fetch_fixtures():

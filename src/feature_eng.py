@@ -115,19 +115,17 @@ def prepare_data(raw_csv_path: str = "data/laliga_results_raw.csv") -> pd.DataFr
 # --- 4. PREPARACIÓN QUINIELA (API INTEGRATION) ---
 
 def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """Lee el CSV generado por la API (que ya tiene matchday y fechas limpias)."""
     try:
         if not os.path.exists(fixtures_path): return pd.DataFrame(), pd.DataFrame()
         
-        # Leemos el CSV de la API (ya viene limpio gracias a api_client.py)
         df_fix = pd.read_csv(fixtures_path) 
         if df_fix.empty: return pd.DataFrame(), pd.DataFrame()
 
-        # Ordenamos por Jornada y luego Fecha
-        if 'matchday' in df_fix.columns:
-            df_fix = df_fix.sort_values(['matchday', 'date_str'])
+        # Ordenar por Jornada y Fecha ISO
+        if 'utc_date' in df_fix.columns:
+            df_fix = df_fix.sort_values(['matchday', 'utc_date'])
         
-        # Historial para stats
+        # Historial
         if not os.path.exists(training_path): return pd.DataFrame(), df_fix
         df_hist = pd.read_csv(training_path)
         df_hist = normalize_names(df_hist)
@@ -144,8 +142,6 @@ def prepare_upcoming_matches(fixtures_path: str, training_path: str) -> Tuple[pd
 
         for _, row in df_fix.iterrows():
             ht, at = row['home_team'], row['away_team']
-            
-            # Cruzamos datos solo si tenemos historial
             if ht in latest_stats.index and at in latest_stats.index:
                 data_for_pred.append({
                     'last_5_home_points': latest_stats.loc[ht, 'last_5_points'],

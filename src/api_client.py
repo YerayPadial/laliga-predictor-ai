@@ -55,7 +55,7 @@ def fetch_fixtures():
         for match in data.get('matches', []):
             try:
                 matchday = match['matchday']
-                utc_date = match['utcDate'] # Viene en UTC (Zulu time)
+                utc_date = match['utcDate'] 
                 
                 # Usamos Pandas para convertir de UTC a Madrid automáticamente
                 ts = pd.Timestamp(utc_date)

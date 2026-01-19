@@ -29,6 +29,8 @@ TEAM_MAPPING = {
     "Las Palmas": "Las Palmas", "UD Las Palmas": "Las Palmas",
     "Rayo": "Rayo Vallecano", "Rayo Vallecano": "Rayo Vallecano",
     "Espanyol": "Espanyol", "RCD Espanyol": "Espanyol",
+    "Elche CF": "Elche",
+    "Levante UD": "Levante",
 }
 
 def normalize_names(df: pd.DataFrame) -> pd.DataFrame:

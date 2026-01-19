@@ -1,184 +1,21 @@
-matchday,date_str,home_team,away_team
-20,18/01 18:30,Celta de Vigo,Rayo Vallecano
-20,18/01 21:00,Real Sociedad,Barcelona
-20,19/01 21:00,Elche CF,Sevilla
-21,23/01 21:00,Levante UD,Elche CF
-21,24/01 14:00,Rayo Vallecano,Osasuna
-21,24/01 16:15,Valencia,Espanyol
-21,24/01 18:30,Sevilla,Athletic Bilbao
-21,24/01 21:00,Villarreal,Real Madrid
-21,25/01 14:00,Atletico Madrid,Mallorca
-21,25/01 16:15,Barcelona,Real Oviedo
-21,25/01 18:30,Real Sociedad,Celta de Vigo
-21,25/01 21:00,Alaves,Real Betis
-21,26/01 21:00,Girona,Getafe
-22,30/01 21:00,Espanyol,Alaves
-22,31/01 14:00,Real Oviedo,Girona
-22,31/01 16:15,Osasuna,Villarreal
-22,31/01 18:30,Levante UD,Atletico Madrid
-22,31/01 21:00,Elche CF,Barcelona
-22,01/02 14:00,Real Madrid,Rayo Vallecano
-22,01/02 16:15,Real Betis,Valencia
-22,01/02 18:30,Getafe,Celta de Vigo
-22,01/02 21:00,Athletic Bilbao,Real Sociedad
-22,02/02 21:00,Mallorca,Sevilla
-23,08/02 01:00,Alaves,Getafe
-23,08/02 01:00,Athletic Bilbao,Levante UD
-23,08/02 01:00,Atletico Madrid,Real Betis
-23,08/02 01:00,Barcelona,Mallorca
-23,08/02 01:00,Celta de Vigo,Osasuna
-23,08/02 01:00,Real Sociedad,Elche CF
-23,08/02 01:00,Villarreal,Espanyol
-23,08/02 01:00,Sevilla,Girona
-23,08/02 01:00,Valencia,Real Madrid
-23,08/02 01:00,Rayo Vallecano,Real Oviedo
-24,15/02 01:00,Elche CF,Osasuna
-24,15/02 01:00,Getafe,Villarreal
-24,15/02 01:00,Levante UD,Valencia
-24,15/02 01:00,Real Madrid,Real Sociedad
-24,15/02 01:00,Sevilla,Alaves
-24,15/02 01:00,Real Oviedo,Athletic Bilbao
-24,15/02 01:00,Rayo Vallecano,Atletico Madrid
-24,15/02 01:00,Girona,Barcelona
-24,15/02 01:00,Mallorca,Real Betis
-24,15/02 01:00,Espanyol,Celta de Vigo
-25,22/02 01:00,Alaves,Girona
-25,22/02 01:00,Athletic Bilbao,Elche CF
-25,22/02 01:00,Atletico Madrid,Espanyol
-25,22/02 01:00,Barcelona,Levante UD
-25,22/02 01:00,Real Betis,Rayo Vallecano
-25,22/02 01:00,Celta de Vigo,Mallorca
-25,22/02 01:00,Getafe,Sevilla
-25,22/02 01:00,Osasuna,Real Madrid
-25,22/02 01:00,Villarreal,Valencia
-25,22/02 01:00,Real Sociedad,Real Oviedo
-26,01/03 01:00,Barcelona,Villarreal
-26,01/03 01:00,Real Betis,Sevilla
-26,01/03 01:00,Elche CF,Espanyol
-26,01/03 01:00,Mallorca,Real Sociedad
-26,01/03 01:00,Levante UD,Alaves
-26,01/03 01:00,Rayo Vallecano,Athletic Bilbao
-26,01/03 01:00,Real Oviedo,Atletico Madrid
-26,01/03 01:00,Girona,Celta de Vigo
-26,01/03 01:00,Real Madrid,Getafe
-26,01/03 01:00,Valencia,Osasuna
-27,08/03 01:00,Athletic Bilbao,Barcelona
-27,08/03 01:00,Atletico Madrid,Real Sociedad
-27,08/03 01:00,Celta de Vigo,Real Madrid
-27,08/03 01:00,Espanyol,Real Oviedo
-27,08/03 01:00,Valencia,Alaves
-27,08/03 01:00,Getafe,Real Betis
-27,08/03 01:00,Villarreal,Elche CF
-27,08/03 01:00,Levante UD,Girona
-27,08/03 01:00,Osasuna,Mallorca
-27,08/03 01:00,Sevilla,Rayo Vallecano
-28,15/03 01:00,Alaves,Villarreal
-28,15/03 01:00,Atletico Madrid,Getafe
-28,15/03 01:00,Barcelona,Sevilla
-28,15/03 01:00,Real Betis,Celta de Vigo
-28,15/03 01:00,Real Oviedo,Valencia
-28,15/03 01:00,Girona,Athletic Bilbao
-28,15/03 01:00,Real Madrid,Elche CF
-28,15/03 01:00,Mallorca,Espanyol
-28,15/03 01:00,Rayo Vallecano,Levante UD
-28,15/03 01:00,Real Sociedad,Osasuna
-29,22/03 01:00,Athletic Bilbao,Real Betis
-29,22/03 01:00,Barcelona,Rayo Vallecano
-29,22/03 01:00,Elche CF,Mallorca
-29,22/03 01:00,Espanyol,Getafe
-29,22/03 01:00,Levante UD,Real Oviedo
-29,22/03 01:00,Sevilla,Valencia
-29,22/03 01:00,Celta de Vigo,Alaves
-29,22/03 01:00,Real Madrid,Atletico Madrid
-29,22/03 01:00,Osasuna,Girona
-29,22/03 01:00,Villarreal,Real Sociedad
-30,05/04 02:00,Alaves,Osasuna
-30,05/04 02:00,Atletico Madrid,Barcelona
-30,05/04 02:00,Real Betis,Espanyol
-30,05/04 02:00,Girona,Villarreal
-30,05/04 02:00,Mallorca,Real Madrid
-30,05/04 02:00,Real Oviedo,Sevilla
-30,05/04 02:00,Getafe,Athletic Bilbao
-30,05/04 02:00,Valencia,Celta de Vigo
-30,05/04 02:00,Rayo Vallecano,Elche CF
-30,05/04 02:00,Real Sociedad,Levante UD
-31,12/04 02:00,Barcelona,Espanyol
-31,12/04 02:00,Celta de Vigo,Real Oviedo
-31,12/04 02:00,Elche CF,Valencia
-31,12/04 02:00,Mallorca,Rayo Vallecano
-31,12/04 02:00,Real Sociedad,Alaves
-31,12/04 02:00,Sevilla,Atletico Madrid
-31,12/04 02:00,Osasuna,Real Betis
-31,12/04 02:00,Levante UD,Getafe
-31,12/04 02:00,Real Madrid,Girona
-31,12/04 02:00,Athletic Bilbao,Villarreal
-32,19/04 02:00,Alaves,Mallorca
-32,19/04 02:00,Real Betis,Real Madrid
-32,19/04 02:00,Espanyol,Levante UD
-32,19/04 02:00,Osasuna,Sevilla
-32,19/04 02:00,Rayo Vallecano,Real Sociedad
-32,19/04 02:00,Atletico Madrid,Athletic Bilbao
-32,19/04 02:00,Getafe,Barcelona
-32,19/04 02:00,Villarreal,Celta de Vigo
-32,19/04 02:00,Real Oviedo,Elche CF
-32,19/04 02:00,Valencia,Girona
-33,22/04 02:00,Athletic Bilbao,Osasuna
-33,22/04 02:00,Barcelona,Celta de Vigo
-33,22/04 02:00,Levante UD,Sevilla
-33,22/04 02:00,Mallorca,Valencia
-33,22/04 02:00,Real Oviedo,Villarreal
-33,22/04 02:00,Real Madrid,Alaves
-33,22/04 02:00,Elche CF,Atletico Madrid
-33,22/04 02:00,Girona,Real Betis
-33,22/04 02:00,Rayo Vallecano,Espanyol
-33,22/04 02:00,Real Sociedad,Getafe
-34,03/05 02:00,Alaves,Athletic Bilbao
-34,03/05 02:00,Real Betis,Real Oviedo
-34,03/05 02:00,Celta de Vigo,Elche CF
-34,03/05 02:00,Espanyol,Real Madrid
-34,03/05 02:00,Getafe,Rayo Vallecano
-34,03/05 02:00,Girona,Mallorca
-34,03/05 02:00,Valencia,Atletico Madrid
-34,03/05 02:00,Osasuna,Barcelona
-34,03/05 02:00,Villarreal,Levante UD
-34,03/05 02:00,Sevilla,Real Sociedad
-35,10/05 02:00,Athletic Bilbao,Valencia
-35,10/05 02:00,Atletico Madrid,Celta de Vigo
-35,10/05 02:00,Barcelona,Real Madrid
-35,10/05 02:00,Levante UD,Osasuna
-35,10/05 02:00,Mallorca,Villarreal
-35,10/05 02:00,Elche CF,Alaves
-35,10/05 02:00,Real Sociedad,Real Betis
-35,10/05 02:00,Sevilla,Espanyol
-35,10/05 02:00,Real Oviedo,Getafe
-35,10/05 02:00,Rayo Vallecano,Girona
-36,13/05 02:00,Alaves,Barcelona
-36,13/05 02:00,Real Betis,Elche CF
-36,13/05 02:00,Celta de Vigo,Levante UD
-36,13/05 02:00,Getafe,Mallorca
-36,13/05 02:00,Girona,Real Sociedad
-36,13/05 02:00,Espanyol,Athletic Bilbao
-36,13/05 02:00,Osasuna,Atletico Madrid
-36,13/05 02:00,Valencia,Rayo Vallecano
-36,13/05 02:00,Villarreal,Sevilla
-36,13/05 02:00,Real Madrid,Real Oviedo
-37,17/05 02:00,Athletic Bilbao,Celta de Vigo
-37,17/05 02:00,Atletico Madrid,Girona
-37,17/05 02:00,Barcelona,Real Betis
-37,17/05 02:00,Elche CF,Getafe
-37,17/05 02:00,Levante UD,Mallorca
-37,17/05 02:00,Rayo Vallecano,Villarreal
-37,17/05 02:00,Real Sociedad,Valencia
-37,17/05 02:00,Real Oviedo,Alaves
-37,17/05 02:00,Osasuna,Espanyol
-37,17/05 02:00,Sevilla,Real Madrid
-38,24/05 02:00,Alaves,Rayo Vallecano
-38,24/05 02:00,Real Betis,Levante UD
-38,24/05 02:00,Celta de Vigo,Sevilla
-38,24/05 02:00,Espanyol,Real Sociedad
-38,24/05 02:00,Getafe,Osasuna
-38,24/05 02:00,Mallorca,Real Oviedo
-38,24/05 02:00,Real Madrid,Athletic Bilbao
-38,24/05 02:00,Villarreal,Atletico Madrid
-38,24/05 02:00,Valencia,Barcelona
-38,24/05 02:00,Girona,Elche CF
+matchday,utc_date,date_str,status,home_team,away_team,real_result
+20,2026-01-16T20:00:00Z,16/01 21:00,FINISHED,Espanyol,Girona,0-2
+20,2026-01-17T13:00:00Z,17/01 14:00,FINISHED,Real Madrid,Levante,2-0
+20,2026-01-17T15:15:00Z,17/01 16:15,FINISHED,Mallorca,Athletic Bilbao,3-2
+20,2026-01-17T17:30:00Z,17/01 18:30,FINISHED,Osasuna,Real Oviedo,3-2
+20,2026-01-17T20:00:00Z,17/01 21:00,FINISHED,Real Betis,Villarreal,2-0
+20,2026-01-18T13:00:00Z,18/01 14:00,FINISHED,Getafe,Valencia,0-1
+20,2026-01-18T15:15:00Z,18/01 16:15,FINISHED,Atletico Madrid,Alaves,1-0
+20,2026-01-18T17:30:00Z,18/01 18:30,FINISHED,Celta de Vigo,Rayo Vallecano,3-0
+20,2026-01-18T20:00:00Z,18/01 21:00,FINISHED,Real Sociedad,Barcelona,2-1
+20,2026-01-19T20:00:00Z,19/01 21:00,FINISHED,Elche,Sevilla,2-2
+21,2026-01-23T20:00:00Z,23/01 21:00,TIMED,Levante,Elche,-
+21,2026-01-24T13:00:00Z,24/01 14:00,TIMED,Rayo Vallecano,Osasuna,-
+21,2026-01-24T15:15:00Z,24/01 16:15,TIMED,Valencia,Espanyol,-
+21,2026-01-24T17:30:00Z,24/01 18:30,TIMED,Sevilla,Athletic Bilbao,-
+21,2026-01-24T20:00:00Z,24/01 21:00,TIMED,Villarreal,Real Madrid,-
+21,2026-01-25T13:00:00Z,25/01 14:00,TIMED,Atletico Madrid,Mallorca,-
+21,2026-01-25T15:15:00Z,25/01 16:15,TIMED,Barcelona,Real Oviedo,-
+21,2026-01-25T17:30:00Z,25/01 18:30,TIMED,Real Sociedad,Celta de Vigo,-
+21,2026-01-25T20:00:00Z,25/01 21:00,TIMED,Alaves,Real Betis,-
+21,2026-01-26T20:00:00Z,26/01 21:00,TIMED,Girona,Getafe,-

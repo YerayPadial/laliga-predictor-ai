@@ -74,50 +74,30 @@ def scrape_historical_results(driver) -> pd.DataFrame:
         match_rows = driver.find_elements(By.CSS_SELECTOR, "div.event__match")
         logger.info(f"Se encontraron {len(match_rows)} elementos de partido. Procesando...")
 
-        # --- CAMBIO IMPORTANTE AQUÍ ---
-        for i, row in enumerate(match_rows):
+        for row in match_rows:
             try:
-                # Usamos innerText porque .text a veces falla en headless
                 raw_text = row.get_attribute('innerText')
-                text_lines = raw_text.split('\n')
+                # Limpiamos líneas vacías y espacios
+                text_lines = [line.strip() for line in raw_text.split('\n') if line.strip()]
                 
-                # DEBUG: Imprimimos el primer partido para ver qué formato tiene
-                if i == 0:
-                    logger.info(f"DEBUG - Texto crudo del primer partido: {text_lines}")
-
-                # Buscamos la línea que tiene el marcador. 
-                # Flashscore suele poner: "Real Madrid", "2", "-", "1", "Barcelona" (todo separado)
-                # O a veces "Real Madrid", "2-1", "Barcelona"
+                # LA ESTRUCTURA RECIBIDA ES:
+                # [0] Fecha, [1] Local, [2] Visitante, [3] Gol Local, [4] Gol Visitante
                 
-                # Buscamos una linea que tenga numeros y un guion
-                score_line_idx = -1
-                for idx, line in enumerate(text_lines):
-                    # Limpiamos espacios
-                    line = line.strip()
-                    # Verificamos si parece un resultado (ej: "2-1" o "2 - 1")
-                    if '-' in line and any(char.isdigit() for char in line):
-                        score_line_idx = idx
-                        break
-                
-                if score_line_idx > 0:
-                    # Asumimos que el local está antes y el visitante después
-                    # A veces hay lineas intermedias (estado del partido), asi que cogemos indices relativos
-                    home_team = clean_team_name(text_lines[score_line_idx - 1])
-                    away_team = clean_team_name(text_lines[score_line_idx + 1])
+                # Verificamos que tenga al menos 5 líneas y que las líneas 3 y 4 sean números
+                if len(text_lines) >= 5:
+                    score_home_str = text_lines[3]
+                    score_away_str = text_lines[4]
                     
-                    score_parts = text_lines[score_line_idx].split('-')
-                    
-                    # Verificación extra para asegurar que tenemos dos numeros
-                    if len(score_parts) == 2:
+                    # Verificamos si son dígitos (para evitar leer partidos suspendidos o textos raros)
+                    if score_home_str.isdigit() and score_away_str.isdigit():
                         data.append({
                             "date": datetime.now().strftime("%Y-%m-%d"), 
-                            "home_team": home_team,
-                            "away_team": away_team,
-                            "home_score": int(score_parts[0].strip()),
-                            "away_score": int(score_parts[1].strip())
+                            "home_team": clean_team_name(text_lines[1]),
+                            "away_team": clean_team_name(text_lines[2]),
+                            "home_score": int(score_home_str),
+                            "away_score": int(score_away_str)
                         })
-            except Exception as e:
-                # Si falla uno, seguimos al siguiente, pero imprimimos error leve
+            except Exception: 
                 continue
             
     except Exception as e:
@@ -135,7 +115,7 @@ def main():
             df_hist.to_csv(os.path.join(DATA_DIR, "laliga_results_raw.csv"), index=False)
             logger.info(f"Historial actualizado: {len(df_hist)} registros.")
         else:
-            logger.warning("⚠️ El scraper terminó pero NO encontró ningún partido (0 registros).")
+            logger.warning("El scraper terminó pero NO encontró ningún partido (0 registros).")
             if os.path.exists("debug_screenshot.png"):
                 logger.info("Hay una captura de pantalla del error disponible en el entorno.")
     finally:

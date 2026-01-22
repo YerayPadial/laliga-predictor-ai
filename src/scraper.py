@@ -88,6 +88,8 @@ def main():
         if not df_hist.empty:
             df_hist.to_csv(os.path.join(DATA_DIR, "laliga_results_raw.csv"), index=False)
             logger.info(f"Historial actualizado: {len(df_hist)} registros.")
+        else:
+            logger.warning("⚠️ El scraper terminó pero NO encontró ningún partido (0 registros).")
     finally:
         driver.quit()
 

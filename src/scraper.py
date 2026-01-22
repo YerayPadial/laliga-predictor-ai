@@ -51,51 +51,77 @@ def scrape_historical_results(driver) -> pd.DataFrame:
     
     try:
         driver.get(url)
-        wait = WebDriverWait(driver, 15) # Aumentamos tiempo de espera
+        wait = WebDriverWait(driver, 15)
 
-        # 1. Intentar cerrar cookies (Es vital para ver el contenido)
+        # 1. Intentar cerrar cookies
         try:
             cookie_btn = wait.until(EC.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler")))
             cookie_btn.click()
             logger.info("Cookies aceptadas.")
-            time.sleep(2) # Pequeña pausa para que desaparezca el banner
+            time.sleep(2)
         except: 
-            logger.info("No se encontró banner de cookies o ya estaba cerrado.")
+            logger.info("No se encontró banner de cookies.")
 
-        # 2. Esperar ESTRICTAMENTE a los partidos (Quitamos la espera del footer)
+        # 2. Esperar a los partidos
         try:
             logger.info("Esperando a que carguen los partidos...")
-            # Buscamos por la clase específica de los partidos de flashscore
             wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.event__match")))
-        except Exception as e:
-            # SI FALLA AQUÍ: Sacamos foto para ver qué pasó
-            logger.error("No cargaron los partidos. Guardando captura de pantalla...")
-            driver.save_screenshot("debug_screenshot.png") # <--- FOTO DEL ERROR
-            # También imprimimos un trozo del HTML para ver si nos bloquearon
-            print(driver.page_source[:1000]) 
+        except Exception:
+            logger.error("No cargaron los partidos.")
             return pd.DataFrame()
         
         # 3. Extraer datos
         match_rows = driver.find_elements(By.CSS_SELECTOR, "div.event__match")
-        logger.info(f"Se encontraron {len(match_rows)} elementos de partido.")
+        logger.info(f"Se encontraron {len(match_rows)} elementos de partido. Procesando...")
 
-        for row in match_rows:
+        # --- CAMBIO IMPORTANTE AQUÍ ---
+        for i, row in enumerate(match_rows):
             try:
-                text = row.text.split('\n')
-                res_idx = next((i for i, x in enumerate(text) if '-' in x and x[0].isdigit()), -1)
-                if res_idx > 0:
-                    data.append({
-                        "date": datetime.now().strftime("%Y-%m-%d"), 
-                        "home_team": clean_team_name(text[res_idx-1]),
-                        "away_team": clean_team_name(text[res_idx+1]),
-                        "home_score": int(text[res_idx].split('-')[0]),
-                        "away_score": int(text[res_idx].split('-')[1])
-                    })
-            except: continue
+                # Usamos innerText porque .text a veces falla en headless
+                raw_text = row.get_attribute('innerText')
+                text_lines = raw_text.split('\n')
+                
+                # DEBUG: Imprimimos el primer partido para ver qué formato tiene
+                if i == 0:
+                    logger.info(f"DEBUG - Texto crudo del primer partido: {text_lines}")
+
+                # Buscamos la línea que tiene el marcador. 
+                # Flashscore suele poner: "Real Madrid", "2", "-", "1", "Barcelona" (todo separado)
+                # O a veces "Real Madrid", "2-1", "Barcelona"
+                
+                # Buscamos una linea que tenga numeros y un guion
+                score_line_idx = -1
+                for idx, line in enumerate(text_lines):
+                    # Limpiamos espacios
+                    line = line.strip()
+                    # Verificamos si parece un resultado (ej: "2-1" o "2 - 1")
+                    if '-' in line and any(char.isdigit() for char in line):
+                        score_line_idx = idx
+                        break
+                
+                if score_line_idx > 0:
+                    # Asumimos que el local está antes y el visitante después
+                    # A veces hay lineas intermedias (estado del partido), asi que cogemos indices relativos
+                    home_team = clean_team_name(text_lines[score_line_idx - 1])
+                    away_team = clean_team_name(text_lines[score_line_idx + 1])
+                    
+                    score_parts = text_lines[score_line_idx].split('-')
+                    
+                    # Verificación extra para asegurar que tenemos dos numeros
+                    if len(score_parts) == 2:
+                        data.append({
+                            "date": datetime.now().strftime("%Y-%m-%d"), 
+                            "home_team": home_team,
+                            "away_team": away_team,
+                            "home_score": int(score_parts[0].strip()),
+                            "away_score": int(score_parts[1].strip())
+                        })
+            except Exception as e:
+                # Si falla uno, seguimos al siguiente, pero imprimimos error leve
+                continue
             
     except Exception as e:
         logger.error(f"Error general scraping: {e}")
-        driver.save_screenshot("debug_crash.png")
         return pd.DataFrame()
         
     return pd.DataFrame(data)

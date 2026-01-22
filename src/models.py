@@ -21,8 +21,8 @@ logger = logging.getLogger(__name__)
 DATA_PATH = "data/training_set.csv"
 MODEL_PATH = "data/model_winner.pkl"
 
+# Carga los datos procesados por el feature_eng y separa las pistas (estadísticas) de la respuesta correcta (quién ganó)
 def load_data(path: str):
-    """Carga el dataset procesado y separa Features (X) de Target (y)."""
     if not os.path.exists(path):
         raise FileNotFoundError(f"No se encontró el archivo {path}. Ejecuta feature_eng.py primero.")
     
@@ -36,7 +36,6 @@ def load_data(path: str):
         'rest_days_home', 
         'rest_days_away', 
         'h2h_home_wins'
-        # Aquí se añadirían 'missing_players_value' si tuviéramos esa fuente activa
     ]
     
     X = df[features]
@@ -47,10 +46,10 @@ def load_data(path: str):
 
 def get_pipeline(model_type: str) -> Pipeline:
     """
-    Fábrica de Pipelines con mejoras para desbalanceo de clases.
+    Fábrica de Pipelines donde se configura para tres tipos de modelos.
     """
     if model_type == 'rf':
-        # CAMBIO CLAVE: balanced_subsample es más agresivo a favor de los empates
+        # balanced_subsample es más agresivo a favor de los empates, lo cual ajusta mejor a los grupos de datos minoritarios en cuanto a balanceo
         clf = RandomForestClassifier(
             random_state=42, 
             class_weight='balanced_subsample', 
@@ -74,13 +73,11 @@ def get_pipeline(model_type: str) -> Pipeline:
         ('clf', clf)
     ])
 
+# f. que hace un torneo de modelos, probando varios algoritmos y parámetros, y el que gane lo guarda como el modelo final.
 def train_and_evaluate():
     try:
         X, y = load_data(DATA_PATH)
-        
-        # Split Train/Test
-        # Nota de Arquitecto: En series temporales estrictas se usa TimeSeriesSplit,
-        # pero para esta versión MVP usamos train_test_split aleatorio.
+        # divido en train y test, siendo el test un 20 % de los datos
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         
         # Definir el "Torneo de Modelos"
@@ -111,15 +108,18 @@ def train_and_evaluate():
             }
         ]
         
+        # el ganador es el que tiene mas precision en el set de test
         best_overall_model = None
-        best_overall_score = -1
+        best_overall_score = -1 
         
         logger.info("Iniciando Torneo de Modelos (GridSearchCV)...")
         
+        # recorro cada modelo y su configuración hasta encontrar el mejor
         for config in model_configs:
             print(f"\n--- Evaluando: {config['name']} ---")
             
-            # Grid Search con Cross Validation (3-folds)
+            # Grid Search con Cross Validation para encontrar los mejores hiperparámetros,
+            # con cv = 3 evitamos que fue suerte , porque entrenamos cada combinacion 3 veces
             grid = GridSearchCV(config['pipeline'], config['params'], cv=3, scoring='accuracy', n_jobs=-1)
             grid.fit(X_train, y_train)
             
@@ -132,7 +132,7 @@ def train_and_evaluate():
             print("Matriz de Confusión:")
             print(confusion_matrix(y_test, y_pred))
             
-            # Lógica de "Rey de la Colina"
+            # Lógica de "Rey de la Colina" donde el mejor modelo se guarda y se compara con el siguiente
             if acc > best_overall_score:
                 best_overall_score = acc
                 best_overall_model = grid.best_estimator_
@@ -141,7 +141,7 @@ def train_and_evaluate():
         # Guardar el ganador absoluto
         if best_overall_model:
             joblib.dump(best_overall_model, MODEL_PATH)
-            logger.info(f"\n✅ GANADOR GUARDADO: {MODEL_PATH}")
+            logger.info(f"\nGANADOR GUARDADO: {MODEL_PATH}")
             logger.info(f"Modelo: {best_overall_model.named_steps['clf']}")
             logger.info(f"Accuracy Final: {best_overall_score:.4f}")
             

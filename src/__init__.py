@@ -1,4 +1,4 @@
-# Esto permite que desde app.py puedas hacer:
+# Esto permite que desde app.py poder hacer:
 # from src import prepare_data, train_and_evaluate
 
 from .feature_eng import prepare_data

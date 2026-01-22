@@ -1,7 +1,7 @@
 name: LaLiga Data Pipeline & Training
 
 # A. Trigger: Cron Schedule
-# Ejecutar Martes y Viernes a las 8:00 AM UTC
+# se ejecuta una vez al día después de comer a las 14 o 13 horas
 on:
   schedule:
     - cron: '0 12 * * *'
@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.9'
 
-      # 3. Instalar Chrome y Chromedriver (Necesario para Selenium Headless)
+      # 3. Instalar Chrome y Chromedriver (Necesario para Selenium Headless (sin gui), para scrapear Flashcore)
       - name: Install Chrome dependencies
         run: |
           sudo apt-get update

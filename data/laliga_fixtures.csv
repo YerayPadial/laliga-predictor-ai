@@ -199,7 +199,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 20,2026-01-18T17:30:00Z,18/01 18:30,FINISHED,Celta de Vigo,Rayo Vallecano,3-0
 20,2026-01-18T20:00:00Z,18/01 21:00,FINISHED,Real Sociedad,Barcelona,2-1
 20,2026-01-19T20:00:00Z,19/01 21:00,FINISHED,Elche,Sevilla,2-2
-21,2026-01-23T20:00:00Z,23/01 21:00,TIMED,Levante,Elche,-
+21,2026-01-23T20:00:00Z,23/01 21:00,FINISHED,Levante,Elche,3-2
 21,2026-01-24T13:00:00Z,24/01 14:00,TIMED,Rayo Vallecano,Osasuna,-
 21,2026-01-24T15:15:00Z,24/01 16:15,TIMED,Valencia,Espanyol,-
 21,2026-01-24T17:30:00Z,24/01 18:30,TIMED,Sevilla,Athletic Bilbao,-

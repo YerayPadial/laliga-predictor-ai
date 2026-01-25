@@ -200,10 +200,10 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 20,2026-01-18T20:00:00Z,18/01 21:00,FINISHED,Real Sociedad,Barcelona,2-1
 20,2026-01-19T20:00:00Z,19/01 21:00,FINISHED,Elche,Sevilla,2-2
 21,2026-01-23T20:00:00Z,23/01 21:00,FINISHED,Levante,Elche,3-2
-21,2026-01-24T13:00:00Z,24/01 14:00,TIMED,Rayo Vallecano,Osasuna,-
-21,2026-01-24T15:15:00Z,24/01 16:15,TIMED,Valencia,Espanyol,-
-21,2026-01-24T17:30:00Z,24/01 18:30,TIMED,Sevilla,Athletic Bilbao,-
-21,2026-01-24T20:00:00Z,24/01 21:00,TIMED,Villarreal,Real Madrid,-
+21,2026-01-24T13:00:00Z,24/01 14:00,FINISHED,Rayo Vallecano,Osasuna,1-3
+21,2026-01-24T15:15:00Z,24/01 16:15,FINISHED,Valencia,Espanyol,3-2
+21,2026-01-24T17:30:00Z,24/01 18:30,FINISHED,Sevilla,Athletic Bilbao,2-1
+21,2026-01-24T20:00:00Z,24/01 21:00,FINISHED,Villarreal,Real Madrid,0-2
 21,2026-01-25T13:00:00Z,25/01 14:00,TIMED,Atletico Madrid,Mallorca,-
 21,2026-01-25T15:15:00Z,25/01 16:15,TIMED,Barcelona,Real Oviedo,-
 21,2026-01-25T17:30:00Z,25/01 18:30,TIMED,Real Sociedad,Celta de Vigo,-

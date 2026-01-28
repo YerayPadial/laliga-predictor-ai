@@ -191,16 +191,30 @@ def prepare_data(input_path="data/laliga_advanced_stats.csv", train_mode=True):
         
     return final_df
 
-def prepare_upcoming_matches(fixtures_path, history_path="data/laliga_advanced_stats.csv"):
+def prepare_upcoming_matches(fixtures_input, history_path="data/laliga_advanced_stats.csv"):
     """
     Prepara los partidos de la próxima jornada (fixtures) pegándoles 
     las estadísticas históricas (history) para que la IA pueda predecir.
+    Acepta tanto una ruta de archivo (str) como un DataFrame ya cargado.
     """
-    # 1. Validar que existan los archivos
-    if not os.path.exists(fixtures_path) or not os.path.exists(history_path):
+    # 1. Validar Historial (Siempre es una ruta)
+    if not os.path.exists(history_path):
         return pd.DataFrame(), pd.DataFrame()
     
-    # 2. Cargar Histórico (La "Enciclopedia")
+    # 2. Gestionar el input de Fixtures (Puede ser ruta o DataFrame)
+    if isinstance(fixtures_input, str):
+        # Si es texto (ruta), verificamos que exista y cargamos
+        if not os.path.exists(fixtures_input):
+            return pd.DataFrame(), pd.DataFrame()
+        fixtures_df = pd.read_csv(fixtures_input)
+    elif isinstance(fixtures_input, pd.DataFrame):
+        # Si ya es un DataFrame, lo usamos directamente
+        fixtures_df = fixtures_input.copy()
+    else:
+        # Si no es ni lo uno ni lo otro, error
+        return pd.DataFrame(), pd.DataFrame()
+
+    # 3. Cargar Histórico (La "Enciclopedia")
     history = pd.read_csv(history_path)
     history = normalize_names(history)
     history['date'] = pd.to_datetime(history['date'])
@@ -211,12 +225,7 @@ def prepare_upcoming_matches(fixtures_path, history_path="data/laliga_advanced_s
     # Nos quedamos con la ÚLTIMA fila de stats de cada equipo (su "forma" actual)
     latest_stats = stats.sort_values('date').groupby('team').tail(1).set_index('team')
     
-    # 3. Cargar Calendario Futuro (Lo que bajó api_client.py)
-    if isinstance(fixtures_path, pd.DataFrame):
-        fixtures_df = fixtures_path
-    else:
-        fixtures_df = pd.read_csv(fixtures_path)
-        
+    # Normalizar nombres del calendario
     fixtures_df = normalize_names(fixtures_df)
     
     predict_data = []

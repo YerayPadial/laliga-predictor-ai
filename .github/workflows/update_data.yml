@@ -1,64 +1,58 @@
 name: LaLiga Data Pipeline & Training
 
 # A. Trigger: Cron Schedule
-# se ejecuta una vez al día después de comer a las 14 o 13 horas
+# Se ejecuta una vez al día a las 11:00 UTC (12:00/12:00 de España)
 on:
   schedule:
     - cron: '0 12 * * *'
-  # Permite ejecución manual desde GitHub para pruebas
+  # Permite ejecución manual desde GitHub ("Run workflow")
   workflow_dispatch:
 
 jobs:
   build-and-update:
-    runs-on: ubuntu-latest # Setup: Ubuntu environment
+    runs-on: ubuntu-latest # Entorno Linux estándar
 
     steps:
-      # 1. Check out del repositorio
+      # 1. Descargar el código del repositorio
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Configurar Python 3.9
-      - name: Set up Python 3.9
+      # 2. Configurar Python 3.10 (Versión estable y moderna)
+      - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
-      # 3. Instalar Chrome y Chromedriver (Necesario para Selenium Headless (sin gui), para scrapear Flashcore)
-      - name: Install Chrome dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          sudo apt-get install -y xvfb
-
-      # 4. Instalar librerías Python
+      # 3. Instalar librerías (pandas, scikit-learn, requests, etc.)
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-     # 5. Ejecutar Scrapers (Arquitectura Híbrida)
+      # 4. EJECUTAR PIPELINE DE DATOS
       
-      # 5.1 Historial (Flashscore - Selenium)
-      - name: Run Scraper (History - Flashscore)
-        run: python src/scraper.py
+      # 4.1. Descargar Histórico (Football-Data 5 años)
+      # Sustituye al viejo scraper de Flashscore
+      - name: 📥 Download Historical Stats
+        run: python src/stats_scraper.py
         
-      # 5.2 Calendario (API - Requests)
-      - name: Run API Client (Fixtures - Football-Data)
+      # 4.2. Descargar Calendario Futuro (API Oficial)
+      - name: 📅 Download Upcoming Fixtures
         run: python src/api_client.py
 
-     # 6. Procesar Datos
-      - name: Run Feature Engineering
-        run: python src/feature_eng.py
-
-      # 7. Entrenar
-      - name: Train Models
+      # 5. ENTRENAMIENTO DE IA
+      # Esto ejecuta feature_eng internamente y genera el modelo .pkl
+      - name: 🧠 Train AI Model
         run: python src/models.py
 
-     # 8. Guardar
+      # 6. GUARDAR CAMBIOS EN EL REPO
+      # Si hay datos nuevos o el modelo ha mejorado, se hace commit
       - name: Commit and Push changes
         run: |
           git config --global user.name "LaLiga AI Bot"
           git config --global user.email "bot@laliga-ai.com"
+          # Añadimos la carpeta de datos y modelos
           git add data/
-          git commit -m "Auto-update: Match results, fixtures and model" || echo "No changes to commit"
+          git add models/
+          git commit -m "Auto-update: Match results, fixtures and model 🤖" || echo "No changes to commit"
           git push

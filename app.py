@@ -45,9 +45,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Rutas actualizadas
-MODEL_PATH = 'models/laliga_model.pkl'  # Ojo: Ahora lo guardamos en models/
+MODEL_PATH = 'data/model_winner.pkl'
 FIXTURES_PATH = 'data/laliga_fixtures.csv'
-HISTORY_PATH = 'data/laliga_advanced_stats.csv' # El nuevo archivo maestro
+HISTORY_PATH = 'data/laliga_advanced_stats.csv'
 
 def load_resources():
     # 1. Cargar Modelo

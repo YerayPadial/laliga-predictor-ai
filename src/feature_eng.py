@@ -99,7 +99,7 @@ def calculate_rolling_stats(df, window=5):
     stats_df['points'] = np.where(stats_df['goals_for'] > stats_df['goals_against'], 3,
                                   np.where(stats_df['goals_for'] == stats_df['goals_against'], 1, 0))
     
-    # Attack Power (Fórmula Experta: Golesx3 + Tirosx1 + Cornersx0.5)
+    # Attack Power (NOMBRE CORRECTO: attack_power)
     stats_df['attack_power'] = (stats_df['goals_for'] * 3.0) + (stats_df['shots'] * 1.0) + (stats_df['corners'] * 0.5)
     
     # Medias Móviles (EMA)
@@ -109,11 +109,12 @@ def calculate_rolling_stats(df, window=5):
             lambda x: x.shift(1).ewm(span=window, min_periods=1).mean()
         ).fillna(0)
     
-    # Racha (Suma de puntos últimos 3 partidos)
+    # Racha
     stats_df['form_streak'] = stats_df.groupby('team')['points'].transform(
         lambda x: x.shift(1).rolling(window=3, min_periods=1).sum()
     ).fillna(0)
     
+    # Devuelve avg_attack_power (NO strength)
     return stats_df[['date', 'team', 'avg_points', 'avg_goals_for', 'avg_goals_against', 'avg_attack_power', 'form_streak']]
 
 def prepare_data(input_path="data/laliga_advanced_stats.csv", train_mode=True):

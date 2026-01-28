@@ -2,12 +2,16 @@ import streamlit as st
 import pandas as pd
 import joblib
 import os
+import matplotlib.pyplot as plt
+
+# Importamos la función de predicción
+# Asegúrate de que src.feature_eng tiene prepare_upcoming_matches
 from src.feature_eng import prepare_upcoming_matches
 
 # Configuración Inicial
 st.set_page_config(page_title="La Quiniela AI", page_icon="⚽", layout="centered")
 
-# --- ESTILOS CSS ---
+# --- ESTILOS CSS (Tu diseño original intacto) ---
 st.markdown("""
 <style>
     .match-card {
@@ -40,119 +44,136 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-MODEL_PATH = 'data/model_winner.pkl'
+# Rutas actualizadas
+MODEL_PATH = 'models/laliga_model.pkl'  # Ojo: Ahora lo guardamos en models/
 FIXTURES_PATH = 'data/laliga_fixtures.csv'
-RAW_DATA_PATH = 'data/laliga_results_raw.csv'
+HISTORY_PATH = 'data/laliga_advanced_stats.csv' # El nuevo archivo maestro
 
-def load_model():
-    if os.path.exists(MODEL_PATH): return joblib.load(MODEL_PATH)
-    return None
+def load_resources():
+    # 1. Cargar Modelo
+    if not os.path.exists(MODEL_PATH):
+        st.error("❌ No se encontró el modelo. Ejecuta src/models.py")
+        return None, None
+    model = joblib.load(MODEL_PATH)
+
+    # 2. Cargar Calendario
+    if not os.path.exists(FIXTURES_PATH):
+        st.error("❌ No hay calendario. Ejecuta src/api_client.py")
+        return model, pd.DataFrame()
+    
+    fixtures = pd.read_csv(FIXTURES_PATH)
+    return model, fixtures
 
 def main():
-    st.title("⚽ La Quiniela IA")
+    st.title("⚽ La Quiniela IA (Versión Experta)")
     
-    model = load_model()
-    if not model:
-        st.error("⚠️ Modelo no encontrado.")
+    model, df_fixtures = load_resources()
+    if not model or df_fixtures.empty:
         return
 
-    # 1. Cargar Datos
-    X_pred, df_info = prepare_upcoming_matches(FIXTURES_PATH, RAW_DATA_PATH)
+    # Preparar datos para la IA
+    # Le pasamos el calendario y el historial para que calcule rachas y H2H
+    try:
+        X_pred = prepare_upcoming_matches(df_fixtures, HISTORY_PATH)
+    except Exception as e:
+        st.error(f"Error procesando datos: {e}")
+        return
 
     if X_pred.empty:
-        st.info("📅 Calendario actualizado. Esperando datos.")
+        st.info("📅 Calendario actualizado, pero no hay datos suficientes para predecir (quizás inicio de temporada).")
         return
 
-    # 2. Resetear índices
-    df_info = df_info.reset_index(drop=True)
-    
-    # 3. Predecir
+    # Predecir
     predictions = model.predict(X_pred)
     probs = model.predict_proba(X_pred)
 
-    # --- LÓGICA INTELIGENTE DE JORNADA ---
-    # Detectamos la jornada basándonos en el TIEMPO, no en el orden numérico.
-    # Así saltamos partidos aplazados antiguos.
+    # --- LÓGICA DE JORNADA ---
+    # Igual que antes: Buscamos la próxima jornada activa
+    df_fixtures['matchday'] = pd.to_numeric(df_fixtures['matchday'], errors='coerce').fillna(0).astype(int)
+    pending = df_fixtures[df_fixtures['status'] != 'FINISHED']
     
-    if 'matchday' in df_info.columns and 'utc_date' in df_info.columns:
-        df_info['matchday'] = pd.to_numeric(df_info['matchday'], errors='coerce').fillna(0).astype(int)
-        
-        # 1. Filtramos todos los partidos que NO han terminado (Pendientes o En Juego)
-        pending_matches = df_info[df_info['status'] != 'FINISHED'].copy()
-        
-        if not pending_matches.empty:
-            # 2. Ordenamos estos partidos por FECHA REAL (utc_date)
-            # Esto pone el partido de "mañana" primero, aunque sea J21,
-            # y el aplazado de "dentro de un mes" (J19) al final.
-            pending_matches = pending_matches.sort_values('utc_date')
-            
-            # 3. La jornada del partido más inmediato es la que mostramos
-            active_matchday = pending_matches.iloc[0]['matchday']
-        else:
-            # Si no queda nada pendiente en toda la liga, mostramos la última jornada
-            active_matchday = df_info['matchday'].max()
+    if not pending.empty:
+        # Ordenar por fecha real para encontrar el "próximo partido" real
+        pending = pending.sort_values('utc_date')
+        active_matchday = pending.iloc[0]['matchday']
     else:
-        active_matchday = 1
+        active_matchday = df_fixtures['matchday'].max()
 
-    # Filtramos la vista
-    matches_mask = df_info['matchday'] == active_matchday
-    current_matches = df_info[matches_mask]
+    # Filtramos solo los partidos de esa jornada que la IA ha podido procesar
+    # OJO: X_pred puede tener menos filas que df_fixtures si faltan datos de algún equipo
+    # Necesitamos alinear las predicciones con los partidos originales
+    
+    # Creamos una lista visual solo con los partidos que están en X_pred (los que tienen predicción)
+    # X_pred conserva el índice original del DataFrame de fixtures, así que usamos eso para unir
+    
+    indices_predichos = X_pred.index
+    matches_to_show = df_fixtures.loc[indices_predichos]
+    
+    # Filtramos por jornada activa
+    matches_to_show = matches_to_show[matches_to_show['matchday'] == active_matchday]
 
-    # Título
+    if matches_to_show.empty:
+        st.info(f"No hay predicciones disponibles para la Jornada {active_matchday}.")
+        return
+
     st.markdown(f"<h3 style='text-align:center; margin-bottom: 20px;'>Jornada {active_matchday}</h3>", unsafe_allow_html=True)
 
-    if current_matches.empty:
-        st.info("No hay partidos para mostrar en esta jornada.")
-
-    # --- RENDERIZADO ---
-    for local_idx, row in current_matches.iterrows():
-        pred = predictions[local_idx]
-        prob = probs[local_idx]
+    # --- RENDERIZADO VISUAL ---
+    # Iteramos por los partidos filtrados
+    for idx, row in matches_to_show.iterrows():
+        # Buscamos la predicción correspondiente a este índice
+        # Como X_pred y matches_to_show comparten índice, podemos buscar por posición relativa
+        
+        # Truco: Encontrar en qué posición de X_pred está este índice
+        loc_idx = X_pred.index.get_loc(idx)
+        
+        pred = predictions[loc_idx]
+        prob = probs[loc_idx]
+        
         p1, pX, p2 = prob[0]*100, prob[1]*100, prob[2]*100
         winner_code = "1" if pred == 0 else ("X" if pred == 1 else "2")
         confidence = max(prob) * 100
         color_class = f"pred-{winner_code}"
         
-        # Estado
         status = row.get('status', 'SCHEDULED')
         status_html = ""
         result_display = "vs"
         
         if status in ['IN_PLAY', 'PAUSED', 'LIVE']:
-            status_html = f"<span class='status-badge status-LIVE'>EN JUEGO</span>"
+            status_html = "<span class='status-badge status-LIVE'>EN JUEGO</span>"
         elif status == 'FINISHED':
-            status_html = f"<span class='status-badge status-FINISHED'>FINALIZADO</span>"
+            status_html = "<span class='status-badge status-FINISHED'>FINALIZADO</span>"
             result_display = row.get('real_result', 'vs')
 
         st.markdown(f"""
-<div class="match-card">
-<div style="text-align:center; color:#aaa; font-size:0.8em; margin-bottom:5px;">
-{row['date_str']} {status_html}
-</div>
-<div class="team-row">
-<div style="flex:1; text-align:right; font-weight:bold; font-size:1.1em;">{row['home_team']}</div>
-<div class="vs" style="color:white; font-size:1.2em;">{result_display}</div>
-<div style="flex:1; text-align:left; font-weight:bold; font-size:1.1em;">{row['away_team']}</div>
-</div>
+        <div class="match-card">
+            <div style="text-align:center; color:#aaa; font-size:0.8em; margin-bottom:5px;">
+                {row['date_str']} {status_html}
+            </div>
+            <div class="team-row">
+                <div style="flex:1; text-align:right; font-weight:bold; font-size:1.1em;">{row['home_team']}</div>
+                <div class="vs" style="color:white; font-size:1.2em;">{result_display}</div>
+                <div style="flex:1; text-align:left; font-weight:bold; font-size:1.1em;">{row['away_team']}</div>
+            </div>
 
-<div style="display:flex; justify-content:center; align-items:center; gap:10px; margin-top:10px;">
-<span style="font-size:0.8em; color:#bbb;">IA:</span>
-<div class="pred-badge {color_class}">{winner_code}</div>
-<span style="font-size:0.8em; color:#ccc;">({confidence:.0f}%)</span>
-</div>
+            <div style="display:flex; justify-content:center; align-items:center; gap:10px; margin-top:10px;">
+                <span style="font-size:0.8em; color:#bbb;">IA:</span>
+                <div class="pred-badge {color_class}">{winner_code}</div>
+                <span style="font-size:0.8em; color:#ccc;">({confidence:.0f}%)</span>
+            </div>
 
-<div class="prob-container">
-<div style="width:{p1}%; background-color:#4CAF50;" title="Local: {p1:.0f}%"></div>
-<div style="width:{pX}%; background-color:#FFC107;" title="Empate: {pX:.0f}%"></div>
-<div style="width:{p2}%; background-color:#F44336;" title="Visitante: {p2:.0f}%"></div>
-</div>
-<div class="prob-labels">
-<span>1: {p1:.0f}%</span>
-<span>X: {pX:.0f}%</span>
-<span>2: {p2:.0f}%</span>
-</div>
-</div>
-""", unsafe_allow_html=True)
+            <div class="prob-container">
+                <div style="width:{p1}%; background-color:#4CAF50;" title="Local: {p1:.0f}%"></div>
+                <div style="width:{pX}%; background-color:#FFC107;" title="Empate: {pX:.0f}%"></div>
+                <div style="width:{p2}%; background-color:#F44336;" title="Visitante: {p2:.0f}%"></div>
+            </div>
+            <div class="prob-labels">
+                <span>1: {p1:.0f}%</span>
+                <span>X: {pX:.0f}%</span>
+                <span>2: {p2:.0f}%</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

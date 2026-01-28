@@ -191,6 +191,82 @@ def prepare_data(input_path="data/laliga_advanced_stats.csv", train_mode=True):
         
     return final_df
 
+def prepare_upcoming_matches(fixtures_path, history_path="data/laliga_advanced_stats.csv"):
+    """
+    Prepara los partidos de la próxima jornada (fixtures) pegándoles 
+    las estadísticas históricas (history) para que la IA pueda predecir.
+    """
+    # 1. Validar que existan los archivos
+    if not os.path.exists(fixtures_path) or not os.path.exists(history_path):
+        return pd.DataFrame(), pd.DataFrame()
+    
+    # 2. Cargar Histórico (La "Enciclopedia")
+    history = pd.read_csv(history_path)
+    history = normalize_names(history)
+    history['date'] = pd.to_datetime(history['date'])
+    
+    # Calcular stats actuales hasta el día de hoy
+    stats = calculate_rolling_stats(history)
+    
+    # Nos quedamos con la ÚLTIMA fila de stats de cada equipo (su "forma" actual)
+    latest_stats = stats.sort_values('date').groupby('team').tail(1).set_index('team')
+    
+    # 3. Cargar Calendario Futuro (Lo que bajó api_client.py)
+    if isinstance(fixtures_path, pd.DataFrame):
+        fixtures_df = fixtures_path
+    else:
+        fixtures_df = pd.read_csv(fixtures_path)
+        
+    fixtures_df = normalize_names(fixtures_df)
+    
+    predict_data = []
+    
+    # 4. Cruzar datos: Para cada partido futuro, buscamos cómo vienen los equipos
+    for idx, row in fixtures_df.iterrows():
+        home = row['home_team']
+        away = row['away_team']
+        
+        # Si un equipo es nuevo y no tiene historia, no podemos predecir
+        if home not in latest_stats.index or away not in latest_stats.index:
+            # Añadimos fila vacía para mantener el índice alineado
+            predict_data.append({}) 
+            continue
+            
+        h_stats = latest_stats.loc[home]
+        a_stats = latest_stats.loc[away]
+        
+        # Simular H2H
+        dummy_row = {'date': datetime.now(), 'home_team': home, 'away_team': away}
+        h2h = get_h2h_balance(dummy_row, history)
+        
+        # Construir la fila exacta que necesita la IA
+        match_features = {
+            'home_avg_points': h_stats['avg_points'],
+            'away_avg_points': a_stats['avg_points'],
+            'home_avg_attack_strength': h_stats['avg_attack_strength'],
+            'away_avg_attack_strength': a_stats['avg_attack_strength'],
+            'home_form_streak': h_stats['form_streak'],
+            'away_form_streak': a_stats['form_streak'],
+            'home_rest_days': 7, # Asumimos descanso estándar
+            'away_rest_days': 7,
+            'h2h_balance': h2h,
+            'diff_points': h_stats['avg_points'] - a_stats['avg_points'],
+            'diff_attack': h_stats['avg_attack_strength'] - a_stats['avg_attack_strength'],
+            'diff_rest': 0
+        }
+        predict_data.append(match_features)
+        
+    # Crear DataFrame y limpiar filas vacías si hubo equipos desconocidos
+    X_pred = pd.DataFrame(predict_data)
+    
+    # Devolvemos X_pred (para la IA) y fixtures_df (para mostrar en pantalla)
+    # Es vital que tengan el mismo número de filas, por eso rellenamos con {} arriba
+    if not X_pred.empty:
+        valid_indices = X_pred.dropna().index
+        return X_pred.loc[valid_indices], fixtures_df.loc[valid_indices]
+    
+    return pd.DataFrame(), pd.DataFrame()
+
 if __name__ == "__main__":
     # Solo para probar que no explota
     df = prepare_data(train_mode=True)

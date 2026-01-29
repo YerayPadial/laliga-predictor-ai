@@ -99,7 +99,7 @@ def calculate_rolling_stats(df, window=5):
     stats_df['points'] = np.where(stats_df['goals_for'] > stats_df['goals_against'], 3,
                                   np.where(stats_df['goals_for'] == stats_df['goals_against'], 1, 0))
     
-    # Attack Power (NOMBRE CORRECTO: attack_power)
+    # Attack Power ( attack_power)
     stats_df['attack_power'] = (stats_df['goals_for'] * 3.0) + (stats_df['shots'] * 1.0) + (stats_df['corners'] * 0.5)
     
     # Medias Móviles (EMA)
@@ -253,15 +253,15 @@ def prepare_upcoming_matches(fixtures_input, history_path="data/laliga_advanced_
         match_features = {
             'home_avg_points': h_stats['avg_points'],
             'away_avg_points': a_stats['avg_points'],
-            'home_avg_attack_strength': h_stats['avg_attack_strength'],
-            'away_avg_attack_strength': a_stats['avg_attack_strength'],
+            'home_avg_attack_power': h_stats['avg_attack_power'], 
+            'away_avg_attack_power': a_stats['avg_attack_power'], 
             'home_form_streak': h_stats['form_streak'],
             'away_form_streak': a_stats['form_streak'],
-            'home_rest_days': 7, # Asumimos descanso estándar
+            'home_rest_days': 7,
             'away_rest_days': 7,
             'h2h_balance': h2h,
             'diff_points': h_stats['avg_points'] - a_stats['avg_points'],
-            'diff_attack': h_stats['avg_attack_strength'] - a_stats['avg_attack_strength'],
+            'diff_attack': h_stats['avg_attack_power'] - a_stats['avg_attack_power'],
             'diff_rest': 0
         }
         predict_data.append(match_features)

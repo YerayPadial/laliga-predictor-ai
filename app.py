@@ -148,34 +148,34 @@ def main():
             result_display = row.get('real_result', 'vs')
 
         st.markdown(f"""
-        <div class="match-card">
-            <div style="text-align:center; color:#aaa; font-size:0.8em; margin-bottom:5px;">
-                {row['date_str']} {status_html}
-            </div>
-            <div class="team-row">
-                <div style="flex:1; text-align:right; font-weight:bold; font-size:1.1em;">{row['home_team']}</div>
-                <div class="vs" style="color:white; font-size:1.2em;">{result_display}</div>
-                <div style="flex:1; text-align:left; font-weight:bold; font-size:1.1em;">{row['away_team']}</div>
-            </div>
-
-            <div style="display:flex; justify-content:center; align-items:center; gap:10px; margin-top:10px;">
-                <span style="font-size:0.8em; color:#bbb;">IA:</span>
-                <div class="pred-badge {color_class}">{winner_code}</div>
-                <span style="font-size:0.8em; color:#ccc;">({confidence:.0f}%)</span>
-            </div>
-
-            <div class="prob-container">
-                <div style="width:{p1}%; background-color:#4CAF50;" title="Local: {p1:.0f}%"></div>
-                <div style="width:{pX}%; background-color:#FFC107;" title="Empate: {pX:.0f}%"></div>
-                <div style="width:{p2}%; background-color:#F44336;" title="Visitante: {p2:.0f}%"></div>
-            </div>
-            <div class="prob-labels">
-                <span>1: {p1:.0f}%</span>
-                <span>X: {pX:.0f}%</span>
-                <span>2: {p2:.0f}%</span>
-            </div>
+    <div class="match-card">
+        <div style="text-align:center; color:#aaa; font-size:0.8em; margin-bottom:5px;">
+        {row['date_str']} {status_html}
         </div>
-        """, unsafe_allow_html=True)
+        <div class="team-row">
+        <div style="flex:1; text-align:right; font-weight:bold; font-size:1.1em;">{row['home_team']}</div>
+        <div class="vs" style="color:white; font-size:1.2em;">{result_display}</div>
+        <div style="flex:1; text-align:left; font-weight:bold; font-size:1.1em;">{row['away_team']}</div>
+        </div>
+
+        <div style="display:flex; justify-content:center; align-items:center; gap:10px; margin-top:10px;">
+        <span style="font-size:0.8em; color:#bbb;">IA:</span>
+        <div class="pred-badge {color_class}">{winner_code}</div>
+        <span style="font-size:0.8em; color:#ccc;">({confidence:.0f}%)</span>
+        </div>
+
+        <div class="prob-container">
+        <div style="width:{p1}%; background-color:#4CAF50;" title="Local: {p1:.0f}%"></div>
+        <div style="width:{pX}%; background-color:#FFC107;" title="Empate: {pX:.0f}%"></div>
+        <div style="width:{p2}%; background-color:#F44336;" title="Visitante: {p2:.0f}%"></div>
+        </div>
+        <div class="prob-labels">
+        <span>1: {p1:.0f}%</span>
+        <span>X: {pX:.0f}%</span>
+        <span>2: {p2:.0f}%</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

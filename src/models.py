@@ -57,16 +57,15 @@ def train_and_evaluate():
         'min_samples_leaf': [1, 2, 4]           # Evitar reglas demasiado específicas
     }
 
-    # Modelo base
+    # Modelo base que aprende de sus errores, aprende de cada arbol de manera secuencial
     gbm = GradientBoostingClassifier(random_state=42)
 
     # Configuración de Validación Cruzada Temporal
-    # Esto simula entrenar en 2020->Predecir 2021, Entrenar 2021->Predecir 2022...
     tscv = TimeSeriesSplit(n_splits=5)
 
     logger.info("🧠 Buscando la configuración perfecta (Grid Search)... Esto tomará unos segundos.")
     
-    # Búsqueda Aleatoria (Más rápido y eficiente que probar todo)
+    # prueba automáticamente combinaciones con RandomizedSearchCV para encontrar la configuración matemática perfecta
     search = RandomizedSearchCV(
         estimator=gbm,
         param_distributions=param_dist,

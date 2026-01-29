@@ -100,13 +100,6 @@ def main():
         active_matchday = pending.iloc[0]['matchday']
     else:
         active_matchday = df_fixtures['matchday'].max()
-
-    # Filtramos solo los partidos de esa jornada que la IA ha podido procesar
-    # OJO: X_pred puede tener menos filas que df_fixtures si faltan datos de algún equipo
-    # Necesitamos alinear las predicciones con los partidos originales
-    
-    # Creamos una lista visual solo con los partidos que están en X_pred (los que tienen predicción)
-    # X_pred conserva el índice original del DataFrame de fixtures, así que usamos eso para unir
     
     indices_predichos = X_pred.index
     matches_to_show = df_fixtures.loc[indices_predichos]
@@ -126,7 +119,6 @@ def main():
         # Buscamos la predicción correspondiente a este índice
         # Como X_pred y matches_to_show comparten índice, podemos buscar por posición relativa
         
-        # Truco: Encontrar en qué posición de X_pred está este índice
         loc_idx = X_pred.index.get_loc(idx)
         
         pred = predictions[loc_idx]

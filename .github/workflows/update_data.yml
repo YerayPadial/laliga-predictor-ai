@@ -1,10 +1,10 @@
 name: LaLiga Data Pipeline & Training
 
 # A. Trigger: Cron Schedule
-# Se ejecuta una vez al día a las 11:00 UTC (12:00/12:00 de España)
+# Se ejecuta una vez al día a las 10:00 UTC (11:00 de España o 12 en verano)
 on:
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '0 10 * * *'
   # Permite ejecución manual desde GitHub ("Run workflow")
   workflow_dispatch:
 

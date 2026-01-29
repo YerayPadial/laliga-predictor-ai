@@ -35,7 +35,7 @@ def normalize_names(df: pd.DataFrame) -> pd.DataFrame:
         df['away_team'] = df['away_team'].replace(TEAM_MAPPING).str.strip()
     return df
 
-# --- NUEVO: CÁLCULO DE DÍAS DE DESCANSO ---
+# --- CÁLCULO DE DÍAS DE DESCANSO ---
 def calculate_rest_days(df):
     """Calcula los días de descanso desde el último partido para cada equipo."""
     # Creamos una lista vertical de todos los partidos jugados por cualquier equipo
@@ -55,7 +55,7 @@ def calculate_rest_days(df):
     
     return all_matches[['date', 'team', 'rest_days']]
 
-# --- NUEVO: CÁLCULO DE H2H (ENFRENTAMIENTOS DIRECTOS) ---
+# --- CÁLCULO DE H2H (ENFRENTAMIENTOS DIRECTOS) ---
 def get_h2h_balance(row, df_history):
     """Calcula cuántos puntos suele sacar el LOCAL contra este VISITANTE históricamente."""
     # Filtramos partidos pasados entre estos dos equipos
@@ -87,34 +87,46 @@ def get_h2h_balance(row, df_history):
 
 # --- MÉTRICAS DE RENDIMIENTO (ROLLING STATS) ---
 def calculate_rolling_stats(df, window=5):
-    home_stats = df[['date', 'home_team', 'home_score', 'away_score', 'home_shots_on_target', 'home_corners']].copy()
-    home_stats.columns = ['date', 'team', 'goals_for', 'goals_against', 'shots', 'corners']
+    # Selección de columnas 
+    cols_home = ['date', 'home_team', 'home_score', 'away_score', 'home_shots', 'home_shots_on_target', 'home_corners']
+    home_stats = df[cols_home].copy()
+    home_stats.columns = ['date', 'team', 'goals_for', 'goals_against', 'shots', 'shots_ot', 'corners']
     
-    away_stats = df[['date', 'away_team', 'away_score', 'home_score', 'away_shots_on_target', 'away_corners']].copy()
-    away_stats.columns = ['date', 'team', 'goals_for', 'goals_against', 'shots', 'corners']
+    cols_away = ['date', 'away_team', 'away_score', 'home_score', 'away_shots', 'away_shots_on_target', 'away_corners']
+    away_stats = df[cols_away].copy()
+    away_stats.columns = ['date', 'team', 'goals_for', 'goals_against', 'shots', 'shots_ot', 'corners']
     
     stats_df = pd.concat([home_stats, away_stats]).sort_values(['team', 'date'])
     
-    # Puntos
+    # Calcular Tiros FUERA (Total - A Puerta)
+    # A veces la estadística falla y dice que hay más a puerta que totales, protegemos con clip(0)
+    stats_df['shots_off'] = (stats_df['shots'] - stats_df['shots_ot']).clip(lower=0)
+    
+    # Puntos del partido
     stats_df['points'] = np.where(stats_df['goals_for'] > stats_df['goals_against'], 3,
                                   np.where(stats_df['goals_for'] == stats_df['goals_against'], 1, 0))
     
-    # Attack Power ( attack_power)
-    stats_df['attack_power'] = (stats_df['goals_for'] * 3.0) + (stats_df['shots'] * 1.0) + (stats_df['corners'] * 0.5)
+    # --- FÓRMULA DE ATAQUE EXPERTA ---
+    # Goles: 3.0 | Tiros a Puerta: 1.0 | Tiros Fuera: 0.5 | Córners: 0.7
+    stats_df['attack_power'] = (
+        (stats_df['goals_for'] * 3.0) + 
+        (stats_df['shots_ot'] * 1.0) + 
+        (stats_df['shots_off'] * 0.5) + 
+        (stats_df['corners'] * 0.7)
+    )
     
-    # Medias Móviles (EMA)
+    # Medias Móviles (EMA) - Usamos solo lo necesario para el modelo
     cols = ['points', 'goals_for', 'goals_against', 'attack_power']
     for col in cols:
         stats_df[f'avg_{col}'] = stats_df.groupby('team')[col].transform(
             lambda x: x.shift(1).ewm(span=window, min_periods=1).mean()
         ).fillna(0)
     
-    # Racha
+    # Racha de forma
     stats_df['form_streak'] = stats_df.groupby('team')['points'].transform(
         lambda x: x.shift(1).rolling(window=3, min_periods=1).sum()
     ).fillna(0)
     
-    # Devuelve avg_attack_power (NO strength)
     return stats_df[['date', 'team', 'avg_points', 'avg_goals_for', 'avg_goals_against', 'avg_attack_power', 'form_streak']]
 
 def prepare_data(input_path="data/laliga_advanced_stats.csv", train_mode=True):
@@ -146,7 +158,6 @@ def prepare_data(input_path="data/laliga_advanced_stats.csv", train_mode=True):
     df = df.rename(columns={'rest_days': 'away_rest_days'})
     
     # 5. Calcular H2H (Histórico Directo)
-    # Esto es lento (bucle), pero para <1000 partidos es instantáneo.
     if train_mode:
         print("⏳ Calculando H2H (Paternidad)...")
         # Usamos una lambda optimizada
@@ -223,7 +234,7 @@ def prepare_upcoming_matches(fixtures_input, history_path="data/laliga_advanced_
     # Calcular stats actuales hasta el día de hoy
     stats = calculate_rolling_stats(history)
     
-    # Nos quedamos con la ÚLTIMA fila de stats de cada equipo (su "forma" actual)
+    # Nos quedamos con la ÚLTIMA fila de stats de cada equipo
     latest_stats = stats.sort_values('date').groupby('team').tail(1).set_index('team')
     
     # Normalizar nombres del calendario

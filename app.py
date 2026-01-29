@@ -11,7 +11,7 @@ from src.feature_eng import prepare_upcoming_matches
 # Configuración Inicial
 st.set_page_config(page_title="La Quiniela AI", page_icon="⚽", layout="centered")
 
-# --- ESTILOS CSS (Tu diseño original intacto) ---
+# --- ESTILOS CSS ---
 st.markdown("""
 <style>
     .match-card {
@@ -74,13 +74,15 @@ def main():
     # Preparar datos para la IA
     # Le pasamos el calendario y el historial para que calcule rachas y H2H
     try:
-        X_pred = prepare_upcoming_matches(df_fixtures, HISTORY_PATH)
+        # DESEMPAQUETAMOS LOS DOS VALORES
+        X_pred, matches_info = prepare_upcoming_matches(df_fixtures, HISTORY_PATH)
     except Exception as e:
         st.error(f"Error procesando datos: {e}")
         return
 
-    if X_pred.empty:
-        st.info("📅 Calendario actualizado, pero no hay datos suficientes para predecir (quizás inicio de temporada).")
+    # Verificamos si X_pred es válido y no está vacío
+    if X_pred is None or X_pred.empty:
+        st.info("📅 Calendario actualizado, pero no hay datos suficientes para predecir (quizás inicio de temporada o equipos nuevos).")
         return
 
     # Predecir

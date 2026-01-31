@@ -209,7 +209,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 21,2026-01-25T17:30:00Z,25/01 18:30,FINISHED,Real Sociedad,Celta de Vigo,3-1
 21,2026-01-25T20:00:00Z,25/01 21:00,FINISHED,Alaves,Real Betis,2-1
 21,2026-01-26T20:00:00Z,26/01 21:00,FINISHED,Girona,Getafe,1-1
-22,2026-01-30T20:00:00Z,30/01 21:00,TIMED,Espanyol,Alaves,-
+22,2026-01-30T20:00:00Z,30/01 21:00,FINISHED,Espanyol,Alaves,1-2
 22,2026-01-31T13:00:00Z,31/01 14:00,TIMED,Real Oviedo,Girona,-
 22,2026-01-31T15:15:00Z,31/01 16:15,TIMED,Osasuna,Villarreal,-
 22,2026-01-31T17:30:00Z,31/01 18:30,TIMED,Levante,Atletico Madrid,-

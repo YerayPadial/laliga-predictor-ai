@@ -218,7 +218,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 22,2026-02-01T15:15:00Z,01/02 16:15,FINISHED,Real Betis,Valencia,2-1
 22,2026-02-01T17:30:00Z,01/02 18:30,FINISHED,Getafe,Celta de Vigo,0-0
 22,2026-02-01T20:00:00Z,01/02 21:00,FINISHED,Athletic Bilbao,Real Sociedad,1-1
-22,2026-02-02T20:00:00Z,02/02 21:00,TIMED,Mallorca,Sevilla,-
+22,2026-02-02T20:00:00Z,02/02 21:00,FINISHED,Mallorca,Sevilla,4-1
 23,2026-02-06T20:00:00Z,06/02 21:00,TIMED,Celta de Vigo,Osasuna,-
 23,2026-02-07T13:00:00Z,07/02 14:00,TIMED,Rayo Vallecano,Real Oviedo,-
 23,2026-02-07T15:15:00Z,07/02 16:15,TIMED,Barcelona,Mallorca,-
@@ -239,16 +239,16 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 24,2026-02-15T17:30:00Z,15/02 18:30,TIMED,Levante,Valencia,-
 24,2026-02-15T20:00:00Z,15/02 21:00,TIMED,Mallorca,Real Betis,-
 24,2026-02-16T20:00:00Z,16/02 21:00,TIMED,Girona,Barcelona,-
-25,2026-02-22T00:00:00Z,22/02 01:00,SCHEDULED,Alaves,Girona,-
-25,2026-02-22T00:00:00Z,22/02 01:00,SCHEDULED,Athletic Bilbao,Elche,-
-25,2026-02-22T00:00:00Z,22/02 01:00,SCHEDULED,Atletico Madrid,Espanyol,-
-25,2026-02-22T00:00:00Z,22/02 01:00,SCHEDULED,Barcelona,Levante,-
-25,2026-02-22T00:00:00Z,22/02 01:00,SCHEDULED,Real Betis,Rayo Vallecano,-
-25,2026-02-22T00:00:00Z,22/02 01:00,SCHEDULED,Celta de Vigo,Mallorca,-
-25,2026-02-22T00:00:00Z,22/02 01:00,SCHEDULED,Getafe,Sevilla,-
-25,2026-02-22T00:00:00Z,22/02 01:00,SCHEDULED,Osasuna,Real Madrid,-
-25,2026-02-22T00:00:00Z,22/02 01:00,SCHEDULED,Villarreal,Valencia,-
-25,2026-02-22T00:00:00Z,22/02 01:00,SCHEDULED,Real Sociedad,Real Oviedo,-
+25,2026-02-20T20:00:00Z,20/02 21:00,TIMED,Athletic Bilbao,Elche,-
+25,2026-02-21T13:00:00Z,21/02 14:00,TIMED,Real Sociedad,Real Oviedo,-
+25,2026-02-21T15:15:00Z,21/02 16:15,TIMED,Real Betis,Rayo Vallecano,-
+25,2026-02-21T17:30:00Z,21/02 18:30,TIMED,Osasuna,Real Madrid,-
+25,2026-02-21T20:00:00Z,21/02 21:00,TIMED,Atletico Madrid,Espanyol,-
+25,2026-02-22T13:00:00Z,22/02 14:00,TIMED,Getafe,Sevilla,-
+25,2026-02-22T15:15:00Z,22/02 16:15,TIMED,Barcelona,Levante,-
+25,2026-02-22T17:30:00Z,22/02 18:30,TIMED,Celta de Vigo,Mallorca,-
+25,2026-02-22T20:00:00Z,22/02 21:00,TIMED,Villarreal,Valencia,-
+25,2026-02-23T20:00:00Z,23/02 21:00,TIMED,Alaves,Girona,-
 26,2026-03-01T00:00:00Z,01/03 01:00,SCHEDULED,Barcelona,Villarreal,-
 26,2026-03-01T00:00:00Z,01/03 01:00,SCHEDULED,Real Betis,Sevilla,-
 26,2026-03-01T00:00:00Z,01/03 01:00,SCHEDULED,Elche,Espanyol,-

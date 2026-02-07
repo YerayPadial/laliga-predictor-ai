@@ -219,7 +219,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 22,2026-02-01T17:30:00Z,01/02 18:30,FINISHED,Getafe,Celta de Vigo,0-0
 22,2026-02-01T20:00:00Z,01/02 21:00,FINISHED,Athletic Bilbao,Real Sociedad,1-1
 22,2026-02-02T20:00:00Z,02/02 21:00,FINISHED,Mallorca,Sevilla,4-1
-23,2026-02-06T20:00:00Z,06/02 21:00,TIMED,Celta de Vigo,Osasuna,-
+23,2026-02-06T20:00:00Z,06/02 21:00,FINISHED,Celta de Vigo,Osasuna,1-2
 23,2026-02-07T13:00:00Z,07/02 14:00,TIMED,Rayo Vallecano,Real Oviedo,-
 23,2026-02-07T15:15:00Z,07/02 16:15,TIMED,Barcelona,Mallorca,-
 23,2026-02-07T17:30:00Z,07/02 18:30,TIMED,Sevilla,Girona,-
@@ -231,11 +231,11 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 23,2026-02-09T20:00:00Z,09/02 21:00,TIMED,Villarreal,Espanyol,-
 24,2026-02-13T20:00:00Z,13/02 21:00,TIMED,Elche,Osasuna,-
 24,2026-02-14T13:00:00Z,14/02 14:00,TIMED,Espanyol,Celta de Vigo,-
-24,2026-02-14T15:15:00Z,14/02 16:15,TIMED,Rayo Vallecano,Atletico Madrid,-
+24,2026-02-14T15:15:00Z,14/02 16:15,TIMED,Getafe,Villarreal,-
 24,2026-02-14T17:30:00Z,14/02 18:30,TIMED,Sevilla,Alaves,-
 24,2026-02-14T20:00:00Z,14/02 21:00,TIMED,Real Madrid,Real Sociedad,-
 24,2026-02-15T13:00:00Z,15/02 14:00,TIMED,Real Oviedo,Athletic Bilbao,-
-24,2026-02-15T15:15:00Z,15/02 16:15,TIMED,Getafe,Villarreal,-
+24,2026-02-15T15:15:00Z,15/02 16:15,TIMED,Rayo Vallecano,Atletico Madrid,-
 24,2026-02-15T17:30:00Z,15/02 18:30,TIMED,Levante,Valencia,-
 24,2026-02-15T20:00:00Z,15/02 21:00,TIMED,Mallorca,Real Betis,-
 24,2026-02-16T20:00:00Z,16/02 21:00,TIMED,Girona,Barcelona,-
@@ -309,16 +309,16 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 31,2026-04-12T00:00:00Z,12/04 02:00,SCHEDULED,Levante,Getafe,-
 31,2026-04-12T00:00:00Z,12/04 02:00,SCHEDULED,Real Madrid,Girona,-
 31,2026-04-12T00:00:00Z,12/04 02:00,SCHEDULED,Athletic Bilbao,Villarreal,-
-32,2026-04-19T00:00:00Z,19/04 02:00,SCHEDULED,Alaves,Mallorca,-
-32,2026-04-19T00:00:00Z,19/04 02:00,SCHEDULED,Real Betis,Real Madrid,-
-32,2026-04-19T00:00:00Z,19/04 02:00,SCHEDULED,Espanyol,Levante,-
-32,2026-04-19T00:00:00Z,19/04 02:00,SCHEDULED,Osasuna,Sevilla,-
-32,2026-04-19T00:00:00Z,19/04 02:00,SCHEDULED,Rayo Vallecano,Real Sociedad,-
-32,2026-04-19T00:00:00Z,19/04 02:00,SCHEDULED,Atletico Madrid,Athletic Bilbao,-
-32,2026-04-19T00:00:00Z,19/04 02:00,SCHEDULED,Getafe,Barcelona,-
-32,2026-04-19T00:00:00Z,19/04 02:00,SCHEDULED,Villarreal,Celta de Vigo,-
-32,2026-04-19T00:00:00Z,19/04 02:00,SCHEDULED,Real Oviedo,Elche,-
-32,2026-04-19T00:00:00Z,19/04 02:00,SCHEDULED,Valencia,Girona,-
+32,2026-04-26T00:00:00Z,26/04 02:00,SCHEDULED,Alaves,Mallorca,-
+32,2026-04-26T00:00:00Z,26/04 02:00,SCHEDULED,Real Betis,Real Madrid,-
+32,2026-04-26T00:00:00Z,26/04 02:00,SCHEDULED,Espanyol,Levante,-
+32,2026-04-26T00:00:00Z,26/04 02:00,SCHEDULED,Osasuna,Sevilla,-
+32,2026-04-26T00:00:00Z,26/04 02:00,SCHEDULED,Rayo Vallecano,Real Sociedad,-
+32,2026-04-26T00:00:00Z,26/04 02:00,SCHEDULED,Atletico Madrid,Athletic Bilbao,-
+32,2026-04-26T00:00:00Z,26/04 02:00,SCHEDULED,Getafe,Barcelona,-
+32,2026-04-26T00:00:00Z,26/04 02:00,SCHEDULED,Villarreal,Celta de Vigo,-
+32,2026-04-26T00:00:00Z,26/04 02:00,SCHEDULED,Real Oviedo,Elche,-
+32,2026-04-26T00:00:00Z,26/04 02:00,SCHEDULED,Valencia,Girona,-
 33,2026-04-22T00:00:00Z,22/04 02:00,SCHEDULED,Athletic Bilbao,Osasuna,-
 33,2026-04-22T00:00:00Z,22/04 02:00,SCHEDULED,Barcelona,Celta de Vigo,-
 33,2026-04-22T00:00:00Z,22/04 02:00,SCHEDULED,Levante,Sevilla,-

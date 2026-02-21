@@ -239,7 +239,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 24,2026-02-15T17:30:00Z,15/02 18:30,FINISHED,Levante,Valencia,0-2
 24,2026-02-15T20:00:00Z,15/02 21:00,FINISHED,Mallorca,Real Betis,1-2
 24,2026-02-16T20:00:00Z,16/02 21:00,FINISHED,Girona,Barcelona,2-1
-25,2026-02-20T20:00:00Z,20/02 21:00,TIMED,Athletic Bilbao,Elche,-
+25,2026-02-20T20:00:00Z,20/02 21:00,FINISHED,Athletic Bilbao,Elche,2-1
 25,2026-02-21T13:00:00Z,21/02 14:00,TIMED,Real Sociedad,Real Oviedo,-
 25,2026-02-21T15:15:00Z,21/02 16:15,TIMED,Real Betis,Rayo Vallecano,-
 25,2026-02-21T17:30:00Z,21/02 18:30,TIMED,Osasuna,Real Madrid,-

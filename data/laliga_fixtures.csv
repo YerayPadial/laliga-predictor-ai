@@ -158,7 +158,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 16,2025-12-14T15:15:00Z,14/12 16:15,FINISHED,Celta de Vigo,Athletic Bilbao,2-0
 16,2025-12-14T20:00:00Z,14/12 21:00,FINISHED,Alaves,Real Madrid,1-2
 16,2025-12-15T20:00:00Z,15/12 21:00,FINISHED,Rayo Vallecano,Real Betis,0-0
-16,2026-03-13T20:00:00Z,13/03 21:00,FINISHED,Levante,Villarreal,0-0
+16,2026-02-18T19:00:00Z,18/02 20:00,FINISHED,Levante,Villarreal,0-1
 17,2025-12-19T20:00:00Z,19/12 21:00,FINISHED,Valencia,Mallorca,1-1
 17,2025-12-20T13:00:00Z,20/12 14:00,FINISHED,Real Oviedo,Celta de Vigo,0-0
 17,2025-12-20T15:15:00Z,20/12 16:15,FINISHED,Levante,Real Sociedad,1-1
@@ -240,10 +240,10 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 24,2026-02-15T20:00:00Z,15/02 21:00,FINISHED,Mallorca,Real Betis,1-2
 24,2026-02-16T20:00:00Z,16/02 21:00,FINISHED,Girona,Barcelona,2-1
 25,2026-02-20T20:00:00Z,20/02 21:00,FINISHED,Athletic Bilbao,Elche,2-1
-25,2026-02-21T13:00:00Z,21/02 14:00,TIMED,Real Sociedad,Real Oviedo,-
-25,2026-02-21T15:15:00Z,21/02 16:15,TIMED,Real Betis,Rayo Vallecano,-
-25,2026-02-21T17:30:00Z,21/02 18:30,TIMED,Osasuna,Real Madrid,-
-25,2026-02-21T20:00:00Z,21/02 21:00,TIMED,Atletico Madrid,Espanyol,-
+25,2026-02-21T13:00:00Z,21/02 14:00,FINISHED,Real Sociedad,Real Oviedo,3-3
+25,2026-02-21T15:15:00Z,21/02 16:15,FINISHED,Real Betis,Rayo Vallecano,1-1
+25,2026-02-21T17:30:00Z,21/02 18:30,FINISHED,Osasuna,Real Madrid,2-1
+25,2026-02-21T20:00:00Z,21/02 21:00,FINISHED,Atletico Madrid,Espanyol,4-2
 25,2026-02-22T13:00:00Z,22/02 14:00,TIMED,Getafe,Sevilla,-
 25,2026-02-22T15:15:00Z,22/02 16:15,TIMED,Barcelona,Levante,-
 25,2026-02-22T17:30:00Z,22/02 18:30,TIMED,Celta de Vigo,Mallorca,-

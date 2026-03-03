@@ -258,7 +258,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 26,2026-03-01T15:15:00Z,01/03 16:15,FINISHED,Valencia,Osasuna,1-0
 26,2026-03-01T17:30:00Z,01/03 18:30,FINISHED,Real Betis,Sevilla,2-2
 26,2026-03-01T20:00:00Z,01/03 21:00,FINISHED,Girona,Celta de Vigo,1-2
-26,2026-03-02T20:00:00Z,02/03 21:00,TIMED,Real Madrid,Getafe,-
+26,2026-03-02T20:00:00Z,02/03 21:00,FINISHED,Real Madrid,Getafe,0-1
 27,2026-03-06T20:00:00Z,06/03 21:00,TIMED,Celta de Vigo,Real Madrid,-
 27,2026-03-07T13:00:00Z,07/03 14:00,TIMED,Osasuna,Mallorca,-
 27,2026-03-07T15:15:00Z,07/03 16:15,TIMED,Levante,Girona,-

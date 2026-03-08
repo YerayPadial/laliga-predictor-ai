@@ -260,10 +260,10 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 26,2026-03-01T20:00:00Z,01/03 21:00,FINISHED,Girona,Celta de Vigo,1-2
 26,2026-03-02T20:00:00Z,02/03 21:00,FINISHED,Real Madrid,Getafe,0-1
 27,2026-03-06T20:00:00Z,06/03 21:00,FINISHED,Celta de Vigo,Real Madrid,1-2
-27,2026-03-07T13:00:00Z,07/03 14:00,TIMED,Osasuna,Mallorca,-
-27,2026-03-07T15:15:00Z,07/03 16:15,TIMED,Levante,Girona,-
-27,2026-03-07T17:30:00Z,07/03 18:30,TIMED,Atletico Madrid,Real Sociedad,-
-27,2026-03-07T20:00:00Z,07/03 21:00,TIMED,Athletic Bilbao,Barcelona,-
+27,2026-03-07T13:00:00Z,07/03 14:00,FINISHED,Osasuna,Mallorca,2-2
+27,2026-03-07T15:15:00Z,07/03 16:15,FINISHED,Levante,Girona,1-1
+27,2026-03-07T17:30:00Z,07/03 18:30,FINISHED,Atletico Madrid,Real Sociedad,3-2
+27,2026-03-07T20:00:00Z,07/03 21:00,FINISHED,Athletic Bilbao,Barcelona,0-1
 27,2026-03-08T13:00:00Z,08/03 14:00,TIMED,Villarreal,Elche,-
 27,2026-03-08T15:15:00Z,08/03 16:15,TIMED,Getafe,Real Betis,-
 27,2026-03-08T17:30:00Z,08/03 18:30,TIMED,Sevilla,Rayo Vallecano,-

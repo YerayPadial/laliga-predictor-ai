@@ -270,10 +270,10 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 27,2026-03-08T20:00:00Z,08/03 21:00,FINISHED,Valencia,Alaves,3-2
 27,2026-03-09T20:00:00Z,09/03 21:00,FINISHED,Espanyol,Real Oviedo,1-1
 28,2026-03-13T20:00:00Z,13/03 21:00,FINISHED,Alaves,Villarreal,1-1
-28,2026-03-14T13:00:00Z,14/03 14:00,TIMED,Girona,Athletic Bilbao,-
-28,2026-03-14T15:15:00Z,14/03 16:15,TIMED,Atletico Madrid,Getafe,-
-28,2026-03-14T17:30:00Z,14/03 18:30,TIMED,Real Oviedo,Valencia,-
-28,2026-03-14T20:00:00Z,14/03 21:00,TIMED,Real Madrid,Elche,-
+28,2026-03-14T13:00:00Z,14/03 14:00,FINISHED,Girona,Athletic Bilbao,3-0
+28,2026-03-14T15:15:00Z,14/03 16:15,FINISHED,Atletico Madrid,Getafe,1-0
+28,2026-03-14T17:30:00Z,14/03 18:30,FINISHED,Real Oviedo,Valencia,1-0
+28,2026-03-14T20:00:00Z,14/03 21:00,FINISHED,Real Madrid,Elche,4-1
 28,2026-03-15T13:00:00Z,15/03 14:00,TIMED,Mallorca,Espanyol,-
 28,2026-03-15T15:15:00Z,15/03 16:15,TIMED,Barcelona,Sevilla,-
 28,2026-03-15T17:30:00Z,15/03 18:30,TIMED,Real Betis,Celta de Vigo,-
@@ -289,6 +289,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 29,2026-03-22T15:15:00Z,22/03 16:15,TIMED,Celta de Vigo,Alaves,-
 29,2026-03-22T17:30:00Z,22/03 18:30,TIMED,Athletic Bilbao,Real Betis,-
 29,2026-03-22T20:00:00Z,22/03 21:00,TIMED,Real Madrid,Atletico Madrid,-
+30,2026-04-03T19:00:00Z,03/04 21:00,TIMED,Rayo Vallecano,Elche,-
 30,2026-04-05T00:00:00Z,05/04 02:00,SCHEDULED,Alaves,Osasuna,-
 30,2026-04-05T00:00:00Z,05/04 02:00,SCHEDULED,Atletico Madrid,Barcelona,-
 30,2026-04-05T00:00:00Z,05/04 02:00,SCHEDULED,Real Betis,Espanyol,-
@@ -297,7 +298,6 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 30,2026-04-05T00:00:00Z,05/04 02:00,SCHEDULED,Real Oviedo,Sevilla,-
 30,2026-04-05T00:00:00Z,05/04 02:00,SCHEDULED,Getafe,Athletic Bilbao,-
 30,2026-04-05T00:00:00Z,05/04 02:00,SCHEDULED,Valencia,Celta de Vigo,-
-30,2026-04-05T00:00:00Z,05/04 02:00,SCHEDULED,Rayo Vallecano,Elche,-
 30,2026-04-05T00:00:00Z,05/04 02:00,SCHEDULED,Real Sociedad,Levante,-
 31,2026-04-12T00:00:00Z,12/04 02:00,SCHEDULED,Barcelona,Espanyol,-
 31,2026-04-12T00:00:00Z,12/04 02:00,SCHEDULED,Celta de Vigo,Real Oviedo,-

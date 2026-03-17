@@ -278,7 +278,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 28,2026-03-15T15:15:00Z,15/03 16:15,FINISHED,Barcelona,Sevilla,5-2
 28,2026-03-15T17:30:00Z,15/03 18:30,FINISHED,Real Betis,Celta de Vigo,1-1
 28,2026-03-15T20:00:00Z,15/03 21:00,FINISHED,Real Sociedad,Osasuna,3-1
-28,2026-03-16T20:00:00Z,16/03 21:00,TIMED,Rayo Vallecano,Levante,-
+28,2026-03-16T20:00:00Z,16/03 21:00,FINISHED,Rayo Vallecano,Levante,1-1
 29,2026-03-20T20:00:00Z,20/03 21:00,TIMED,Villarreal,Real Sociedad,-
 29,2026-03-21T13:00:00Z,21/03 14:00,TIMED,Elche,Mallorca,-
 29,2026-03-21T15:15:00Z,21/03 16:15,TIMED,Espanyol,Getafe,-

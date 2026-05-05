@@ -307,7 +307,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 31,2026-04-12T12:00:00Z,12/04 14:00,FINISHED,Osasuna,Real Betis,1-1
 31,2026-04-12T14:15:00Z,12/04 16:15,FINISHED,Mallorca,Rayo Vallecano,3-0
 31,2026-04-12T16:30:00Z,12/04 18:30,FINISHED,Celta de Vigo,Real Oviedo,0-3
-31,2026-04-12T19:00:00Z,12/04 21:00,FINISHED,Athletic Bilbao,Villarreal,1-2
+31,2026-04-12T19:00:00Z,12/04 21:00,FINISHED,Athletic Bilbao,Villarreal,1-3
 31,2026-04-13T19:00:00Z,13/04 21:00,FINISHED,Levante,Getafe,1-0
 32,2026-04-24T19:00:00Z,24/04 21:00,FINISHED,Real Betis,Real Madrid,1-1
 32,2026-04-25T12:00:00Z,25/04 14:00,FINISHED,Alaves,Mallorca,2-1
@@ -338,7 +338,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 34,2026-05-03T14:15:00Z,03/05 16:15,FINISHED,Getafe,Rayo Vallecano,0-2
 34,2026-05-03T16:30:00Z,03/05 18:30,FINISHED,Real Betis,Real Oviedo,3-0
 34,2026-05-03T19:00:00Z,03/05 21:00,FINISHED,Espanyol,Real Madrid,0-2
-34,2026-05-04T19:00:00Z,04/05 21:00,TIMED,Sevilla,Real Sociedad,-
+34,2026-05-04T19:00:00Z,04/05 21:00,FINISHED,Sevilla,Real Sociedad,1-0
 35,2026-05-08T19:00:00Z,08/05 21:00,TIMED,Levante,Osasuna,-
 35,2026-05-09T12:00:00Z,09/05 14:00,TIMED,Elche,Alaves,-
 35,2026-05-09T14:15:00Z,09/05 16:15,TIMED,Sevilla,Espanyol,-

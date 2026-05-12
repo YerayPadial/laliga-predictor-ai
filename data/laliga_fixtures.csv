@@ -348,7 +348,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 35,2026-05-10T14:15:00Z,10/05 16:15,FINISHED,Athletic Bilbao,Valencia,0-1
 35,2026-05-10T16:30:00Z,10/05 18:30,FINISHED,Real Oviedo,Getafe,0-0
 35,2026-05-10T19:00:00Z,10/05 21:00,FINISHED,Barcelona,Real Madrid,2-0
-35,2026-05-11T19:00:00Z,11/05 21:00,TIMED,Rayo Vallecano,Girona,-
+35,2026-05-11T19:00:00Z,11/05 21:00,FINISHED,Rayo Vallecano,Girona,1-1
 36,2026-05-12T17:00:00Z,12/05 19:00,TIMED,Celta de Vigo,Levante,-
 36,2026-05-12T18:00:00Z,12/05 20:00,TIMED,Real Betis,Elche,-
 36,2026-05-12T19:30:00Z,12/05 21:30,TIMED,Osasuna,Atletico Madrid,-
@@ -369,13 +369,13 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 37,2026-05-17T17:00:00Z,17/05 19:00,TIMED,Real Oviedo,Alaves,-
 37,2026-05-17T17:00:00Z,17/05 19:00,TIMED,Osasuna,Espanyol,-
 37,2026-05-17T17:00:00Z,17/05 19:00,TIMED,Sevilla,Real Madrid,-
-38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Alaves,Rayo Vallecano,-
-38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Real Betis,Levante,-
-38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Celta de Vigo,Sevilla,-
-38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Espanyol,Real Sociedad,-
-38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Getafe,Osasuna,-
-38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Mallorca,Real Oviedo,-
-38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Real Madrid,Athletic Bilbao,-
+38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Alaves,Rayo Vallecano,-
+38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Real Betis,Levante,-
+38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Celta de Vigo,Sevilla,-
+38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Espanyol,Real Sociedad,-
+38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Getafe,Osasuna,-
+38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Mallorca,Real Oviedo,-
+38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Real Madrid,Athletic Bilbao,-
+38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Valencia,Barcelona,-
+38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Girona,Elche,-
 38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Villarreal,Atletico Madrid,-
-38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Valencia,Barcelona,-
-38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Girona,Elche,-

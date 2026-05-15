@@ -356,9 +356,9 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 36,2026-05-13T17:00:00Z,13/05 19:00,FINISHED,Villarreal,Sevilla,2-3
 36,2026-05-13T19:30:00Z,13/05 21:30,FINISHED,Alaves,Barcelona,1-0
 36,2026-05-13T19:30:00Z,13/05 21:30,FINISHED,Getafe,Mallorca,3-1
-36,2026-05-14T17:00:00Z,14/05 19:00,TIMED,Valencia,Rayo Vallecano,-
-36,2026-05-14T18:00:00Z,14/05 20:00,TIMED,Girona,Real Sociedad,-
-36,2026-05-14T19:30:00Z,14/05 21:30,TIMED,Real Madrid,Real Oviedo,-
+36,2026-05-14T17:00:00Z,14/05 19:00,FINISHED,Valencia,Rayo Vallecano,1-1
+36,2026-05-14T18:00:00Z,14/05 20:00,FINISHED,Girona,Real Sociedad,1-1
+36,2026-05-14T19:30:00Z,14/05 21:30,FINISHED,Real Madrid,Real Oviedo,2-0
 37,2026-05-17T17:00:00Z,17/05 19:00,TIMED,Athletic Bilbao,Celta de Vigo,-
 37,2026-05-17T17:00:00Z,17/05 19:00,TIMED,Atletico Madrid,Girona,-
 37,2026-05-17T17:00:00Z,17/05 19:00,TIMED,Barcelona,Real Betis,-
@@ -378,4 +378,4 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Real Madrid,Athletic Bilbao,-
 38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Valencia,Barcelona,-
 38,2026-05-23T19:00:00Z,23/05 21:00,TIMED,Girona,Elche,-
-38,2026-05-24T00:00:00Z,24/05 02:00,SCHEDULED,Villarreal,Atletico Madrid,-
+38,2026-05-24T19:00:00Z,24/05 21:00,TIMED,Villarreal,Atletico Madrid,-

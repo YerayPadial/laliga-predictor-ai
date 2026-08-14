@@ -38,7 +38,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 4,2026-09-06T16:30:00Z,06/09 18:30,TIMED,Málaga CF,Levante,-
 4,2026-09-06T19:00:00Z,06/09 21:00,TIMED,Espanyol,Sevilla,-
 4,2026-09-07T17:00:00Z,07/09 19:00,TIMED,Getafe,Celta de Vigo,-
-4,2026-09-07T19:00:00Z,07/09 21:00,TIMED,Elche,Real Sociedad,-
+4,2026-09-07T19:30:00Z,07/09 21:30,TIMED,Elche,Real Sociedad,-
 5,2026-09-13T00:00:00Z,13/09 02:00,SCHEDULED,Getafe,RC Deportivo La Coruña,-
 5,2026-09-13T00:00:00Z,13/09 02:00,SCHEDULED,Sevilla,Valencia,-
 5,2026-09-13T00:00:00Z,13/09 02:00,SCHEDULED,Real Racing Club de Santander,Alaves,-

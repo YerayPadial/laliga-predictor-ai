@@ -1,6 +1,6 @@
 matchday,utc_date,date_str,status,home_team,away_team,real_result
-1,2026-08-15T17:30:00Z,15/08 19:30,TIMED,Alaves,Getafe,-
-1,2026-08-15T19:30:00Z,15/08 21:30,TIMED,Sevilla,Rayo Vallecano,-
+1,2026-08-15T17:30:00Z,15/08 19:30,FINISHED,Alaves,Getafe,3-0
+1,2026-08-15T19:30:00Z,15/08 21:30,FINISHED,Sevilla,Rayo Vallecano,2-1
 1,2026-08-16T15:00:00Z,16/08 17:00,TIMED,Real Racing Club de Santander,Villarreal,-
 1,2026-08-16T17:00:00Z,16/08 19:00,TIMED,Espanyol,Levante,-
 1,2026-08-17T19:00:00Z,17/08 21:00,TIMED,RC Deportivo La Coruña,Elche,-

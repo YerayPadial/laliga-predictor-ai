@@ -4,7 +4,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 1,2026-08-16T15:00:00Z,16/08 17:00,FINISHED,Real Racing Club de Santander,Villarreal,2-2
 1,2026-08-16T17:00:00Z,16/08 19:00,FINISHED,Espanyol,Levante,3-0
 1,2026-08-17T19:00:00Z,17/08 21:00,FINISHED,RC Deportivo La Coruña,Elche,1-1
-1,2026-08-19T19:00:00Z,19/08 21:00,TIMED,Atletico Madrid,Málaga CF,-
+1,2026-08-19T19:00:00Z,19/08 21:00,FINISHED,Atletico Madrid,Málaga CF,2-0
 1,2026-08-25T19:00:00Z,25/08 21:00,TIMED,Valencia,Real Betis,-
 1,2026-08-26T19:00:00Z,26/08 21:00,TIMED,Real Madrid,Real Sociedad,-
 1,2026-08-27T18:30:00Z,27/08 20:30,TIMED,Celta de Vigo,Osasuna,-

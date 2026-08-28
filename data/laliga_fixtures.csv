@@ -7,8 +7,8 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 1,2026-08-19T19:00:00Z,19/08 21:00,FINISHED,Atletico Madrid,Málaga CF,2-0
 1,2026-08-25T19:00:00Z,25/08 21:00,FINISHED,Valencia,Real Betis,0-1
 1,2026-08-26T19:00:00Z,26/08 21:00,FINISHED,Real Madrid,Real Sociedad,4-1
-1,2026-08-27T18:30:00Z,27/08 20:30,IN_PLAY,Celta de Vigo,Osasuna,-
-1,2026-08-27T19:00:00Z,27/08 21:00,PAUSED,Barcelona,Athletic Bilbao,-
+1,2026-08-27T18:30:00Z,27/08 20:30,FINISHED,Celta de Vigo,Osasuna,1-2
+1,2026-08-27T19:00:00Z,27/08 21:00,FINISHED,Barcelona,Athletic Bilbao,2-0
 2,2026-08-20T19:00:00Z,20/08 21:00,FINISHED,Rayo Vallecano,Alaves,1-1
 2,2026-08-21T19:00:00Z,21/08 21:00,FINISHED,Real Betis,Real Sociedad,1-0
 2,2026-08-22T15:00:00Z,22/08 17:00,FINISHED,Athletic Bilbao,Sevilla,1-3
@@ -19,8 +19,8 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 2,2026-08-23T19:30:00Z,23/08 21:30,FINISHED,Elche,Barcelona,0-5
 2,2026-08-24T17:30:00Z,24/08 19:30,FINISHED,Osasuna,Levante,0-0
 2,2026-08-24T19:30:00Z,24/08 21:30,FINISHED,Málaga CF,RC Deportivo La Coruña,1-1
-3,2026-08-28T17:00:00Z,28/08 19:00,TIMED,Real Racing Club de Santander,Elche,-
-3,2026-08-28T19:30:00Z,28/08 21:30,TIMED,Alaves,Villarreal,-
+3,2026-08-28T17:00:00Z,28/08 19:00,FINISHED,Real Racing Club de Santander,Elche,3-2
+3,2026-08-28T19:30:00Z,28/08 21:30,IN_PLAY,Alaves,Villarreal,-
 3,2026-08-29T15:00:00Z,29/08 17:00,TIMED,Levante,Real Betis,-
 3,2026-08-29T17:00:00Z,29/08 19:00,TIMED,Real Sociedad,Espanyol,-
 3,2026-08-29T19:30:00Z,29/08 21:30,TIMED,Sevilla,Atletico Madrid,-

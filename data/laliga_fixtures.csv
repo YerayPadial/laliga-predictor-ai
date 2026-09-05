@@ -29,7 +29,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 3,2026-08-30T19:30:00Z,30/08 21:30,FINISHED,Celta de Vigo,Athletic Bilbao,0-2
 3,2026-08-31T17:30:00Z,31/08 19:30,FINISHED,Osasuna,Getafe,1-0
 3,2026-08-31T19:30:00Z,31/08 21:30,FINISHED,Barcelona,Rayo Vallecano,5-2
-4,2026-09-04T19:00:00Z,04/09 21:00,2026-09-04 18:00:00Z,Real Betis,Real Madrid,-
+4,2026-09-04T19:00:00Z,04/09 21:00,FINISHED,Real Betis,Real Madrid,1-0
 4,2026-09-05T14:15:00Z,05/09 16:15,TIMED,Athletic Bilbao,Atletico Madrid,-
 4,2026-09-05T16:30:00Z,05/09 18:30,TIMED,Rayo Vallecano,Real Racing Club de Santander,-
 4,2026-09-05T19:00:00Z,05/09 21:00,TIMED,Villarreal,RC Deportivo La Coruña,-
@@ -49,7 +49,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 5,2026-09-13T16:30:00Z,13/09 18:30,TIMED,Getafe,RC Deportivo La Coruña,-
 5,2026-09-13T19:00:00Z,13/09 21:00,TIMED,Real Sociedad,Atletico Madrid,-
 5,2026-09-14T19:00:00Z,14/09 21:00,TIMED,Villarreal,Real Betis,-
-6,2026-09-03T19:00:00Z,03/09 21:00,2026-09-03 18:00:00Z,Real Sociedad,Celta de Vigo,-
+6,2026-09-03T19:00:00Z,03/09 21:00,FINISHED,Real Sociedad,Celta de Vigo,0-0
 6,2026-09-15T17:00:00Z,15/09 19:00,TIMED,Rayo Vallecano,Espanyol,-
 6,2026-09-15T18:00:00Z,15/09 20:00,TIMED,Alaves,Valencia,-
 6,2026-09-15T19:30:00Z,15/09 21:30,TIMED,Elche,Real Madrid,-

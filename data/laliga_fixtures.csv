@@ -89,16 +89,16 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 9,2026-10-18T16:30:00Z,18/10 18:30,TIMED,Málaga CF,Real Sociedad,-
 9,2026-10-18T19:00:00Z,18/10 21:00,TIMED,Real Madrid,Sevilla,-
 9,2026-10-19T19:00:00Z,19/10 21:00,TIMED,Getafe,Rayo Vallecano,-
-10,2026-10-25T00:00:00Z,25/10 02:00,SCHEDULED,Rayo Vallecano,Elche,-
-10,2026-10-25T00:00:00Z,25/10 02:00,SCHEDULED,Alaves,Málaga CF,-
-10,2026-10-25T00:00:00Z,25/10 02:00,SCHEDULED,Athletic Bilbao,Getafe,-
-10,2026-10-25T00:00:00Z,25/10 02:00,SCHEDULED,Sevilla,Osasuna,-
-10,2026-10-25T00:00:00Z,25/10 02:00,SCHEDULED,Valencia,Villarreal,-
-10,2026-10-25T00:00:00Z,25/10 02:00,SCHEDULED,Barcelona,Real Madrid,-
-10,2026-10-25T00:00:00Z,25/10 02:00,SCHEDULED,Atletico Madrid,RC Deportivo La Coruña,-
-10,2026-10-25T00:00:00Z,25/10 02:00,SCHEDULED,Celta de Vigo,Real Betis,-
-10,2026-10-25T00:00:00Z,25/10 02:00,SCHEDULED,Real Sociedad,Levante,-
-10,2026-10-25T00:00:00Z,25/10 02:00,SCHEDULED,Real Racing Club de Santander,Espanyol,-
+10,2026-10-23T19:00:00Z,23/10 21:00,TIMED,Alaves,Málaga CF,-
+10,2026-10-24T12:00:00Z,24/10 14:00,TIMED,Rayo Vallecano,Elche,-
+10,2026-10-24T14:15:00Z,24/10 16:15,TIMED,Real Racing Club de Santander,Espanyol,-
+10,2026-10-24T16:30:00Z,24/10 18:30,TIMED,Valencia,Villarreal,-
+10,2026-10-24T19:00:00Z,24/10 21:00,TIMED,Atletico Madrid,RC Deportivo La Coruña,-
+10,2026-10-25T13:00:00Z,25/10 14:00,TIMED,Athletic Bilbao,Getafe,-
+10,2026-10-25T15:15:00Z,25/10 16:15,TIMED,Celta de Vigo,Real Betis,-
+10,2026-10-25T17:30:00Z,25/10 18:30,TIMED,Real Sociedad,Levante,-
+10,2026-10-25T20:00:00Z,25/10 21:00,TIMED,Barcelona,Real Madrid,-
+10,2026-10-26T20:00:00Z,26/10 21:00,TIMED,Sevilla,Osasuna,-
 11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Real Betis,Málaga CF,-
 11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Villarreal,Espanyol,-
 11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Elche,Valencia,-

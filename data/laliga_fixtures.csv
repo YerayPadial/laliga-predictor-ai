@@ -99,16 +99,16 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 10,2026-10-25T17:30:00Z,25/10 18:30,TIMED,Real Sociedad,Levante,-
 10,2026-10-25T20:00:00Z,25/10 21:00,TIMED,Barcelona,Real Madrid,-
 10,2026-10-26T20:00:00Z,26/10 21:00,TIMED,Sevilla,Osasuna,-
-11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Real Betis,Málaga CF,-
-11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Villarreal,Espanyol,-
-11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Elche,Valencia,-
-11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Athletic Bilbao,Real Sociedad,-
-11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Levante,Atletico Madrid,-
-11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,RC Deportivo La Coruña,Osasuna,-
-11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Barcelona,Alaves,-
-11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Getafe,Sevilla,-
-11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Real Racing Club de Santander,Real Madrid,-
-11,2026-11-01T00:00:00Z,01/11 01:00,SCHEDULED,Rayo Vallecano,Celta de Vigo,-
+11,2026-10-30T20:00:00Z,30/10 21:00,TIMED,Villarreal,Espanyol,-
+11,2026-10-31T13:00:00Z,31/10 14:00,TIMED,Levante,Atletico Madrid,-
+11,2026-10-31T15:15:00Z,31/10 16:15,TIMED,Rayo Vallecano,Celta de Vigo,-
+11,2026-10-31T17:30:00Z,31/10 18:30,TIMED,Real Betis,Málaga CF,-
+11,2026-10-31T20:00:00Z,31/10 21:00,TIMED,Barcelona,Alaves,-
+11,2026-11-01T13:00:00Z,01/11 14:00,TIMED,Getafe,Sevilla,-
+11,2026-11-01T15:15:00Z,01/11 16:15,TIMED,Real Racing Club de Santander,Real Madrid,-
+11,2026-11-01T17:30:00Z,01/11 18:30,TIMED,Elche,Valencia,-
+11,2026-11-01T20:00:00Z,01/11 21:00,TIMED,Athletic Bilbao,Real Sociedad,-
+11,2026-11-02T20:00:00Z,02/11 21:00,TIMED,RC Deportivo La Coruña,Osasuna,-
 12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Elche,Real Betis,-
 12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Osasuna,Athletic Bilbao,-
 12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Sevilla,Alaves,-

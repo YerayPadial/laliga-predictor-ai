@@ -75,10 +75,10 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 8,2026-10-10T16:30:00Z,10/10 18:30,FINISHED,Barcelona,Getafe,3-0
 8,2026-10-10T19:00:00Z,10/10 21:00,FINISHED,Real Madrid,Villarreal,1-0
 8,2026-10-11T12:00:00Z,11/10 14:00,FINISHED,Elche,Celta de Vigo,0-0
-8,2026-10-11T14:15:00Z,11/10 16:15,IN_PLAY,Real Sociedad,RC Deportivo La Coruña,-
-8,2026-10-11T16:30:00Z,11/10 18:30,TIMED,Real Betis,Osasuna,-
-8,2026-10-11T19:00:00Z,11/10 21:00,TIMED,Real Racing Club de Santander,Valencia,-
-8,2026-10-12T19:00:00Z,12/10 21:00,TIMED,Levante,Sevilla,-
+8,2026-10-11T14:15:00Z,11/10 16:15,FINISHED,Real Sociedad,RC Deportivo La Coruña,3-2
+8,2026-10-11T16:30:00Z,11/10 18:30,FINISHED,Real Betis,Osasuna,5-2
+8,2026-10-11T19:00:00Z,11/10 21:00,FINISHED,Real Racing Club de Santander,Valencia,2-2
+8,2026-10-12T19:00:00Z,12/10 21:00,IN_PLAY,Levante,Sevilla,-
 9,2026-10-16T19:00:00Z,16/10 21:00,TIMED,RC Deportivo La Coruña,Levante,-
 9,2026-10-17T12:00:00Z,17/10 14:00,TIMED,Espanyol,Atletico Madrid,-
 9,2026-10-17T14:15:00Z,17/10 16:15,TIMED,Villarreal,Elche,-
@@ -109,16 +109,16 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 11,2026-11-01T17:30:00Z,01/11 18:30,TIMED,Elche,Valencia,-
 11,2026-11-01T20:00:00Z,01/11 21:00,TIMED,Athletic Bilbao,Real Sociedad,-
 11,2026-11-02T20:00:00Z,02/11 21:00,TIMED,RC Deportivo La Coruña,Osasuna,-
-12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Elche,Real Betis,-
-12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Osasuna,Athletic Bilbao,-
-12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Sevilla,Alaves,-
-12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Valencia,Real Madrid,-
-12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Celta de Vigo,Levante,-
-12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Real Sociedad,Rayo Vallecano,-
-12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Málaga CF,Real Racing Club de Santander,-
-12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Espanyol,RC Deportivo La Coruña,-
-12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Atletico Madrid,Barcelona,-
-12,2026-11-08T00:00:00Z,08/11 01:00,SCHEDULED,Villarreal,Getafe,-
+12,2026-11-06T20:00:00Z,06/11 21:00,TIMED,Sevilla,Alaves,-
+12,2026-11-07T13:00:00Z,07/11 14:00,TIMED,Málaga CF,Real Racing Club de Santander,-
+12,2026-11-07T15:15:00Z,07/11 16:15,TIMED,Espanyol,RC Deportivo La Coruña,-
+12,2026-11-07T17:30:00Z,07/11 18:30,TIMED,Osasuna,Athletic Bilbao,-
+12,2026-11-07T20:00:00Z,07/11 21:00,TIMED,Valencia,Real Madrid,-
+12,2026-11-08T13:00:00Z,08/11 14:00,TIMED,Elche,Real Betis,-
+12,2026-11-08T15:15:00Z,08/11 16:15,TIMED,Real Sociedad,Rayo Vallecano,-
+12,2026-11-08T17:30:00Z,08/11 18:30,TIMED,Celta de Vigo,Levante,-
+12,2026-11-08T17:30:00Z,08/11 18:30,TIMED,Villarreal,Getafe,-
+12,2026-11-08T20:00:00Z,08/11 21:00,TIMED,Atletico Madrid,Barcelona,-
 13,2026-11-22T00:00:00Z,22/11 01:00,SCHEDULED,Athletic Bilbao,Espanyol,-
 13,2026-11-22T00:00:00Z,22/11 01:00,SCHEDULED,Barcelona,Villarreal,-
 13,2026-11-22T00:00:00Z,22/11 01:00,SCHEDULED,Real Racing Club de Santander,Real Sociedad,-

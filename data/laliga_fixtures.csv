@@ -78,7 +78,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 8,2026-10-11T14:15:00Z,11/10 16:15,FINISHED,Real Sociedad,RC Deportivo La Coruña,3-2
 8,2026-10-11T16:30:00Z,11/10 18:30,FINISHED,Real Betis,Osasuna,5-2
 8,2026-10-11T19:00:00Z,11/10 21:00,FINISHED,Real Racing Club de Santander,Valencia,2-2
-8,2026-10-12T19:00:00Z,12/10 21:00,IN_PLAY,Levante,Sevilla,-
+8,2026-10-12T19:00:00Z,12/10 21:00,FINISHED,Levante,Sevilla,3-3
 9,2026-10-16T19:00:00Z,16/10 21:00,TIMED,RC Deportivo La Coruña,Levante,-
 9,2026-10-17T12:00:00Z,17/10 14:00,TIMED,Espanyol,Atletico Madrid,-
 9,2026-10-17T14:15:00Z,17/10 16:15,TIMED,Villarreal,Elche,-

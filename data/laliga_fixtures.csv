@@ -99,9 +99,9 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 10,2026-10-25T17:30:00Z,25/10 18:30,FINISHED,Real Sociedad,Levante,2-1
 10,2026-10-25T20:00:00Z,25/10 21:00,FINISHED,Barcelona,Real Madrid,1-2
 10,2026-10-26T20:00:00Z,26/10 21:00,FINISHED,Sevilla,Osasuna,2-0
-11,2026-10-30T20:00:00Z,30/10 21:00,TIMED,Villarreal,Espanyol,-
-11,2026-10-31T13:00:00Z,31/10 14:00,TIMED,Levante,Atletico Madrid,-
-11,2026-10-31T15:15:00Z,31/10 16:15,TIMED,Rayo Vallecano,Celta de Vigo,-
+11,2026-10-30T20:00:00Z,30/10 21:00,FINISHED,Villarreal,Espanyol,0-1
+11,2026-10-31T13:00:00Z,31/10 14:00,FINISHED,Levante,Atletico Madrid,0-2
+11,2026-10-31T15:15:00Z,31/10 16:15,IN_PLAY,Rayo Vallecano,Celta de Vigo,-
 11,2026-10-31T17:30:00Z,31/10 18:30,TIMED,Real Betis,Málaga CF,-
 11,2026-10-31T20:00:00Z,31/10 21:00,TIMED,Barcelona,Alaves,-
 11,2026-11-01T13:00:00Z,01/11 14:00,TIMED,Getafe,Sevilla,-

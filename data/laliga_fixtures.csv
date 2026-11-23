@@ -126,9 +126,9 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 13,2026-11-21T20:00:00Z,21/11 21:00,FINISHED,Real Madrid,Celta de Vigo,2-1
 13,2026-11-22T13:00:00Z,22/11 14:00,FINISHED,Barcelona,Villarreal,3-2
 13,2026-11-22T15:15:00Z,22/11 16:15,FINISHED,Real Racing Club de Santander,Real Sociedad,3-2
-13,2026-11-22T17:30:00Z,22/11 18:30,TIMED,Osasuna,Málaga CF,-
-13,2026-11-22T20:00:00Z,22/11 21:00,TIMED,Getafe,Atletico Madrid,-
-13,2026-11-23T20:00:00Z,23/11 21:00,TIMED,Levante,Elche,-
+13,2026-11-22T17:30:00Z,22/11 18:30,FINISHED,Osasuna,Málaga CF,1-0
+13,2026-11-22T20:00:00Z,22/11 21:00,FINISHED,Getafe,Atletico Madrid,0-3
+13,2026-11-23T20:00:00Z,23/11 21:00,IN_PLAY,Levante,Elche,-
 14,2026-11-27T20:00:00Z,27/11 21:00,TIMED,Levante,Real Racing Club de Santander,-
 14,2026-11-28T13:00:00Z,28/11 14:00,TIMED,Real Betis,Rayo Vallecano,-
 14,2026-11-28T15:15:00Z,28/11 16:15,TIMED,Málaga CF,Athletic Bilbao,-
@@ -149,16 +149,16 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 15,2026-12-06T17:30:00Z,06/12 18:30,TIMED,Getafe,Valencia,-
 15,2026-12-06T20:00:00Z,06/12 21:00,TIMED,Atletico Madrid,Real Betis,-
 15,2026-12-07T20:00:00Z,07/12 21:00,TIMED,Sevilla,Málaga CF,-
-16,2026-12-13T00:00:00Z,13/12 01:00,SCHEDULED,Espanyol,Celta de Vigo,-
-16,2026-12-13T00:00:00Z,13/12 01:00,SCHEDULED,Málaga CF,Barcelona,-
-16,2026-12-13T00:00:00Z,13/12 01:00,SCHEDULED,Real Madrid,Osasuna,-
-16,2026-12-13T00:00:00Z,13/12 01:00,SCHEDULED,RC Deportivo La Coruña,Athletic Bilbao,-
-16,2026-12-13T00:00:00Z,13/12 01:00,SCHEDULED,Levante,Alaves,-
-16,2026-12-13T00:00:00Z,13/12 01:00,SCHEDULED,Elche,Sevilla,-
-16,2026-12-13T00:00:00Z,13/12 01:00,SCHEDULED,Villarreal,Rayo Vallecano,-
-16,2026-12-13T00:00:00Z,13/12 01:00,SCHEDULED,Real Betis,Real Racing Club de Santander,-
-16,2026-12-13T00:00:00Z,13/12 01:00,SCHEDULED,Real Sociedad,Getafe,-
-16,2026-12-13T00:00:00Z,13/12 01:00,SCHEDULED,Atletico Madrid,Valencia,-
+16,2026-12-11T20:00:00Z,11/12 21:00,TIMED,Elche,Sevilla,-
+16,2026-12-12T13:00:00Z,12/12 14:00,TIMED,Levante,Alaves,-
+16,2026-12-12T15:15:00Z,12/12 16:15,TIMED,Villarreal,Rayo Vallecano,-
+16,2026-12-12T17:30:00Z,12/12 18:30,TIMED,Málaga CF,Barcelona,-
+16,2026-12-12T20:00:00Z,12/12 21:00,TIMED,Real Betis,Real Racing Club de Santander,-
+16,2026-12-13T13:00:00Z,13/12 14:00,TIMED,Atletico Madrid,Valencia,-
+16,2026-12-13T15:15:00Z,13/12 16:15,TIMED,RC Deportivo La Coruña,Athletic Bilbao,-
+16,2026-12-13T17:30:00Z,13/12 18:30,TIMED,Real Sociedad,Getafe,-
+16,2026-12-13T20:00:00Z,13/12 21:00,TIMED,Real Madrid,Osasuna,-
+16,2026-12-14T20:00:00Z,14/12 21:00,TIMED,Espanyol,Celta de Vigo,-
 17,2026-12-20T00:00:00Z,20/12 01:00,SCHEDULED,Athletic Bilbao,Real Betis,-
 17,2026-12-20T00:00:00Z,20/12 01:00,SCHEDULED,Getafe,Levante,-
 17,2026-12-20T00:00:00Z,20/12 01:00,SCHEDULED,Alaves,Elche,-

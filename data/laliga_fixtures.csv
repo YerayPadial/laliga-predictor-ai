@@ -128,7 +128,7 @@ matchday,utc_date,date_str,status,home_team,away_team,real_result
 13,2026-11-22T15:15:00Z,22/11 16:15,FINISHED,Real Racing Club de Santander,Real Sociedad,3-2
 13,2026-11-22T17:30:00Z,22/11 18:30,FINISHED,Osasuna,Málaga CF,1-0
 13,2026-11-22T20:00:00Z,22/11 21:00,FINISHED,Getafe,Atletico Madrid,0-3
-13,2026-11-23T20:00:00Z,23/11 21:00,IN_PLAY,Levante,Elche,-
+13,2026-11-23T20:00:00Z,23/11 21:00,FINISHED,Levante,Elche,1-1
 14,2026-11-27T20:00:00Z,27/11 21:00,TIMED,Levante,Real Racing Club de Santander,-
 14,2026-11-28T13:00:00Z,28/11 14:00,TIMED,Real Betis,Rayo Vallecano,-
 14,2026-11-28T15:15:00Z,28/11 16:15,TIMED,Málaga CF,Athletic Bilbao,-
